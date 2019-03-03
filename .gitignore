@@ -1,0 +1,4 @@
+# Ignore vim-plug plugins directory
+vim/.vim/plugged/
+# Ignore vim file explorer history
+vim/.vim/.netrwhist
