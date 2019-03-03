@@ -1,6 +1,6 @@
 #!/bin/bash
 
-bgimage="~/.config/sway/swaylock/PolygonI.png"
+bgimage="${HOME}/.config/sway/swaylock/PolygonI.png"
 
 textcolor=ffffff
 keyhlcolor=00eddd98
