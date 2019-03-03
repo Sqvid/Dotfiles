@@ -1,0 +1,101 @@
+{
+    "layer": "bottom", // Waybar at top layer
+    // "position": "bottom", // Waybar at the bottom of your screen
+    // "height": 30, // Waybar height
+    "height": 35, // Waybar height
+    // "width": 1280, // Waybar width
+    // Choose the order of the modules
+    "modules-left": ["sway/workspaces", "sway/mode", "custom/cmus"],
+    "modules-center": ["sway/window"],
+    "modules-right": ["pulseaudio", "backlight", "network", "battery", "clock", "tray"],
+    // Modules configuration
+    "sway/workspaces": {
+        "disable-scroll": true,
+        "max-length": "10"
+    //     "all-outputs": true,
+    //     "format": "{name}: {icon}",
+    //     "format-icons": {
+    //         "1": "",
+    //         "2": "",
+    //         "3": "",
+    //         "4": "",
+    //         "5": "",
+    //         "urgent": "",
+    //         "focused": "",
+    //         "default": ""
+    //     }
+    },
+    "sway/mode": {
+        "format": "<span style=\"italic\">{}</span>"
+    },
+    "tray": {
+        // "icon-size": 21,
+        "spacing": 10
+    },
+    "clock": {
+        "format-alt": "{:%A, %e %B}"
+    },
+    "cpu": {
+        "format": "{usage}% "
+    },
+    "memory": {
+        "format": "{}% "
+    },
+    "battery": {
+        "states": {
+            "good": 95,
+            "warning": 20,
+            "critical": 10
+        },
+        "format": "{capacity}% {icon}",
+        // "format-good": "", // An empty format will hide the module
+        "format-full": "{capacity}% ",
+        "format-icons": ["", "", "", "", ""]
+    },
+    "battery#bat2": {
+        "bat": "BAT2"
+    },
+    "network": {
+        // "interface": "wlp2s0", // (Optional) To force the use of this interface
+        "format-wifi": "{essid} ({signalStrength}%) ",
+        "format-ethernet": "{ifname}: {ipaddr}/{cidr} ",
+        "format-disconnected": "Disconnected ⚠"
+    },
+    "pulseaudio": {
+        //"scroll-step": 1,
+        "format": "{volume}% {icon}",
+        "format-bluetooth": "{volume}% {icon}",
+        "format-muted": "",
+        "format-icons": {
+            "headphones": "",
+            "handsfree": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", ""]
+        },
+        "on-click": "amixer set Master unmute",
+        "on-click-right": "amixer set Master mute",
+        "on-scroll-up": "amixer set Master 2%+",
+        "on-scroll-down": "amixer set Master 2%-"
+    },
+    "custom/spotify": {
+        "format": " {}",
+        "max-length": 40,
+        "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null" // Script in resources folder
+    },
+    "custom/cmus": {
+        "format": "  <span style=\"italic\">{}</span>",
+//        "format": "<span style=\"italic\">{}</span>",
+        "on-click": "cmus-remote -u",
+        "on-click-right": "cmus-remote -n",
+//        "exec-if": "pgrep cmus",
+        "exec": "~/.config/waybar/custom_modules/musicMonitor.sh"
+    },
+    "backlight": {
+//        "device": "acpi_video1",
+        "format": "{percent}% {icon}",
+        "format-icons": [""]
+    }
+}

@@ -1,0 +1,314 @@
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~ Custom Config for Sway ~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+
+
+######################### Variables #########################
+#
+# Main Key Bindings:
+#
+# Modifier Key. Mod4 for the Logo Key and Mod1 for Alt.
+set $mod Mod4
+# Home row direction keys, like vim
+set $left h
+set $down j
+set $up k
+set $right l
+
+#
+# Preferred programs
+#
+set $term terminator
+set $browser qutebrowser
+set $menu rofi -show run
+#set $menu dmenu_path | dmenu -nb "$col_secondary" -sb "$col_highlight" -sf "#000000" \
+#        -fn "Mint Spirit No2-17" | xargs swaymsg exec
+
+#
+# Appearance:
+#
+# Colors
+set $col_highlight #00eddd
+set $col_secondary #000b1c
+set $col_unfocused_titlebar_bg #0f1723
+set $col_unfocused_titlebar_text #AAAAAA
+# Wallpaper
+set $wallpaper ~/Pictures/Wallpapers/UmbrellaScience.jpg
+
+#
+# Other:
+#
+# Path to swaylock script.
+set $swaylock ~/.config/sway/swayscripts/swaylock/blurlocker.sh
+# Path to power options script.
+set $poweroptions ~/.config/sway/swayscripts/misc/poweroptions.sh
+# Brightness and volume control.
+set $volumeup amixer set 'Master' 2%+
+set $volumedown amixer set 'Master' 2%-
+set $brightnessup brightnessctl set 2%+ 
+set $brightnessdown brightnessctl set 2%-
+
+
+######################### Output configuration #########################
+#
+# Set Wallpaper:
+#
+output * background $wallpaper fill $col_secondary
+#
+# Example configuration:
+#
+#   output HDMI-A-1 resolution 1920x1080 position 1920,0
+#
+# You can get the names of your outputs by running: swaymsg -t get_outputs
+
+
+######################### Input configuration #########################
+#
+# Touchpad Configuration:
+#
+    input "2:7:SynPS/2_Synaptics_TouchPad" {
+        dwt enabled
+        tap enabled
+        natural_scroll enabled
+        middle_emulation enabled
+    }
+
+#
+# Seat Configuration
+#
+# Hide cursor after <timeout> milliseconds
+seat * hide_cursor 1900
+
+#
+# Function Keys:
+#
+    bindsym XF86AudioRaiseVolume exec $volumeup
+    bindsym XF86AudioLowerVolume exec $volumedown
+    bindsym XF86MonBrightnessUp exec $brightnessup
+    bindsym XF86MonBrightnessDown exec $brightnessdown
+    bindsym XF86PowerOff exec $swaylock && systemctl suspend
+    bindsym XF86WakeUp exec $swaylock
+
+# You can get the names of your inputs by running: swaymsg -t get_inputs
+# Read `man 5 sway-input` for more information about this section.
+
+
+######################### Startup Services #########################
+#
+# Swayidle:
+#
+#exec swayidle \
+#    timeout 300 'swaylock -c 000000' \
+#    timeout 600 'swaymsg "output * dpms off"' \
+#       resume 'swaymsg "output * dpms on"' \
+#    before-sleep 'swaylock -c 000000'
+#
+# This will lock your screen after 300 seconds of inactivity, then turn off
+# your displays after another 300 seconds, and turn your screens back on when
+# resumed. It will also lock your screen before your computer goes to sleep.
+
+#
+# Mako (Notification Daemon):
+#
+exec mako --font 'Mint Spirit No2 14' --background-color '#044c47' \
+--text-color '#FFFFFF' --width '500' --height '300' --margin '20, 20, 20' \
+--padding '15, 15, 15, 50' --border-size '0' --border-color '#FFFFFF' \
+--max-visible '2' --layer 'top'
+
+# Dismiss all notifications.
+bindsym $mod+M exec makoctl dismiss --all
+
+
+######################### Key bindings #########################
+#
+# Basics:
+#
+    # kill focused window
+    bindsym $mod+Shift+q kill
+
+    # start your launcher
+    bindsym $mod+d exec $menu
+
+    # take a screenshot
+    bindsym print exec grim ~/Pictures/Screenshots/"Screenshot_$(date +%F\ %H-%M-%S).png"
+    bindsym Shift+print exec slurp | grim -g - ~/Pictures/Screenshots/"Screenshot_$(date +%F\ %H-%M-%S).png"
+
+    # Drag floating windows by holding down $mod and left mouse button.
+    # Resize them with right mouse button + $mod.
+    # Despite the name, also works for non-floating windows.
+    # Change normal to inverse to use left mouse button for resizing and right
+    # mouse button for dragging.
+    floating_modifier $mod normal
+
+    # reload the configuration file
+    bindsym $mod+Shift+c reload
+
+    # exit sway (logs you out of your wayland session)
+    bindsym $mod+Shift+e exec swaynag -t warning -m \
+        'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.'\
+        -b 'Yes, exit sway' 'swaymsg exit'
+
+    # lock screen
+    bindsym $mod+x exec $swaylock
+
+    # power options
+    bindsym $mod+Shift+x exec $poweroptions
+#
+# Programs:
+#
+    bindsym $mod+Return exec $term
+    bindsym $mod+Shift+Return exec $browser
+#
+# Moving around:
+#
+    # Move your focus around
+    bindsym $mod+$left focus left
+    bindsym $mod+$down focus down
+    bindsym $mod+$up focus up
+    bindsym $mod+$right focus right
+    # or use $mod+[up|down|left|right]
+    bindsym $mod+Left focus left
+    bindsym $mod+Down focus down
+    bindsym $mod+Up focus up
+    bindsym $mod+Right focus right
+
+    # _move_ the focused window with the same, but add Shift
+    bindsym $mod+Shift+$left move left
+    bindsym $mod+Shift+$down move down
+    bindsym $mod+Shift+$up move up
+    bindsym $mod+Shift+$right move right
+    # ditto, with arrow keys
+    bindsym $mod+Shift+Left move left
+    bindsym $mod+Shift+Down move down
+    bindsym $mod+Shift+Up move up
+    bindsym $mod+Shift+Right move right
+#
+# Workspaces:
+#
+    # switch to workspace
+    bindsym $mod+1 workspace I
+    bindsym $mod+2 workspace II
+    bindsym $mod+3 workspace III
+    bindsym $mod+4 workspace IV
+    bindsym $mod+5 workspace V
+    bindsym $mod+6 workspace VI
+    bindsym $mod+7 workspace VII
+    bindsym $mod+8 workspace VIII
+    bindsym $mod+9 workspace IX
+    bindsym $mod+0 workspace X
+    # move focused container to workspace
+    bindsym $mod+Shift+1 move container to workspace I
+    bindsym $mod+Shift+2 move container to workspace II
+    bindsym $mod+Shift+3 move container to workspace III
+    bindsym $mod+Shift+4 move container to workspace IV
+    bindsym $mod+Shift+5 move container to workspace V
+    bindsym $mod+Shift+6 move container to workspace VI
+    bindsym $mod+Shift+7 move container to workspace VII
+    bindsym $mod+Shift+8 move container to workspace VIII
+    bindsym $mod+Shift+9 move container to workspace IX
+    bindsym $mod+Shift+0 move container to workspace X
+    # Note: workspaces can have any name you want, not just numbers.
+    # We just use 1-10 as the default.
+#
+# Layout management:
+#
+    # You can "split" the current object of your focus with
+    # $mod+b or $mod+v, for horizontal and vertical splits
+    # respectively.
+    bindsym $mod+b splith
+    bindsym $mod+v splitv
+
+    # Switch the current container between different layout styles
+    bindsym $mod+s layout stacking
+    bindsym $mod+w layout tabbed
+    bindsym $mod+e layout toggle split
+
+    # Make the current focus fullscreen
+    bindsym $mod+f fullscreen
+
+    # Toggle the current focus between tiling and floating mode
+    bindsym $mod+Shift+space floating toggle
+
+    # Swap focus between the tiling area and the floating area
+    bindsym $mod+space focus mode_toggle
+
+    # move focus to the parent container
+    bindsym $mod+a focus parent
+#
+# Scratchpad:
+#
+    # Sway has a "scratchpad", which is a bag of holding for windows.
+    # You can send windows there and get them back later.
+
+    # Move the currently focused window to the scratchpad
+    bindsym $mod+Shift+minus move scratchpad
+
+    # Show the next scratchpad window or hide the focused scratchpad window.
+    # If there are multiple scratchpad windows, this command cycles through them.
+    bindsym $mod+minus scratchpad show
+#
+# Modes:
+#
+mode "Resize" {
+    # left will shrink the containers width
+    # right will grow the containers width
+    # up will shrink the containers height
+    # down will grow the containers height
+    bindsym $left resize shrink width 10 px or 10 ppt
+    bindsym $down resize shrink height 10 px or 10 ppt
+    bindsym $up resize grow height 10 px or 10 ppt
+    bindsym $right resize grow width 10 px or 10 ppt
+
+    # ditto, with arrow keys
+    bindsym Left resize shrink width 10 px or 10 ppt
+    bindsym Down resize shrink height 10 px or 10 ppt
+    bindsym Up resize grow height 10 px or 10 ppt
+    bindsym Right resize grow width 10 px or 10 ppt
+
+    # return to default mode
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+    bindsym $mod+r mode "default"
+}
+
+bindsym $mod+r mode "Resize"
+
+
+######################### Window Appearance #########################
+#
+# Windows:
+#
+    titlebar_padding 23 8
+    title_align center
+    default_border pixel 1
+    smart_borders on
+
+    gaps outer 3
+    gaps inner 10
+
+    focus_follows_mouse no
+
+# Window decorations.
+    font pango:Mint Spirit No2 Regular 15
+
+    client.focused $col_secondary $col_secondary $col_highlight \
+        $col_highlight $col_highlight
+
+    client.unfocused $col_secondary $col_unfocused_titlebar_bg \
+        $col_unfocused_titlebar_text $col_secondary $col_secondary
+
+#
+# Special Window Behaviour:
+#
+    for_window [class="Mathematica"] floating enable
+
+
+######################### Status Bar #########################
+#
+# Bar:
+#
+
+bar {
+    swaybar_command waybar
+}
+
+include /etc/sway/config.d/*
