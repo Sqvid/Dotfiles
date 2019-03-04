@@ -44,6 +44,8 @@ set $poweroptions ~/.config/sway/swayscripts/misc/poweroptions.sh
 # Brightness and volume control.
 set $volumeup amixer set 'Master' 2%+
 set $volumedown amixer set 'Master' 2%-
+set $mute amixer set 'Master' mute
+set $unmute amixer set 'Master' unmute
 set $brightnessup brightnessctl set 2%+ 
 set $brightnessdown brightnessctl set 2%-
 
@@ -87,6 +89,10 @@ seat * hide_cursor 1900
     bindsym XF86MonBrightnessDown exec $brightnessdown
     bindsym XF86PowerOff exec $swaylock && systemctl suspend
     bindsym XF86WakeUp exec $swaylock
+
+# Pseudo-Function Keys.
+    bindsym $mod+Alt+Left exec $mute
+    bindsym $mod+Alt+Right exec $unmute
 
 # You can get the names of your inputs by running: swaymsg -t get_inputs
 # Read `man 5 sway-input` for more information about this section.
