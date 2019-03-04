@@ -1,6 +1,6 @@
 #!/bin/bash
 
-LOCKSCRIPT="~/.config/sway/swayscripts/swaylock/blurlocker.sh"
+LOCKSCRIPT="${HOME}/.config/sway/swayscripts/swaylock/blurlocker.sh"
 
 response=$(echo -e "Cancel\n1. Shutdown\n2. Restart\n3. Sleep" | \
 	rofi -dmenu -p "Power Options")
