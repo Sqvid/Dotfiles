@@ -93,6 +93,7 @@ c.colors.statusbar.command.private.bg = 'black'
 c.colors.completion.category.bg = 'black'
 c.colors.completion.even.bg = 'black'
 c.colors.completion.odd.bg = '#111111'
+c.colors.prompts.bg = 'black'
 
 # Font used in the statusbar.
 # Type: Font
