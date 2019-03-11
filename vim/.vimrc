@@ -67,6 +67,13 @@ nnoremap <silent> zt zt2<C-Y>
 nnoremap <silent> zb zb2<C-E>
 
 
+" Plugin configurations:
+"
+" Airline:
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts = 1
+
+
 "******************************************************************************
 " The Rest:
 if v:lang =~ "utf8$" || v:lang =~ "UTF-8$"
