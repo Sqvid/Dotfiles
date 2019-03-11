@@ -102,11 +102,11 @@ seat * hide_cursor 1900
 #
 # Swayidle:
 #
-#exec swayidle \
-#    timeout 300 'swaylock -c 000000' \
-#    timeout 600 'swaymsg "output * dpms off"' \
-#       resume 'swaymsg "output * dpms on"' \
-#    before-sleep 'swaylock -c 000000'
+exec swayidle \
+    timeout 300 $swaylock \
+    timeout 600 'swaymsg "output * dpms off"' \
+    resume 'swaymsg "output * dpms on"' \
+    before-sleep $swaylock
 #
 # This will lock your screen after 300 seconds of inactivity, then turn off
 # your displays after another 300 seconds, and turn your screens back on when
@@ -158,11 +158,13 @@ bindsym $mod+M exec makoctl dismiss --all
 
     # power options
     bindsym $mod+Shift+x exec $poweroptions
+
 #
 # Programs:
 #
     bindsym $mod+Return exec $term
     bindsym $mod+Shift+Return exec $browser
+
 #
 # Moving around:
 #
@@ -187,6 +189,7 @@ bindsym $mod+M exec makoctl dismiss --all
     bindsym $mod+Shift+Down move down
     bindsym $mod+Shift+Up move up
     bindsym $mod+Shift+Right move right
+
 #
 # Workspaces:
 #
@@ -214,6 +217,7 @@ bindsym $mod+M exec makoctl dismiss --all
     bindsym $mod+Shift+0 move container to workspace X
     # Note: workspaces can have any name you want, not just numbers.
     # We just use 1-10 as the default.
+
 #
 # Layout management:
 #
@@ -237,8 +241,12 @@ bindsym $mod+M exec makoctl dismiss --all
     # Swap focus between the tiling area and the floating area
     bindsym $mod+space focus mode_toggle
 
-    # move focus to the parent container
+    # Move focus to the parent container
     bindsym $mod+a focus parent
+
+    # Center the focused container
+    bindsym $mod+Shift+z move position center
+
 #
 # Scratchpad:
 #
@@ -251,6 +259,7 @@ bindsym $mod+M exec makoctl dismiss --all
     # Show the next scratchpad window or hide the focused scratchpad window.
     # If there are multiple scratchpad windows, this command cycles through them.
     bindsym $mod+minus scratchpad show
+
 #
 # Modes:
 #
