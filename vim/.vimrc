@@ -53,6 +53,8 @@ set t_Co=256 		" Set terminal colours
 set wildmenu 		" Command completion menu
 set incsearch 		" Start searching before hitting enter
 set scrolloff=1 	" Keep the lines above and below the cursor
+set ignorecase		" Ignore case when searching
+set smartcase		" Don't ignore case if search contains capitals
 
 
 "******************************************************************************
@@ -72,6 +74,9 @@ nnoremap <silent> zb zb2<C-E>
 " Airline:
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
+
+" LaTeX live preview
+let g:livepreview_previewer = 'zathura'
 
 
 "******************************************************************************
