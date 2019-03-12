@@ -77,6 +77,7 @@ source $ZSH/oh-my-zsh.sh
 #Exported variables
 export EDITOR='vim'
 export VISUAL=$EDITOR
+export XDG_CONFIG_HOME="${HOME}/.config/"
 
 #Bindkeys:
 bindkey -v
@@ -117,8 +118,7 @@ alias music=cmus
 alias gdb='gdb --tui'
 alias info='info --vi-keys'
 alias restart='shutdown -r'
-alias swayconfig='vim /home/siddhartha/.config/sway/config'
-alias i3config='vim /home/siddhartha/.config/i3/config'
+alias swayconfig="vim ${XDG_CONFIG_HOME}/sway/config"
 alias git=hub
 alias ranger='source ranger'
 alias rngr='source ranger'

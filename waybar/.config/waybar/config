@@ -10,6 +10,7 @@
     "modules-right": ["pulseaudio", "backlight", "network", "battery", "clock", "tray"],
     // Modules configuration
     "sway/workspaces": {
+        "tooltip": false,
         "disable-scroll": true,
         "max-length": "10"
     //     "all-outputs": true,
@@ -26,13 +27,19 @@
     //     }
     },
     "sway/mode": {
+        "tooltip": false,
         "format": "<span style=\"italic\">{}</span>"
     },
+    "sway/window": {
+        "tooltip": false
+    },
     "tray": {
+        "tooltip": false,
         // "icon-size": 21,
         "spacing": 10
     },
     "clock": {
+        "tooltip": false,
         "format-alt": "{:%A, %e %B}"
     },
     "cpu": {
@@ -42,6 +49,7 @@
         "format": "{}% "
     },
     "battery": {
+        "tooltip": false,
         "states": {
             "good": 95,
             "warning": 20,
@@ -57,11 +65,13 @@
     },
     "network": {
         // "interface": "wlp2s0", // (Optional) To force the use of this interface
+        "tooltip": false,
         "format-wifi": "{essid} ({signalStrength}%) ",
         "format-ethernet": "{ifname}: {ipaddr}/{cidr} ",
         "format-disconnected": "Disconnected ⚠"
     },
     "pulseaudio": {
+        "tooltip": false,
         //"scroll-step": 1,
         "format": "{volume}% {icon}",
         "format-bluetooth": "{volume}% {icon}",
@@ -75,8 +85,7 @@
             "car": "",
             "default": ["", ""]
         },
-        "on-click": "amixer set Master unmute",
-        "on-click-right": "amixer set Master mute",
+        "on-click": "amixer set Master toggle",
         "on-scroll-up": "amixer set Master 2%+",
         "on-scroll-down": "amixer set Master 2%-"
     },
@@ -86,6 +95,7 @@
         "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null" // Script in resources folder
     },
     "custom/cmus": {
+        "tooltip": false,
         "format": "  <span style=\"italic\">{}</span>",
 //        "format": "<span style=\"italic\">{}</span>",
         "on-click": "cmus-remote -u",
