@@ -38,8 +38,7 @@ call plug#end()
 " Settings:
 set nocompatible	" Use Vim defaults (much better!)
 set bs=indent,eol,start	" Allow backspacing over everything in insert mode
-"set ai			" Always set autoindenting on
-"set backup		" Keep a backup file
+set ai			" Always set autoindenting on
 set viminfo='20,\"50	" Read/write a .viminfo file, don't store more
 			" Than 50 lines of registers
 set history=50		" Keep 50 lines of command line history
@@ -59,11 +58,13 @@ set smartcase		" Don't ignore case if search contains capitals
 
 "******************************************************************************
 " Mappings:
-nmap <silent> <C-l> :LLPStartPreview <CR>
-nmap <silent> <F9> :setlocal spell! spelllang=en_gb <CR>
-nmap <silent> <F8> :noh <CR>:let @/="ldsfl2393rj0mash02enp3irnddsfc" <CR>
-nmap <silent> <C-n> :NERDTree <CR>
-nmap <silent> <C-]> <C-]>zt
+let mapleader = " "
+
+nnoremap <silent> <C-l> :LLPStartPreview <CR>
+nnoremap <silent> <F9> :setlocal spell! spelllang=en_gb <CR>
+nnoremap <silent> <F8> :noh <CR>:let @/="ldsfl2393rj0mash02enp3irnddsfc" <CR>
+nnoremap <silent> <C-n> :NERDTree <CR>
+nnoremap <silent> <C-]> <C-]>zt
 nnoremap <silent> daa ggdG
 nnoremap <silent> zt zt2<C-Y>
 nnoremap <silent> zb zb2<C-E>

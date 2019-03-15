@@ -40,7 +40,7 @@ ZSH_THEME="agnoster-short"
  ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
-  COMPLETION_WAITING_DOTS="true"
+ COMPLETION_WAITING_DOTS="true"
 
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
@@ -101,7 +101,7 @@ bindkey "M-w" forward-word
 # export ARCHFLAGS="-arch x86_64"
 
 # ssh
-# export SSH_KEY_PATH="~/.ssh/rsa_id"
+export SSH_KEY_PATH="~/.ssh/rsa_id"
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
@@ -128,4 +128,9 @@ alias mkcd='source mkcd'
 # Functions:
 function wttr(){
 	echo $1 | xargs -i{} curl http://wttr.in/{}
+}
+
+function msg(){
+	program_name=$(echo $@ | cut -d ' ' -f '1')
+	$@ && notify-send "$program_name has finished!"
 }
