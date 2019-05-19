@@ -32,7 +32,7 @@ set $col_secondary #000b1c
 set $col_unfocused_titlebar_bg #0f1723
 set $col_unfocused_titlebar_text #AAAAAA
 # Wallpaper
-set $wallpaper ~/Pictures/Wallpapers/UmbrellaScience.jpg
+set $wallpaper ~/Pictures/Wallpapers/Other/UmbrellaScience.jpg
 
 #
 # Other:

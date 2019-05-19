@@ -10,3 +10,7 @@ set incremental-search "true"
 set smooth-scroll "true"
 set zoom-center "true"
 set selection-clipboard clipboard
+
+# Mappings
+unmap q
+unmap r

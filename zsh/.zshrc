@@ -123,6 +123,8 @@ alias git=hub
 alias ranger='source ranger'
 alias rngr='source ranger'
 alias mkcd='source mkcd'
+alias dots="cd ~/.Dotfiles"
+alias aulog='less /var/log/dnfupdate.log'
 #
 #
 # Functions:
@@ -133,4 +135,13 @@ function wttr(){
 function msg(){
 	program_name=$(echo $@ | cut -d ' ' -f '1')
 	$@ && notify-send "$program_name has finished!"
+}
+
+function sever(){
+	if [[ $# -ne 1 ]]; then
+		echo "Provide one job ID (%<JOB_NO>) at a time"
+		exit 1
+	fi
+
+	bg $1; disown $1
 }
