@@ -3,5 +3,6 @@
 
 config_version: 2
 settings:
-  qt.force_platform:
-    global: xcb
+  completion.open_categories:
+    global:
+    - quickmarks

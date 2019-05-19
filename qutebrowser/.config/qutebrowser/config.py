@@ -6,6 +6,12 @@
 # Uncomment this to still load settings configured via autoconfig.yml
 # config.load_autoconfig()
 
+# Force a Qt platform to use. This sets the `QT_QPA_PLATFORM`
+# environment variable and is useful to force using the XCB plugin when
+# running QtWebEngine on Wayland.
+# Type: String
+c.qt.force_platform = 'xcb'
+
 # Enable JavaScript.
 # Type: Bool
 config.set('content.javascript.enabled', True, 'file://*')
@@ -18,13 +24,19 @@ config.set('content.javascript.enabled', True, 'chrome://*/*')
 # Type: Bool
 config.set('content.javascript.enabled', True, 'qute://*/*')
 
-# Force XWayland
-c.qt.force_platform = 'xcb'
-
 # Open new windows in private browsing mode which does not record
 # visited pages.
 # Type: Bool
 c.content.private_browsing = True
+
+# Which categories to show (in which order) in the :open completion.
+# Type: FlagList
+# Valid values:
+#   - searchengines
+#   - quickmarks
+#   - bookmarks
+#   - history
+c.completion.open_categories = ['quickmarks']
 
 # Padding (in pixels) around text for tabs.
 # Type: Padding
@@ -65,13 +77,7 @@ c.url.open_base_url = True
 # used by prepending the search engine name to the search term, e.g.
 # `:open google qutebrowser`.
 # Type: Dict
-c.url.searchengines = {
-        'DEFAULT': 'https://www.google.co.uk/search?q={}', 
-        'gh': 'https://www.github.com/search?q={}', 
-        'r': 'https://www.reddit.com/r/{}', 
-        'yt': 'https://www.youtube.com/results?search_query={}', 
-        'aw': 'https://wiki.archlinux.org/index.php?search={}'
-        }
+c.url.searchengines = {'DEFAULT': 'https://www.google.co.uk/search?q={}', 'gh': 'https://www.github.com/search?q={}', 'r': 'https://www.reddit.com/r/{}', 'yt': 'https://www.youtube.com/results?search_query={}', 'aw': 'https://wiki.archlinux.org/index.php?search={}'}
 
 # Page(s) to open at the start.
 # Type: List of FuzzyUrl, or FuzzyUrl
@@ -81,6 +87,22 @@ c.url.start_pages = 'https://www.google.co.uk'
 # Type: Perc
 c.zoom.default = '120%'
 
+# Background color of the completion widget for odd rows.
+# Type: QssColor
+c.colors.completion.odd.bg = '#111111'
+
+# Background color of the completion widget for even rows.
+# Type: QssColor
+c.colors.completion.even.bg = 'black'
+
+# Background color of the completion widget category headers.
+# Type: QssColor
+c.colors.completion.category.bg = 'black'
+
+# Background color for prompts.
+# Type: QssColor
+c.colors.prompts.bg = 'black'
+
 # Background color of the statusbar in private browsing mode.
 # Type: QssColor
 c.colors.statusbar.private.bg = 'black'
@@ -89,11 +111,13 @@ c.colors.statusbar.private.bg = 'black'
 # Type: QssColor
 c.colors.statusbar.command.private.bg = 'black'
 
-# Other colors:
-c.colors.completion.category.bg = 'black'
-c.colors.completion.even.bg = 'black'
-c.colors.completion.odd.bg = '#111111'
-c.colors.prompts.bg = 'black'
+# Font used in the completion widget.
+# Type: Font
+c.fonts.completion.entry = '15pt monospace'
+
+# Font used in the completion categories.
+# Type: Font
+c.fonts.completion.category = 'bold 15pt monospace'
 
 # Font used in the statusbar.
 # Type: Font
@@ -103,17 +127,14 @@ c.fonts.statusbar = '15pt Fira mono'
 # Type: QtFont
 c.fonts.tabs = '14pt DejaVu Sans'
 
-# Other fonts:
-c.fonts.completion.category = 'bold 15pt monospace'
-c.fonts.completion.entry = '15pt monospace'
-
 # Bindings for normal mode
+config.bind('<Ctrl+->', 'zoom-out')
+config.bind('<Ctrl+0>', 'zoom')
 config.bind('<Ctrl+PgDown>', None)
 config.bind('<Ctrl+PgUp>', None)
+config.bind('=', None)
+config.bind('Ctrl+=>', 'zoom-in')
+config.bind('F', 'hint all tab-bg')
 config.bind('J', 'tab-prev')
 config.bind('K', 'tab-next')
 config.bind('d', None)
-config.bind('=', None)
-config.bind('Ctrl+=>', 'zoom-in')
-config.bind('<Ctrl+->', 'zoom-out')
-config.bind('<Ctrl+0>', 'zoom')
