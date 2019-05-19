@@ -17,19 +17,22 @@ call plug#begin('~/.vim/plugged')
 "
 "
 " A Vim Plugin for Lively Previewing LaTeX PDF Output
-Plug 'xuhdev/vim-latex-live-preview', { 'for': 'tex' }
+ Plug 'xuhdev/vim-latex-live-preview', { 'for': 'tex' }
 
 " A Vim motions on speed
 "Plug 'https://github.com/easymotion/vim-easymotion'
 
 " Status bar plugin
-Plug 'vim-airline/vim-airline'
+ Plug 'vim-airline/vim-airline'
 
 " Supertab: autocomplete
-Plug 'https://github.com/ervandew/supertab'
+ Plug 'https://github.com/ervandew/supertab'
 
 " NERDTree file system explorer
-Plug 'https://github.com/scrooloose/nerdtree.git'
+ Plug 'https://github.com/scrooloose/nerdtree.git'
+
+" Goyo: Distraction-free writing
+ Plug 'junegunn/goyo.vim'
 
 call plug#end()
 
@@ -54,6 +57,7 @@ set incsearch 		" Start searching before hitting enter
 set scrolloff=1 	" Keep the lines above and below the cursor
 set ignorecase		" Ignore case when searching
 set smartcase		" Don't ignore case if search contains capitals
+set showcmd		" Show keystrokes
 
 
 "******************************************************************************
@@ -62,7 +66,7 @@ let mapleader = " "
 
 nnoremap <silent> <C-l> :LLPStartPreview <CR>
 nnoremap <silent> <F9> :setlocal spell! spelllang=en_gb <CR>
-nnoremap <silent> <F8> :noh <CR>:let @/="ldsfl2393rj0mash02enp3irnddsfc" <CR>
+nnoremap <silent> <Esc><Esc> :noh<CR>:let @/="ldsfl2393rj0mash02enp3irnddsfc"<CR>
 nnoremap <silent> <C-n> :NERDTree <CR>
 nnoremap <silent> <C-]> <C-]>zt
 nnoremap <silent> daa ggdG
@@ -72,7 +76,7 @@ nnoremap <silent> zb zb2<C-E>
 
 " Plugin configurations:
 "
-" Airline:
+" Airline
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
 
