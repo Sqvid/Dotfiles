@@ -104,11 +104,23 @@ window#waybar {
 #pulseaudio.muted {
     background: #90b1b1;
     color: #2a5c45;
+    border-bottom: 3px solid transparent;
+    padding: 0px 25px;
 }
 
 #backlight {
     background: transparent;
     color: white;
+}
+
+#idle_inhibitor {
+    background-color: #2d3436;
+    padding: 0px 12px;
+}
+
+#idle_inhibitor.activated {
+    background-color: #00eddd;
+    color: #2d3436;
 }
 
 #custom-spotify {
