@@ -77,7 +77,12 @@ c.url.open_base_url = True
 # used by prepending the search engine name to the search term, e.g.
 # `:open google qutebrowser`.
 # Type: Dict
-c.url.searchengines = {'DEFAULT': 'https://www.google.co.uk/search?q={}', 'gh': 'https://www.github.com/search?q={}', 'r': 'https://www.reddit.com/r/{}', 'yt': 'https://www.youtube.com/results?search_query={}', 'aw': 'https://wiki.archlinux.org/index.php?search={}'}
+c.url.searchengines = {'DEFAULT': 'https://www.google.co.uk/search?q={}',
+                            'gh': 'https://www.github.com/search?q={}',
+                             'r': 'https://www.reddit.com/r/{}',
+                            'yt': 'https://www.youtube.com/results?search_query={}',
+                            'aw': 'https://wiki.archlinux.org/index.php?search={}',
+                            'wp': 'https://en.wikipedia.org/w/index.php?search={}'}
 
 # Page(s) to open at the start.
 # Type: List of FuzzyUrl, or FuzzyUrl
@@ -127,14 +132,16 @@ c.fonts.statusbar = '15pt Fira mono'
 # Type: QtFont
 c.fonts.tabs = '14pt DejaVu Sans'
 
+# Smooth scrolling.
+# Type: Bool
+c.scrolling.smooth = True
+
 # Bindings for normal mode
 config.bind('<Ctrl+->', 'zoom-out')
 config.bind('<Ctrl+0>', 'zoom')
-config.bind('<Ctrl+PgDown>', None)
-config.bind('<Ctrl+PgUp>', None)
-config.bind('=', None)
 config.bind('Ctrl+=>', 'zoom-in')
 config.bind('F', 'hint all tab-bg')
 config.bind('J', 'tab-prev')
 config.bind('K', 'tab-next')
-config.bind('d', None)
+config.unbind('=', mode='normal')
+config.unbind('d', mode='normal')

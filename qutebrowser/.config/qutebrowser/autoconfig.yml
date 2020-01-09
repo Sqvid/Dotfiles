@@ -3,6 +3,5 @@
 
 config_version: 2
 settings:
-  completion.open_categories:
-    global:
-    - quickmarks
+  scrolling.smooth:
+    global: true
