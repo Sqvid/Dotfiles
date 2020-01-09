@@ -3,27 +3,13 @@
 
 " - Avoid using standard Vim directory names like 'plugin'
 call plug#begin('~/.vim/plugged')
-"Examples:
-"
-" Make sure you use single quotes
-" Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
-"Plug 'junegunn/vim-easy-align'
-" Any valid git URL is allowed
-"Plug 'https://github.com/junegunn/vim-github-dashboard.git'
-" Unmanaged plugin (manually installed and updated)
-"Plug '~/my-prototype-plugin'
-"
 " Plugins go here:
-"
-"
-" A Vim Plugin for Lively Previewing LaTeX PDF Output
- Plug 'xuhdev/vim-latex-live-preview', { 'for': 'tex' }
 
-" A Vim motions on speed
-"Plug 'https://github.com/easymotion/vim-easymotion'
+" A Vim Plugin for Lively Previewing LaTeX PDF Output
+ Plug 'https://github.com/xuhdev/vim-latex-live-preview', { 'for': 'tex' }
 
 " Status bar plugin
- Plug 'vim-airline/vim-airline'
+ Plug 'https://github.com/vim-airline/vim-airline'
 
 " Supertab: autocomplete
  Plug 'https://github.com/ervandew/supertab'
@@ -32,9 +18,19 @@ call plug#begin('~/.vim/plugged')
  Plug 'https://github.com/scrooloose/nerdtree.git'
 
 " Goyo: Distraction-free writing
- Plug 'junegunn/goyo.vim'
+ Plug 'https://github.com/junegunn/goyo.vim'
 
 call plug#end()
+
+
+" Plugin configurations:
+"
+" Airline
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts = 1
+
+" LaTeX live preview
+let g:livepreview_previewer = 'zathura'
 
 
 "******************************************************************************
@@ -72,16 +68,8 @@ nnoremap <silent> <C-]> <C-]>zt
 nnoremap <silent> daa ggdG
 nnoremap <silent> zt zt2<C-Y>
 nnoremap <silent> zb zb2<C-E>
-
-
-" Plugin configurations:
-"
-" Airline
-let g:airline#extensions#tabline#enabled = 1
-let g:airline_powerline_fonts = 1
-
-" LaTeX live preview
-let g:livepreview_previewer = 'zathura'
+nnoremap <silent> <C-j> /<++><CR>:noh<CR>ca<
+inoremap <silent> <C-j> <Esc>/<++><CR>:noh<CR>ca<
 
 
 "******************************************************************************

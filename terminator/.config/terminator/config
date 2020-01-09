@@ -23,12 +23,11 @@
 [profiles]
   [[default]]
     background_color = "#000510"
-    background_darkness = 0.9
-    background_type = transparent
+    background_darkness = 1.0
     cursor_color = "#e8dfd6"
-    font = Fira Mono Medium 16
+    font = Monospace 16
     foreground_color = "#02cdc7"
-    palette = "#00091f:#c2454e:#7cbf9e:#c08b3f:#2e3340:#ff5879:#44b5b1:#f2f1b9:#414141:#ef5847:#67f78f:#beb090:#74a9de:#ff99a1:#9ed9d8:#f6f6c9"
+    palette = "#000000:#cc0403:#19cb00:#cecb00:#0d73cc:#cb1ed1:#0dcdcd:#dddddd:#767676:#f2201f:#23fd00:#fffd00:#1a8fff:#fd28ff:#14ffff:#ffffff"
     scrollback_lines = 1000
     scrollbar_position = hidden
     show_titlebar = False

@@ -8,8 +8,9 @@ set default-bg "#DDDDDD"
 # Behaviour
 set incremental-search "true"
 set smooth-scroll "true"
+set scroll-step "100"
 set zoom-center "true"
-set selection-clipboard clipboard
+set selection-clipboard "clipboard"
 
 # Mappings
 unmap q

@@ -1,9 +1,9 @@
 # If you come from bash you might have to change your $PATH.
 #  export PATH=$HOME/bin:/usr/local/bin:$PATH
-export PATH=$PATH:~/bin:~/.local/bin:/usr/local/bin
+ export PATH=$PATH:~/bin:~/.local/bin:/usr/local/bin
 
 # Path to your oh-my-zsh installation.
-  export ZSH="/home/siddhartha/.oh-my-zsh"
+ export ZSH="/home/siddhartha/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -67,7 +67,6 @@ plugins=(
   git
   zsh-syntax-highlighting
   zsh-autosuggestions
-  autojump
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -78,12 +77,14 @@ source $ZSH/oh-my-zsh.sh
 export EDITOR='vim'
 export VISUAL=$EDITOR
 export XDG_CONFIG_HOME="${HOME}/.config/"
+export KEYTIMEOUT=1
 
 #Bindkeys:
 bindkey -v
 bindkey "^?" backward-delete-char
 bindkey "M-l" forward-char
 bindkey "M-w" forward-word
+bindkey '^R' history-incremental-search-backward
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
@@ -111,22 +112,24 @@ export SSH_KEY_PATH="~/.ssh/rsa_id"
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-#
-#
+
+
 #Aliases
-alias music=cmus
+alias please='sudo $(fc -ln -1)'
+alias music='cmus'
 alias gdb='gdb --tui'
 alias info='info --vi-keys'
 alias restart='shutdown -r'
-alias swayconfig="vim ${XDG_CONFIG_HOME}/sway/config"
-alias git=hub
+alias swayconfig='vim ~/.config/sway/config'
+alias sway='sway --my-next-gpu-wont-be-nvidia'
+alias git='hub'
 alias ranger='source ranger'
 alias rngr='source ranger'
 alias mkcd='source mkcd'
-alias dots="cd ~/.Dotfiles"
+alias dots='cd ~/.Dotfiles'
 alias aulog='less /var/log/dnfupdate.log'
-#
-#
+
+
 # Functions:
 function wttr(){
 	echo $1 | xargs -i{} curl http://wttr.in/{}

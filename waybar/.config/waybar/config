@@ -31,7 +31,8 @@
         "format": "<span style=\"italic\">{}</span>"
     },
     "sway/window": {
-        "tooltip": false
+        "tooltip": false,
+	"max-length": 75
     },
     "tray": {
         "tooltip": false,
