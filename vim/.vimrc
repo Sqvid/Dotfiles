@@ -15,7 +15,7 @@ call plug#begin('~/.vim/plugged')
  Plug 'https://github.com/ervandew/supertab'
 
 " NERDTree file system explorer
- Plug 'https://github.com/scrooloose/nerdtree.git'
+ Plug 'https://github.com/scrooloose/nerdtree'
 
 " Goyo: Distraction-free writing
  Plug 'https://github.com/junegunn/goyo.vim'
@@ -24,7 +24,6 @@ call plug#end()
 
 
 " Plugin configurations:
-"
 " Airline
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
@@ -55,6 +54,8 @@ set ignorecase		" Ignore case when searching
 set smartcase		" Don't ignore case if search contains capitals
 set showcmd		" Show keystrokes
 
+filetype plugin on
+
 
 "******************************************************************************
 " Mappings:
@@ -64,51 +65,8 @@ nnoremap <silent> <C-l> :LLPStartPreview <CR>
 nnoremap <silent> <F9> :setlocal spell! spelllang=en_gb <CR>
 nnoremap <silent> <Esc><Esc> :noh<CR>:let @/="ldsfl2393rj0mash02enp3irnddsfc"<CR>
 nnoremap <silent> <C-n> :NERDTree <CR>
-nnoremap <silent> <C-]> <C-]>zt
 nnoremap <silent> daa ggdG
 nnoremap <silent> zt zt2<C-Y>
 nnoremap <silent> zb zb2<C-E>
 nnoremap <silent> <C-j> /<++><CR>:noh<CR>ca<
 inoremap <silent> <C-j> <Esc>/<++><CR>:noh<CR>ca<
-
-
-"******************************************************************************
-" The Rest:
-if v:lang =~ "utf8$" || v:lang =~ "UTF-8$"
-   set fileencodings=ucs-bom,utf-8,latin1
-endif
-
-filetype plugin on
-
-" Only do this part when compiled with support for autocommands
-if has("autocmd")
-  augroup fedora
-  autocmd!
-  " In text files, always limit the width of text to 78 characters
-  " autocmd BufRead *.txt set tw=78
-  " When editing a file, always jump to the last cursor position
-  autocmd BufReadPost *
-  \ if line("'\"") > 0 && line ("'\"") <= line("$") |
-  \   exe "normal! g'\"" |
-  \ endif
-  " don't write swapfile on most commonly used directories for NFS mounts or USB sticks
-  autocmd BufNewFile,BufReadPre /media/*,/run/media/*,/mnt/* set directory=~/tmp,/var/tmp,/tmp
-  " start with spec file template
-  autocmd BufNewFile *.spec 0r /usr/share/vim/vimfiles/template.spec
-  augroup END
-endif
-
-if has("cscope") && filereadable("/usr/bin/cscope")
-   set csprg=/usr/bin/cscope
-   set csto=0
-   set cst
-   set nocsverb
-   " add any database in current directory
-   if filereadable("cscope.out")
-      cs add $PWD/cscope.out
-   " else add database pointed to by environment
-   elseif $CSCOPE_DB != ""
-      cs add $CSCOPE_DB
-   endif
-   set csverb
-endif
