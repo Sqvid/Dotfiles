@@ -1,4 +1,7 @@
 # Ignore vim-plug plugins directory
 vim/.vim/plugged/
+# Ignore unwanted qutebrowser files and directories
+qutebrowser/.config/qutebrowser/autoconfig.yml
+qutebrowser/.config/qutebrowser/qsettings/
 # Ignore vim file explorer history
 vim/.vim/.netrwhist
