@@ -57,6 +57,10 @@ set ignorecase		" Ignore case when searching
 set smartcase		" Don't ignore case if search contains capitals
 set showcmd		" Show keystrokes
 
+let &t_ut=''		"clearing uses the current background color
+
+colorscheme nightfly
+
 filetype plugin on
 
 
