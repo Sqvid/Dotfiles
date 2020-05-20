@@ -15,7 +15,7 @@ set $right l
 
 
 # Preferred programs
-set $term terminator
+set $term kitty
 set $browser qutebrowser
 set $menu rofi -show run
 #set $menu dmenu_path | dmenu -nb "$col_secondary" -sb "$col_highlight" -sf "#000000" \

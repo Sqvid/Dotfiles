@@ -20,6 +20,9 @@ call plug#begin('~/.vim/plugged')
 " Goyo: Distraction-free writing
  Plug 'https://github.com/junegunn/goyo.vim'
 
+" Nightfly colourscheme.
+ Plug 'https://github.com/bluz71/vim-nightfly-guicolors'
+
 call plug#end()
 
 
@@ -46,7 +49,7 @@ set updatetime=950	" Time to update .swp file. Used by LLP plugin
 set colorcolumn=80	" Sets coloured bar at 80 characters as a guide
 set tw=79		" Text wrapping at 79 characters
 set background=dark	" Fixes urxvt real transparency
-set t_Co=256 		" Set terminal colours
+set termguicolors 	" Set terminal colours
 set wildmenu 		" Command completion menu
 set incsearch 		" Start searching before hitting enter
 set scrolloff=1 	" Keep the lines above and below the cursor
