@@ -4,10 +4,10 @@ set adjust-open "width"
 set statusbar-home-tilde "true"
 set window-title-basename "true"
 set default-bg "#DDDDDD"
+set font "FreeMono bold 24"
 
 # Behaviour
 set incremental-search "true"
-set smooth-scroll "true"
 set scroll-step "100"
 set zoom-center "true"
 set selection-clipboard "clipboard"

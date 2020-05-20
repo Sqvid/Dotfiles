@@ -128,6 +128,7 @@ alias rngr='source ranger'
 alias mkcd='source mkcd'
 alias dots='cd ~/.Dotfiles'
 alias aulog='less /var/log/dnfupdate.log'
+alias ccc='gcc -Wall -Wextra -Wpedantic -std=c99'
 
 
 # Functions:

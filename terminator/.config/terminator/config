@@ -1,16 +1,30 @@
 [global_config]
   borderless = True
-  inactive_color_offset = 0.909090909091
-  title_inactive_bg_color = "#414141"
-  title_inactive_fg_color = "#e8dfd6"
-  title_transmit_bg_color = "#02cdc7"
   title_transmit_fg_color = "#e8dfd6"
+  title_transmit_bg_color = "#02cdc7"
+  title_inactive_fg_color = "#e8dfd6"
+  title_inactive_bg_color = "#414141"
+  inactive_color_offset = 0.909090909091
   title_use_system_font = False
 [keybindings]
-  help = None
-  layout_launcher = None
-  split_vert = <Primary><Shift>b
   zoom_in = <Primary>equal
+  split_vert = <Primary><Shift>b
+  layout_launcher = None
+  help = None
+[profiles]
+  [[default]]
+    allow_bold = False
+    background_color = "#000510"
+    background_darkness = 1.0
+    cursor_color = "#e8dfd6"
+    font = Source Code Pro 16
+    foreground_color = "#02cdc7"
+    show_titlebar = False
+    scrollbar_position = hidden
+    scrollback_lines = 1000
+    palette = "#000000:#cc0403:#19cb00:#cecb00:#0d73cc:#cb1ed1:#0dcdcd:#dddddd:#767676:#f2201f:#23fd00:#fffd00:#1a8fff:#fd28ff:#14ffff:#ffffff"
+    use_system_font = False
+    rewrap_on_resize = False
 [layouts]
   [[default]]
     [[[child1]]]
@@ -20,15 +34,3 @@
       parent = ""
       type = Window
 [plugins]
-[profiles]
-  [[default]]
-    background_color = "#000510"
-    background_darkness = 1.0
-    cursor_color = "#e8dfd6"
-    font = Monospace 16
-    foreground_color = "#02cdc7"
-    palette = "#000000:#cc0403:#19cb00:#cecb00:#0d73cc:#cb1ed1:#0dcdcd:#dddddd:#767676:#f2201f:#23fd00:#fffd00:#1a8fff:#fd28ff:#14ffff:#ffffff"
-    scrollback_lines = 1000
-    scrollbar_position = hidden
-    show_titlebar = False
-    use_system_font = False

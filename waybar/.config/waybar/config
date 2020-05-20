@@ -93,9 +93,7 @@
             "car": "",
             "default": ["", ""]
         },
-        "on-click": "amixer set Master toggle",
-        "on-scroll-up": "amixer set Master 2%+",
-        "on-scroll-down": "amixer set Master 2%-"
+        "on-click": "pactl set-sink-mute 0 toggle"
     },
     "custom/spotify": {
         "format": " {}",

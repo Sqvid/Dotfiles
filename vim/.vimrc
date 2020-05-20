@@ -69,4 +69,7 @@ nnoremap <silent> daa ggdG
 nnoremap <silent> zt zt2<C-Y>
 nnoremap <silent> zb zb2<C-E>
 nnoremap <silent> <C-j> /<++><CR>:noh<CR>ca<
+nnoremap <silent> ciq ci"
+nnoremap <silent> <Leader>ff zfaB
+
 inoremap <silent> <C-j> <Esc>/<++><CR>:noh<CR>ca<

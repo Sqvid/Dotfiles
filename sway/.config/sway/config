@@ -40,9 +40,9 @@ set $swaylock ~/.config/sway/swayscripts/swaylock/blurlocker.sh
 # Path to power options script.
 set $poweroptions ~/.config/sway/swayscripts/misc/poweroptions.sh
 # Brightness and volume control.
-set $volumeup amixer set 'Master' 2%+
-set $volumedown amixer set 'Master' 2%-
-set $mute_toggle amixer set 'Master' toggle
+set $volumeup pactl set-sink-volume 0 +4%
+set $volumedown pactl set-sink-volume 0 -4%
+set $mute_toggle pactl set-sink-mute 0 toggle
 set $brightnessup light -A 10%
 set $brightnessdown light -U 10%
 set $audio_prev cmus-remote -r
