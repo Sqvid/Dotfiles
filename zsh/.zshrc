@@ -1,9 +1,9 @@
 # If you come from bash you might have to change your $PATH.
-#  export PATH=$HOME/bin:/usr/local/bin:$PATH
- export PATH=$PATH:~/bin:~/.local/bin:/usr/local/bin
+# export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$PATH:~/bin:~/.local/bin:/usr/local/bin
 
 # Path to your oh-my-zsh installation.
- export ZSH="/home/siddhartha/.oh-my-zsh"
+export ZSH="/home/siddhartha/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -11,52 +11,25 @@
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 ZSH_THEME="agnoster-short"
 
-# Set list of themes to pick from when loading at random
-# Setting this variable when ZSH_THEME=random will cause zsh to load
-# a theme from this variable instead of looking in ~/.oh-my-zsh/themes/
-# If set to an empty array, this variable will have no effect.
-# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
-
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
-
-# Uncomment the following line to use hyphen-insensitive completion.
-# Case-sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
-
 # Uncomment the following line to disable bi-weekly auto-update checks.
 # DISABLE_AUTO_UPDATE="true"
 
 # Uncomment the following line to change how often to auto-update (in days).
- export UPDATE_ZSH_DAYS=30
-
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
-
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
+export UPDATE_ZSH_DAYS=30
 
 # Uncomment the following line to enable command auto-correction.
- ENABLE_CORRECTION="true"
+ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
- COMPLETION_WAITING_DOTS="true"
+COMPLETION_WAITING_DOTS="true"
 
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
 # much, much faster.
 # DISABLE_UNTRACKED_FILES_DIRTY="true"
 
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# You can set one of the optional three formats:
-# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# or set a custom format using the strftime function format specifications,
-# see 'man strftime' for details.
-# HIST_STAMPS="mm/dd/yyyy"
-
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
+# Allow extended globbing pattern set.
+setopt EXTENDED_GLOB
 
 # Which plugins would you like to load?
 # Standard plugins can be found in ~/.oh-my-zsh/plugins/*
@@ -64,9 +37,9 @@ ZSH_THEME="agnoster-short"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-  git
-  zsh-syntax-highlighting
-  zsh-autosuggestions
+	git
+	zsh-syntax-highlighting
+	zsh-autosuggestions
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -74,10 +47,12 @@ source $ZSH/oh-my-zsh.sh
 # User configuration
 
 #Exported variables
-export EDITOR='vim'
+export EDITOR='nvim'
 export VISUAL=$EDITOR
 export XDG_CONFIG_HOME="${HOME}/.config/"
 export KEYTIMEOUT=1
+export FZF_DEFAULT_PREVIEW="bat --color=always --style=header,grid \
+				--line-range :300"
 
 #Bindkeys:
 bindkey -v
@@ -115,12 +90,14 @@ export SSH_KEY_PATH="~/.ssh/rsa_id"
 
 
 #Aliases
+alias vi='nvim'
+alias vim='nvim'
 alias please='sudo $(fc -ln -1)'
 alias music='cmus'
 alias gdb='gdb --tui'
 alias info='info --vi-keys'
 alias restart='shutdown -r'
-alias swayconfig='vim ~/.config/sway/config'
+alias swayconfig='nvim ~/.config/sway/config'
 alias sway='sway --my-next-gpu-wont-be-nvidia'
 alias git='hub'
 alias ranger='source ranger'
@@ -132,20 +109,44 @@ alias ccc='gcc -Wall -Wextra -Wpedantic -std=c99'
 
 
 # Functions:
-function wttr(){
-	echo $1 | xargs -i{} curl http://wttr.in/{}
-}
-
-function msg(){
-	program_name=$(echo $@ | cut -d ' ' -f '1')
-	$@ && notify-send "$program_name has finished!"
-}
-
-function sever(){
-	if [[ $# -ne 1 ]]; then
-		echo "Provide one job ID (%<JOB_NO>) at a time"
-		exit 1
+function msg() {
+	echo "$@"
+	if [[ "$1" == "sudo" || "$1" ]]; then
+		programName=$2
+	else
+		programName=$1
 	fi
 
-	bg $1; disown $1
+	"$@" && notify-send "$programName has finished!"
+}
+
+function v() {
+	local viSelection;
+	viSelection="$(find ./ -type f ! -iwholename "*.git/*" | fzf \
+			--preview="$FZF_DEFAULT_PREVIEW {}")"
+
+	if [[ -n $viSelection ]]; then
+		$EDITOR "$viSelection"
+	fi
+}
+
+function z() {
+	local pdfSelection;
+	pdfSelection="$(find ./ -type f -iname "*.pdf" | fzf \
+			--preview='pdftotext -f 1 -l 3 {} -')"
+
+	if [[ -n $pdfSelection ]]; then
+		zathura "$pdfSelection" &
+	fi
+}
+
+function dotconfig() {
+	local dotSelection;
+	dotSelection="$(find $HOME/.Dotfiles -type f ! -iwholename "*.git/*" \
+			! -iwholename "*/plugged/*" -printf "%P\n" \
+			| fzf --preview="$FZF_DEFAULT_PREVIEW ~/.Dotfiles/{}")"
+
+	if [[ -n $dotSelection ]]; then
+		$EDITOR ~/.Dotfiles/"$dotSelection"
+	fi
 }
