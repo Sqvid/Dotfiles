@@ -7,20 +7,17 @@
 
 # Modifier Key. Mod4 for the Logo Key and Mod1 for Alt.
 set $mod Mod4
+
 # Home row direction keys, like vim
 set $left h
 set $down j
 set $up k
 set $right l
 
-
 # Preferred programs
 set $term kitty
 set $browser qutebrowser
 set $menu rofi -show run
-#set $menu dmenu_path | dmenu -nb "$col_secondary" -sb "$col_highlight" -sf "#000000" \
-#        -fn "Mint Spirit No2-17" | xargs swaymsg exec
-
 
 ##: Appearance:
 
@@ -29,16 +26,30 @@ set $col_highlight #00eddd
 set $col_secondary #000b1c
 set $col_unfocused_titlebar_bg #0f1723
 set $col_unfocused_titlebar_text #AAAAAA
+
 # Wallpaper
 set $wallpaper ~/Pictures/Wallpapers/Nature/OceanCliff.jpg
 
+# Workspaces:
+set $workspace1 I
+set $workspace2 II
+set $workspace3 III
+set $workspace4 IV
+set $workspace5 V
+set $workspace6 VI
+set $workspace7 VII
+set $workspace8 VIII
+set $workspace9 IX
+set $workspace10 X
 
 ##: Other:
 
 # Path to swaylock script.
 set $swaylock ~/.config/sway/swayscripts/swaylock/blurlocker.sh
+
 # Path to power options script.
 set $poweroptions ~/.config/sway/swayscripts/misc/poweroptions.sh
+
 # Brightness and volume control.
 set $volumeup pactl set-sink-volume 0 +4%
 set $volumedown pactl set-sink-volume 0 -4%
@@ -56,8 +67,6 @@ set $audio_next cmus-remote -n
 
 output eDP-1 mode 1920x1080@144.171997Hz
 output * background $wallpaper fill $col_secondary
-
-
 # You can get the names of your outputs by running: swaymsg -t get_outputs
 # }}}
 
@@ -185,27 +194,27 @@ bindsym $mod+M exec makoctl dismiss --all
 ##: Workspaces:
 
     # switch to workspace
-    bindsym $mod+1 workspace I
-    bindsym $mod+2 workspace II
-    bindsym $mod+3 workspace III
-    bindsym $mod+4 workspace IV
-    bindsym $mod+5 workspace V
-    bindsym $mod+6 workspace VI
-    bindsym $mod+7 workspace VII
-    bindsym $mod+8 workspace VIII
-    bindsym $mod+9 workspace IX
-    bindsym $mod+0 workspace X
+    bindsym $mod+1 workspace $workspace1
+    bindsym $mod+2 workspace $workspace2
+    bindsym $mod+3 workspace $workspace3
+    bindsym $mod+4 workspace $workspace4
+    bindsym $mod+5 workspace $workspace5
+    bindsym $mod+6 workspace $workspace6
+    bindsym $mod+7 workspace $workspace7
+    bindsym $mod+8 workspace $workspace8
+    bindsym $mod+9 workspace $workspace9
+    bindsym $mod+0 workspace $workspace10
     # move focused container to workspace
-    bindsym $mod+Shift+1 move container to workspace I
-    bindsym $mod+Shift+2 move container to workspace II
-    bindsym $mod+Shift+3 move container to workspace III
-    bindsym $mod+Shift+4 move container to workspace IV
-    bindsym $mod+Shift+5 move container to workspace V
-    bindsym $mod+Shift+6 move container to workspace VI
-    bindsym $mod+Shift+7 move container to workspace VII
-    bindsym $mod+Shift+8 move container to workspace VIII
-    bindsym $mod+Shift+9 move container to workspace IX
-    bindsym $mod+Shift+0 move container to workspace X
+    bindsym $mod+Shift+1 move container to workspace $workspace1
+    bindsym $mod+Shift+2 move container to workspace $workspace2
+    bindsym $mod+Shift+3 move container to workspace $workspace3
+    bindsym $mod+Shift+4 move container to workspace $workspace4
+    bindsym $mod+Shift+5 move container to workspace $workspace5
+    bindsym $mod+Shift+6 move container to workspace $workspace6
+    bindsym $mod+Shift+7 move container to workspace $workspace7
+    bindsym $mod+Shift+8 move container to workspace $workspace8
+    bindsym $mod+Shift+9 move container to workspace $workspace9
+    bindsym $mod+Shift+0 move container to workspace $workspace10
     # Note: workspaces can have any name you want, not just numbers.
     # We just use 1-10 as the default.
 # }}}

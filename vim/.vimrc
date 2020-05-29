@@ -1,27 +1,25 @@
 "******************************************************************************
 " Vim-Plug
 
-" - Avoid using standard Vim directory names like 'plugin'
-call plug#begin('~/.vim/plugged')
-" Plugins go here:
+call plug#begin('~/.local/share/nvim/plugged')
 
-" A Vim Plugin for Lively Previewing LaTeX PDF Output
- Plug 'https://github.com/xuhdev/vim-latex-live-preview', { 'for': 'tex' }
+" Live LaTeX preview.
+Plug 'xuhdev/vim-latex-live-preview', { 'for': 'tex' }
 
-" Status bar plugin
- Plug 'https://github.com/vim-airline/vim-airline'
+" Status bar plugin.
+Plug 'vim-airline/vim-airline'
 
-" Supertab: autocomplete
- Plug 'https://github.com/ervandew/supertab'
+" Tab powered autocomplete autocomplete.
+Plug 'ervandew/supertab'
 
-" NERDTree file system explorer
- Plug 'https://github.com/scrooloose/nerdtree'
+" NERDTree file system explorer.
+Plug 'scrooloose/nerdtree'
 
-" Goyo: Distraction-free writing
- Plug 'https://github.com/junegunn/goyo.vim'
+" Distraction-free writing.
+Plug 'junegunn/goyo.vim'
 
 " Nightfly colourscheme.
- Plug 'https://github.com/bluz71/vim-nightfly-guicolors'
+Plug 'bluz71/vim-nightfly-guicolors'
 
 call plug#end()
 
