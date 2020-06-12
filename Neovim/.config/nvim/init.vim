@@ -18,11 +18,15 @@ Plug 'scrooloose/nerdtree'
 " Distraction-free writing.
 Plug 'junegunn/goyo.vim'
 
+" Vim wrapper for fzf.
+Plug 'junegunn/fzf.vim'
+
 " Nightfly colourscheme.
 Plug 'bluz71/vim-nightfly-guicolors'
 
 " CoC Intellisense Engine.
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
 
 call plug#end()
 
@@ -38,12 +42,17 @@ let g:livepreview_previewer = 'zathura'
 " Use <c-space> to trigger completion.
 inoremap <silent><expr> <C-Space> coc#refresh()
 
+" SuperTab
+" Reverse default navigation direction.
+let g:SuperTabDefaultCompletionType = "<C-n>"
+
 "******************************************************************************
 " Settings:
 set viminfo='20,\"50	" Read/write a .viminfo file, don't store more
 			" than 50 lines of registers.
 set history=200		" Keep 50 lines of command line history.
 set number		" Show line numbers.
+set relativenumber      " Show relative line numbers.
 set updatetime=950	" Time to update .swp file.
 set colorcolumn=80	" Sets coloured bar at 80 characters as a guide.
 set tw=79		" Text wrapping at 79 characters.
@@ -51,6 +60,7 @@ set termguicolors 	" Set terminal colours.
 set scrolloff=1 	" Keep the lines above and below the cursor.
 set ignorecase		" Ignore case when searching.
 set smartcase		" Don't ignore case if search contains capitals.
+set inccommand=nosplit 	" Live feedback during substitution.
 
 colorscheme nightfly
 
