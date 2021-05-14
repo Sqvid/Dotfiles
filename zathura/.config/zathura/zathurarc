@@ -4,6 +4,7 @@ set adjust-open "width"
 set statusbar-home-tilde "true"
 set window-title-basename "true"
 set default-bg "#DDDDDD"
+set recolor-darkcolor "#969696"
 set font "FreeMono bold 24"
 
 # Behaviour

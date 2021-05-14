@@ -61,6 +61,7 @@ set scrolloff=1 	" Keep the lines above and below the cursor.
 set ignorecase		" Ignore case when searching.
 set smartcase		" Don't ignore case if search contains capitals.
 set inccommand=nosplit 	" Live feedback during substitution.
+set nowrapscan		" Don't wrap when jumping through search results.
 
 colorscheme nightfly
 

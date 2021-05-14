@@ -36,6 +36,7 @@ source $ZSH/oh-my-zsh.sh
 export PATH=$PATH:~/bin:~/.local/bin:/usr/local/bin
 export EDITOR='nvim'
 export VISUAL=$EDITOR
+export BROWSER=/usr/bin/firefox-wayland
 export XDG_CONFIG_HOME="${HOME}/.config/"
 export KEYTIMEOUT=1
 export FZF_DEFAULT_PREVIEW="bat --color=always --style=header,grid -r :300"
@@ -55,14 +56,11 @@ bindkey '^R' history-incremental-search-backward
 
 # *****************************************************************************
 # Aliases:
-#alias vi='nvim'
-#alias vim='nvim'
 alias please='sudo $(fc -ln -1)'
 alias music='cmus'
 alias gdb='gdb --tui'
 alias info='info --vi-keys'
 alias restart='shutdown -r'
-alias swayconfig='nvim ~/.config/sway/config'
 alias sway='sway --my-next-gpu-wont-be-nvidia'
 alias git='hub'
 alias ranger='source ranger'
@@ -104,7 +102,7 @@ function z() {
 			--preview='pdftotext -f 1 -l 3 {} -')"
 
 	if [[ -n $pdfSelection ]]; then
-		zathura "$pdfSelection" &
+		setsid -f zathura "$pdfSelection"
 	fi
 }
 
@@ -127,3 +125,14 @@ function dotconfig() {
 		$EDITOR ~/.Dotfiles/"$dotSelection"
 	fi
 }
+
+
+# *****************************************************************************
+# Launch Programs:
+
+# Window Manager:
+if [[ "$TTY" == "/dev/tty1" ]]; then
+	echo "Launching Sway..."
+	sleep 2
+	sway
+fi

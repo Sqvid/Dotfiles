@@ -16,7 +16,7 @@ set $right l
 
 # Preferred programs
 set $term kitty
-set $browser qutebrowser
+set $browser firefox-wayland
 set $menu rofi -show run
 
 ##: Appearance:
@@ -28,7 +28,7 @@ set $col_unfocused_titlebar_bg #0f1723
 set $col_unfocused_titlebar_text #AAAAAA
 
 # Wallpaper
-set $wallpaper ~/Pictures/Wallpapers/Nature/OceanCliff.jpg
+set $wallpaper ~/Pictures/Wallpapers/Aenami/FarFromTomorrow.jpg
 
 # Workspaces:
 set $workspace1 I

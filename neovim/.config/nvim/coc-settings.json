@@ -1,3 +1,4 @@
 {
-  "suggest.enablePreview": true
+  "suggest.enablePreview": true,
+  "html.autoClosingTags": true
 }
