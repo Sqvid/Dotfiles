@@ -54,8 +54,8 @@ set $poweroptions ~/.config/sway/swayscripts/misc/poweroptions.sh
 set $volumeup pactl set-sink-volume 0 +4%
 set $volumedown pactl set-sink-volume 0 -4%
 set $mute_toggle pactl set-sink-mute 0 toggle
-set $brightnessup light -A 10%
-set $brightnessdown light -U 10%
+set $brightnessup light -A 5%
+set $brightnessdown light -U 5%
 set $audio_prev cmus-remote -r
 set $audio_toggle cmus-remote -u
 set $audio_next cmus-remote -n

@@ -57,7 +57,6 @@ bindkey '^R' history-incremental-search-backward
 # *****************************************************************************
 # Aliases:
 alias please='sudo $(fc -ln -1)'
-alias music='cmus'
 alias gdb='gdb --tui'
 alias info='info --vi-keys'
 alias restart='shutdown -r'
@@ -66,7 +65,6 @@ alias git='hub'
 alias ranger='source ranger'
 alias rngr='source ranger'
 alias dots='cd ~/.Dotfiles'
-alias aulog='less /var/log/dnfupdate.log'
 alias ccc='gcc -Wall -Wextra -Wpedantic -std=c99'
 alias sdu='sudo dnf upgrade'
 alias sdi='sudo dnf install'
