@@ -1,30 +1,18 @@
 {
     "layer": "bottom", // Waybar at top layer
-    // "position": "bottom", // Waybar at the bottom of your screen
-    // "height": 30, // Waybar height
     "height": 35, // Waybar height
-    // "width": 1280, // Waybar width
+    "width": 100, // Waybar width
+
     // Choose the order of the modules
     "modules-left": ["sway/workspaces", "sway/mode", "custom/cmus"],
     "modules-center": ["sway/window"],
     "modules-right": ["idle_inhibitor", "pulseaudio", "backlight", "network", "battery", "clock", "tray"],
+
     // Modules configuration
     "sway/workspaces": {
         "tooltip": false,
         "disable-scroll": true,
         "max-length": "10"
-    //     "all-outputs": true,
-    //     "format": "{name}: {icon}",
-    //     "format-icons": {
-    //         "1": "",
-    //         "2": "",
-    //         "3": "",
-    //         "4": "",
-    //         "5": "",
-    //         "urgent": "",
-    //         "focused": "",
-    //         "default": ""
-    //     }
     },
     "sway/mode": {
         "tooltip": false,
@@ -36,36 +24,25 @@
     },
     "tray": {
         "tooltip": false,
-        // "icon-size": 21,
+        "icon-size": 18,
         "spacing": 10
     },
     "clock": {
         "tooltip": false,
-        "format-alt": "{:%A, %e %B}"
-    },
-    "cpu": {
-        "format": "{usage}% "
-    },
-    "memory": {
-        "format": "{}% "
+        "format-alt": "{:%A, %-d %B}"
     },
     "battery": {
         "tooltip": false,
         "states": {
-            "good": 95,
+            "good": 70,
             "warning": 20,
             "critical": 10
         },
         "format": "{capacity}% {icon}",
-        // "format-good": "", // An empty format will hide the module
         "format-full": "{capacity}% ",
         "format-icons": ["", "", "", "", ""]
     },
-    "battery#bat2": {
-        "bat": "BAT2"
-    },
     "network": {
-        // "interface": "wlp2s0", // (Optional) To force the use of this interface
         "tooltip": false,
         "format-wifi": "{essid} ({signalStrength}%) ",
         "format-ethernet": "{ifname}: {ipaddr}/{cidr} ",
@@ -80,7 +57,6 @@
     },
     "pulseaudio": {
         "tooltip": false,
-        //"scroll-step": 1,
         "format": "{volume}% {icon}",
         "format-bluetooth": "{volume}% {icon}",
         "format-muted": "",
@@ -90,27 +66,18 @@
             "headset": "",
             "phone": "",
             "portable": "",
-            "car": "",
             "default": ["", ""]
         },
         "on-click": "pactl set-sink-mute 0 toggle"
     },
-    "custom/spotify": {
-        "format": " {}",
-        "max-length": 40,
-        "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null" // Script in resources folder
-    },
     "custom/cmus": {
         "tooltip": false,
         "format": "  <span style=\"italic\">{}</span>",
-//        "format": "<span style=\"italic\">{}</span>",
         "on-click": "cmus-remote -u",
         "on-click-right": "cmus-remote -n",
-//        "exec-if": "pgrep cmus",
         "exec": "~/.config/waybar/custom_modules/musicMonitor.sh"
     },
     "backlight": {
-//        "device": "acpi_video1",
         "format": "{percent}% {icon}",
         "format-icons": [""]
     }
