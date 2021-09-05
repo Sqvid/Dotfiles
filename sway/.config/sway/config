@@ -45,7 +45,7 @@ set $workspace10 X
 ##: Other:
 
 # Path to swaylock script.
-set $swaylock ~/.config/sway/swayscripts/swaylock/blurlocker.sh
+set $swaylock ~/.config/swaylock/blurlocker.sh
 
 # Path to power options script.
 set $poweroptions ~/.config/sway/swayscripts/misc/poweroptions.sh
@@ -314,7 +314,6 @@ bindsym $mod+r mode "Resize"
     default_border none
     smart_borders on
 
-    gaps outer 3
     gaps inner 10
 
     focus_follows_mouse no
