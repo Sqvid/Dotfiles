@@ -24,6 +24,7 @@ plugins=(
 	git
 	zsh-syntax-highlighting
 	zsh-autosuggestions
+	autojump
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -33,14 +34,14 @@ source $ZSH/oh-my-zsh.sh
 # Variables and Options:
 
 # Exported variables:
-export PATH=$PATH:~/bin:~/.local/bin:/usr/local/bin
+export GOPATH=~/Documents/Code/Go/libs
+export PATH=$PATH:/opt/texlive/2021/bin/x86_64-linux/
 export EDITOR='nvim'
 export VISUAL=$EDITOR
 export BROWSER=/usr/bin/firefox-wayland
-export XDG_CONFIG_HOME="${HOME}/.config/"
+export XDG_CONFIG_HOME="$HOME/.config/"
 export KEYTIMEOUT=1
 export FZF_DEFAULT_PREVIEW="bat --color=always --style=header,grid -r :300"
-export GOPATH=~/Documents/Code/Go
 
 # Zsh options:
 setopt EXTENDED_GLOB
@@ -52,29 +53,28 @@ bindkey "^?" backward-delete-char
 bindkey "M-l" forward-char
 bindkey "M-w" forward-word
 bindkey '^R' history-incremental-search-backward
+bindkey -s '^o' 'lfcd\n'
 
 
 # *****************************************************************************
 # Aliases:
+alias ccc='gcc -Wall -Wextra -Wpedantic -std=c99'
 alias please='sudo $(fc -ln -1)'
-alias music='cmus'
 alias gdb='gdb --tui'
 alias info='info --vi-keys'
-alias restart='shutdown -r'
-alias sway='sway --my-next-gpu-wont-be-nvidia'
+alias shutdown='sudo poweroff'
+alias restart='sudo reboot'
 alias git='hub'
 alias ranger='source ranger'
 alias rngr='source ranger'
+alias lff='lfcd'
 alias dots='cd ~/.Dotfiles'
-alias aulog='less /var/log/dnfupdate.log'
-alias ccc='gcc -Wall -Wextra -Wpedantic -std=c99'
-alias sdu='sudo dnf upgrade'
-alias sdi='sudo dnf install'
-alias ds='dnf search'
 
 
 # *****************************************************************************
 # Functions:
+
+# Notify when command is done.
 function msg() {
 	echo "$@"
 	if [[ "$1" == "sudo" || "$1" ]]; then
@@ -86,6 +86,7 @@ function msg() {
 	"$@" && notify-send "$programName has finished!"
 }
 
+# Edit a file with $EDITOR.
 function v() {
 	local viSelection;
 	viSelection="$(find ./ -type f ! -iwholename "*.git/*" | fzf \
@@ -96,6 +97,7 @@ function v() {
 	fi
 }
 
+# Open a PDF with Zathura.
 function z() {
 	local pdfSelection;
 	pdfSelection="$(find ./ -type f -iname "*.pdf" | fzf \
@@ -106,6 +108,7 @@ function z() {
 	fi
 }
 
+# cd to a searched directory.
 function leap() {
 	local dirSelection;
 	dirSelection="$(find ./ -type d ! -iwholename "*.git/*" | fzf)"
@@ -115,7 +118,8 @@ function leap() {
 	fi
 }
 
-function dotconfig() {
+# Edit a dotfile.
+function de() {
 	local dotSelection;
 	dotSelection="$(find $HOME/.Dotfiles -type f ! -iwholename "*.git/*" \
 			! -iwholename "*/plugged/*" -printf "%P\n" \
@@ -126,6 +130,17 @@ function dotconfig() {
 	fi
 }
 
+# Use lf to switch directories and bind it to ctrl-o
+lfcd () {
+    tmp="$(mktemp)"
+    lf -last-dir-path="$tmp" "$@"
+    if [ -f "$tmp" ]; then
+        dir="$(cat "$tmp")"
+        rm -f "$tmp"
+        [ -d "$dir" ] && [ "$dir" != "$(pwd)" ] && cd "$dir"
+    fi
+}
+
 
 # *****************************************************************************
 # Launch Programs:
@@ -134,5 +149,5 @@ function dotconfig() {
 if [[ "$TTY" == "/dev/tty1" ]]; then
 	echo "Launching Sway..."
 	sleep 2
-	sway
+	dbus-run-session sway --my-next-gpu-wont-be-nvidia
 fi

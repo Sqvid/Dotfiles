@@ -3,30 +3,23 @@
 
 call plug#begin('~/.local/share/nvim/plugged')
 
-" Live LaTeX preview.
-Plug 'xuhdev/vim-latex-live-preview', { 'for': 'tex' }
+" Nightfly colourscheme.
+Plug 'bluz71/vim-nightfly-guicolors'
 
 " Status bar plugin.
 Plug 'vim-airline/vim-airline'
 
+" Live LaTeX preview.
+Plug 'xuhdev/vim-latex-live-preview', { 'for': 'tex' }
+
 " Tab powered autocomplete autocomplete.
 Plug 'ervandew/supertab'
-
-" NERDTree file system explorer.
-Plug 'scrooloose/nerdtree'
-
-" Distraction-free writing.
-Plug 'junegunn/goyo.vim'
-
-" Vim wrapper for fzf.
-Plug 'junegunn/fzf.vim'
-
-" Nightfly colourscheme.
-Plug 'bluz71/vim-nightfly-guicolors'
 
 " CoC Intellisense Engine.
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
+" Go language support.
+Plug 'fatih/vim-go', {'do': ':GoInstallBinaries gopls goimports godef'}
 
 call plug#end()
 
@@ -62,13 +55,14 @@ set ignorecase		" Ignore case when searching.
 set smartcase		" Don't ignore case if search contains capitals.
 set inccommand=nosplit 	" Live feedback during substitution.
 set nowrapscan		" Don't wrap when jumping through search results.
+set autowrite		" Automatically write when calling :make
 
 colorscheme nightfly
 
 filetype plugin on
 
 " Jump to the last visited position in the file.
-autocmd BufReadPost * if line("'\"") >= 1 && line("'\"") <= line("$") 
+autocmd BufReadPost * if line("'\"") >= 1 && line("'\"") <= line("$")
 	\ && &ft !~# 'commit' |   exe "normal! g`\"" | endif
 
 "******************************************************************************
@@ -80,7 +74,6 @@ let mapleader = " "
 nnoremap <silent> <C-l> :LLPStartPreview <CR>
 nnoremap <silent> <F9> :setlocal spell! spelllang=en_gb <CR>
 nnoremap <silent> <Esc><Esc> :noh<CR>:let @/="ldsfl2393rj0mash02enp3irdsfc"<CR>
-nnoremap <silent> <C-n> :NERDTree <CR>
 nnoremap <silent> daa ggdG
 nnoremap <silent> zt zt2<C-Y>
 nnoremap <silent> zb zb2<C-E>

@@ -17,7 +17,7 @@ set $right l
 # Preferred programs
 set $term kitty
 set $browser firefox-wayland
-set $menu rofi -show run
+set $menu rofi -show drun
 
 ##: Appearance:
 
@@ -28,7 +28,7 @@ set $col_unfocused_titlebar_bg #0f1723
 set $col_unfocused_titlebar_text #AAAAAA
 
 # Wallpaper
-set $wallpaper ~/Pictures/Wallpapers/Aenami/FarFromTomorrow.jpg
+set $wallpaper ~/Pictures/Wallpapers/Other/SimpleMountains.jpg
 
 # Workspaces:
 set $workspace1 I
@@ -51,11 +51,11 @@ set $swaylock ~/.config/sway/swayscripts/swaylock/blurlocker.sh
 set $poweroptions ~/.config/sway/swayscripts/misc/poweroptions.sh
 
 # Brightness and volume control.
-set $volumeup pactl set-sink-volume 0 +4%
-set $volumedown pactl set-sink-volume 0 -4%
-set $mute_toggle pactl set-sink-mute 0 toggle
-set $brightnessup light -A 10%
-set $brightnessdown light -U 10%
+set $volumeup pactl set-sink-volume @DEFAULT_SINK@ +4%
+set $volumedown pactl set-sink-volume @DEFAULT_SINK@ -4%
+set $mute_toggle pactl set-sink-mute @DEFAULT_SINK@ toggle
+set $brightnessup light -A 5%
+set $brightnessdown light -U 5%
 set $audio_prev cmus-remote -r
 set $audio_toggle cmus-remote -u
 set $audio_next cmus-remote -n

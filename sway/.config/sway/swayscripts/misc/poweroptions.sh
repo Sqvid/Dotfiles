@@ -6,11 +6,12 @@ response=$(echo -e "Cancel\n1. Shutdown\n2. Restart\n3. Sleep" | \
 	rofi -dmenu -p "Power Options")
 
 if [ "$response" == "1. Shutdown" ]; then
-	shutdown now
+	sudo poweroff now
 elif [ "$response" == "2. Restart" ]; then
-	shutdown -r now
+	sudo reboot now
 elif [ "$response" == "3. Sleep" ]; then
-	$LOCKSCRIPT && systemctl suspend
+	#$LOCKSCRIPT && systemctl suspend
+	echo "Not implemented yet."
 else
 	exit 0
 fi
