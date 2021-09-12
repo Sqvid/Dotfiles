@@ -1,3 +1,12 @@
+#
+# ███████╗░██████╗██╗░░██╗
+# ╚════██║██╔════╝██║░░██║
+# ░░███╔═╝╚█████╗░███████║
+# ██╔══╝░░░╚═══██╗██╔══██║
+# ███████╗██████╔╝██║░░██║
+# ╚══════╝╚═════╝░╚═╝░░╚═╝
+#
+
 # *****************************************************************************
 # Oh My Zsh Configuration:
 
@@ -27,23 +36,26 @@ plugins=(
 	autojump
 )
 
-source $ZSH/oh-my-zsh.sh
+source ${ZSH}/oh-my-zsh.sh
 
 
 # *****************************************************************************
 # Variables and Options:
 
 # Exported variables:
-export GOPATH=~/Documents/Code/Go/libs
-export PATH=$PATH:/opt/texlive/2021/bin/x86_64-linux/
+userpath=${HOME}/bin
+texpath=/opt/texlive/2021/bin/x86_64-linux
+export GOPATH=${HOME}/Documents/Code/Go/libs
+export PATH=${PATH}:${userpath}:${GOPATH}/bin:${texpath}
+
 export EDITOR='nvim'
-export VISUAL=$EDITOR
+export VISUAL=${EDITOR}
 export BROWSER=/usr/bin/firefox-wayland
-export XDG_CONFIG_HOME="$HOME/.config/"
-export KEYTIMEOUT=1
+export XDG_CONFIG_HOME="${HOME}/.config"
 export FZF_DEFAULT_PREVIEW="bat --color=always --style=header,grid -r :300"
 
 # Zsh options:
+export KEYTIMEOUT=1
 setopt EXTENDED_GLOB
 setopt NO_AUTO_CD
 
@@ -68,77 +80,91 @@ alias git='hub'
 alias ranger='source ranger'
 alias rngr='source ranger'
 alias lff='lfcd'
-alias dots='cd ~/.Dotfiles'
+alias vpm='vpm --color=yes'
 
 
 # *****************************************************************************
 # Functions:
 
 # Notify when command is done.
-function msg() {
+msg() {
 	echo "$@"
-	if [[ "$1" == "sudo" || "$1" ]]; then
+	if [ "$1" == "sudo" || "$1" ]; then
 		programName=$2
 	else
 		programName=$1
 	fi
 
-	"$@" && notify-send "$programName has finished!"
+	"$@" && notify-send "${programName} has finished!"
 }
 
 # Edit a file with $EDITOR.
-function v() {
+v() {
 	local viSelection;
 	viSelection="$(find ./ -type f ! -iwholename "*.git/*" | fzf \
-			--preview="$FZF_DEFAULT_PREVIEW {}")"
+			--preview="${FZF_DEFAULT_PREVIEW} {}")"
 
-	if [[ -n $viSelection ]]; then
-		$EDITOR "$viSelection"
+	if [[ -n ${viSelection} ]]; then
+		${EDITOR} "${viSelection}"
 	fi
 }
 
 # Open a PDF with Zathura.
-function z() {
+z() {
 	local pdfSelection;
 	pdfSelection="$(find ./ -type f -iname "*.pdf" | fzf \
 			--preview='pdftotext -f 1 -l 3 {} -')"
 
-	if [[ -n $pdfSelection ]]; then
-		setsid -f zathura "$pdfSelection"
+	if [[ -n ${pdfSelection} ]]; then
+		setsid -f zathura "${pdfSelection}"
 	fi
 }
 
 # cd to a searched directory.
-function leap() {
+leap() {
 	local dirSelection;
-	dirSelection="$(find ./ -type d ! -iwholename "*.git/*" | fzf)"
+	dirSelection="$(find ./ -type d ! -iwholename "*.git/*" | fzf \
+			--query="$1")"
 
-	if [[ -n $dirSelection ]]; then
-		cd "$dirSelection"
+	if [[ -n ${dir}Selection ]]; then
+		cd "${dir}Selection" || return
 	fi
 }
 
 # Edit a dotfile.
-function de() {
+dot() {
 	local dotSelection;
-	dotSelection="$(find $HOME/.Dotfiles -type f ! -iwholename "*.git/*" \
+	dotSelection="$(find ${HOME}/.Dotfiles -type f ! -iwholename "*.git/*" \
 			! -iwholename "*/plugged/*" -printf "%P\n" \
-			| fzf --preview="$FZF_DEFAULT_PREVIEW ~/.Dotfiles/{}")"
+			| fzf --preview="${FZF_DEFAULT_PREVIEW} ~/.Dotfiles/{}"\
+			--query="$1")"
 
-	if [[ -n $dotSelection ]]; then
-		$EDITOR ~/.Dotfiles/"$dotSelection"
+	if [[ -n ${dotSelection} ]]; then
+		${EDITOR} ~/.Dotfiles/"${dotSelection}"
 	fi
 }
 
 # Use lf to switch directories and bind it to ctrl-o
-lfcd () {
-    tmp="$(mktemp)"
-    lf -last-dir-path="$tmp" "$@"
-    if [ -f "$tmp" ]; then
-        dir="$(cat "$tmp")"
-        rm -f "$tmp"
-        [ -d "$dir" ] && [ "$dir" != "$(pwd)" ] && cd "$dir"
-    fi
+lfcd() {
+	tmp="$(mktemp)"
+	lf -last-dir-path="${tmp}" "$@"
+	if [ -f "${tmp}" ]; then
+	dir="$(cat "${tmp}")"
+	rm -f "${tmp}"
+	[ -d "${dir}" ] && [ "${dir}" != "$(pwd)" ] && cd "${dir}" || return
+	fi
+}
+
+btrsnap() {
+	if [ $# -ne 1 ]; then
+		echo "Must provide 'home' or 'root' as options."
+	elif [[ "$1" == "root" ]]; then
+		sudo btrfs subvolume snapshot / /snapshots/root/snapshot-root_$(date +%Y-%m-%d-%T)
+	elif [[ "$1" == "home" ]]; then
+		sudo btrfs subvolume snapshot /home /snapshots/home/snapshot-home_$(date +%Y-%m-%d-%T)
+	else
+		echo "Must provide 'home' or 'root' as options."
+	fi
 }
 
 
@@ -146,7 +172,7 @@ lfcd () {
 # Launch Programs:
 
 # Window Manager:
-if [[ "$TTY" == "/dev/tty1" ]]; then
+if [[ "${TTY}" == "/dev/tty1" ]]; then
 	echo "Launching Sway..."
 	sleep 2
 	dbus-run-session sway --my-next-gpu-wont-be-nvidia
