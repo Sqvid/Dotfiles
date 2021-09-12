@@ -1,3 +1,12 @@
+"
+" ███╗░░██╗███████╗░█████╗░██╗░░░██╗██╗███╗░░░███╗
+" ████╗░██║██╔════╝██╔══██╗██║░░░██║██║████╗░████║
+" ██╔██╗██║█████╗░░██║░░██║╚██╗░██╔╝██║██╔████╔██║
+" ██║╚████║██╔══╝░░██║░░██║░╚████╔╝░██║██║╚██╔╝██║
+" ██║░╚███║███████╗╚█████╔╝░░╚██╔╝░░██║██║░╚═╝░██║
+" ╚═╝░░╚══╝╚══════╝░╚════╝░░░░╚═╝░░░╚═╝╚═╝░░░░░╚═╝
+"
+
 "******************************************************************************
 " Vim-Plug:
 
@@ -45,7 +54,7 @@ set viminfo='20,\"50	" Read/write a .viminfo file, don't store more
 			" than 50 lines of registers.
 set history=200		" Keep 50 lines of command line history.
 set number		" Show line numbers.
-set relativenumber      " Show relative line numbers.
+"set relativenumber      " Show relative line numbers.
 set updatetime=950	" Time to update .swp file.
 set colorcolumn=80	" Sets coloured bar at 80 characters as a guide.
 set tw=79		" Text wrapping at 79 characters.
