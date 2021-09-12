@@ -1,7 +1,10 @@
 {
-    "layer": "bottom", // Waybar at top layer
-    "height": 35, // Waybar height
-    "width": 100, // Waybar width
+    // Draw waybar on the bottom layer.
+    "layer": "bottom",
+    // Dimensions
+    "margin": "4, 4, 0",
+    "height": 30,
+    "width": 100,
 
     // Choose the order of the modules
     "modules-left": ["sway/workspaces", "sway/mode", "custom/cmus"],
