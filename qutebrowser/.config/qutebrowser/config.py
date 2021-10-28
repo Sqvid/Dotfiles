@@ -3,8 +3,8 @@
 #   qute://help/configuring.html
 #   qute://help/settings.html
 
-# Uncomment this to still load settings configured via autoconfig.yml
-# config.load_autoconfig()
+# Determines whether to still load settings configured via autoconfig.yml
+config.load_autoconfig(False)
 
 # Force a Qt platform to use. This sets the `QT_QPA_PLATFORM`
 # environment variable and is useful to force using the XCB plugin when
@@ -61,7 +61,7 @@ c.url.auto_search = 'naive'
 # Page to open if :open -t/-b/-w is used without URL. Use `about:blank`
 # for a blank page.
 # Type: FuzzyUrl
-c.url.default_page = 'https://www.google.co.uk'
+c.url.default_page = 'https://www.duckduckgo.com'
 
 # Open base URL of the searchengine if a searchengine shortcut is
 # invoked without parameters.
@@ -77,7 +77,8 @@ c.url.open_base_url = True
 # used by prepending the search engine name to the search term, e.g.
 # `:open google qutebrowser`.
 # Type: Dict
-c.url.searchengines = {'DEFAULT': 'https://www.google.co.uk/search?q={}',
+c.url.searchengines = {'DEFAULT': 'https://www.duckduckgo.com/?q={}',
+                            'g':  'https://www.google.com/search?q={}',
                             'gh': 'https://www.github.com/search?q={}',
                              'r': 'https://www.reddit.com/r/{}',
                             'yt': 'https://www.youtube.com/results?search_query={}',
@@ -86,7 +87,7 @@ c.url.searchengines = {'DEFAULT': 'https://www.google.co.uk/search?q={}',
 
 # Page(s) to open at the start.
 # Type: List of FuzzyUrl, or FuzzyUrl
-c.url.start_pages = 'https://www.google.co.uk'
+c.url.start_pages = 'https://www.duckduckgo.com'
 
 # Default zoom level.
 # Type: Perc
@@ -116,6 +117,9 @@ c.colors.statusbar.private.bg = 'black'
 # Type: QssColor
 c.colors.statusbar.command.private.bg = 'black'
 
+# Render pages in dark mode.
+c.colors.webpage.darkmode.enabled = True
+
 # Font used in the completion widget.
 # Type: Font
 c.fonts.completion.entry = '15pt monospace'
@@ -130,7 +134,8 @@ c.fonts.statusbar = '15pt Fira mono'
 
 # Font used in the tab bar.
 # Type: QtFont
-c.fonts.tabs = '14pt DejaVu Sans'
+c.fonts.tabs.selected = '14pt DejaVu Sans'
+c.fonts.tabs.unselected = '14pt DejaVu Sans'
 
 # Smooth scrolling.
 # Type: Bool

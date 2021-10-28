@@ -42,6 +42,9 @@ source ${ZSH}/oh-my-zsh.sh
 # *****************************************************************************
 # Variables and Options:
 
+# Starship prompt
+#eval "$(starship init zsh)"
+
 # Exported variables:
 userpath=${HOME}/bin
 texpath=/opt/texlive/2021/bin/x86_64-linux
@@ -126,8 +129,8 @@ leap() {
 	dirSelection="$(find ./ -type d ! -iwholename "*.git/*" | fzf \
 			--query="$1")"
 
-	if [[ -n ${dir}Selection ]]; then
-		cd "${dir}Selection" || return
+	if [[ -n ${dirSelection} ]]; then
+		cd "${dirSelection}" || return
 	fi
 }
 

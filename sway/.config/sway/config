@@ -1,5 +1,11 @@
-
-#~~~~~~~~~~~~~~~~~~~~~~~~~~ Custom Config for Sway ~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+#
+# ░██████╗░██╗░░░░░░░██╗░█████╗░██╗░░░██╗
+# ██╔════╝░██║░░██╗░░██║██╔══██╗╚██╗░██╔╝
+# ╚█████╗░░╚██╗████╗██╔╝███████║░╚████╔╝░
+# ░╚═══██╗░░████╔═████║░██╔══██║░░╚██╔╝░░
+# ██████╔╝░░╚██╔╝░╚██╔╝░██║░░██║░░░██║░░░
+# ╚═════╝░░░░╚═╝░░░╚═╝░░╚═╝░░╚═╝░░░╚═╝░░░
+#
 
 ###: Variables {{{
 
@@ -17,18 +23,18 @@ set $right l
 # Preferred programs
 set $term kitty
 set $browser firefox-wayland
-set $menu rofi -show drun
+set $menu rofi -show drun -config ~/.config/rofi/config
 
 ##: Appearance:
 
 # Colors
-set $col_highlight #00eddd
-set $col_secondary #000b1c
-set $col_unfocused_titlebar_bg #0f1723
+set $col_highlight #FFFFFF
+set $col_secondary #c53c4e
+set $col_unfocused_titlebar_bg #040f14
 set $col_unfocused_titlebar_text #AAAAAA
 
 # Wallpaper
-set $wallpaper ~/Pictures/Wallpapers/Other/SimpleMountains.jpg
+set $wallpaper ~/Pictures/Wallpapers/Japanese/SamuraiI.jpg
 
 # Workspaces:
 set $workspace1 I
@@ -44,6 +50,13 @@ set $workspace10 X
 
 ##: Other:
 
+# Outputs
+set $screen0 eDP-1
+
+# Inputs
+set $touchpad "1739:52390:DELL08EB:00_06CB:CCA6_Touchpad"
+set $keyboard "1:1:AT_Translated_Set_2_keyboard" 
+
 # Path to swaylock script.
 set $swaylock ~/.config/swaylock/blurlocker.sh
 
@@ -51,21 +64,25 @@ set $swaylock ~/.config/swaylock/blurlocker.sh
 set $poweroptions ~/.config/sway/swayscripts/misc/poweroptions.sh
 
 # Brightness and volume control.
-set $volumeup pactl set-sink-volume @DEFAULT_SINK@ +4%
-set $volumedown pactl set-sink-volume @DEFAULT_SINK@ -4%
+set $volumeup pactl set-sink-volume @DEFAULT_SINK@ +2%
+set $volumedown pactl set-sink-volume @DEFAULT_SINK@ -2%
 set $mute_toggle pactl set-sink-mute @DEFAULT_SINK@ toggle
 set $brightnessup light -A 5%
 set $brightnessdown light -U 5%
 set $audio_prev cmus-remote -r
 set $audio_toggle cmus-remote -u
 set $audio_next cmus-remote -n
+
+# Write dbus session address to a file (useful for cron).
+exec sh -c 'echo DBUS_SESSION_BUS_ADDRESS=$DBUS_SESSION_BUS_ADDRESS > ~/.dbus/swaysession'
+
 # }}}
 
 ###: Output configuration {{{
 
 ##: Set Wallpaper:
 
-output eDP-1 mode 1920x1080@144.171997Hz
+output $screen0 mode 1920x1080@144.171997Hz
 output * background $wallpaper fill $col_secondary
 # You can get the names of your outputs by running: swaymsg -t get_outputs
 # }}}
@@ -74,7 +91,7 @@ output * background $wallpaper fill $col_secondary
 
 ##: Touchpad Configuration:
 
-    input "1739:52390:DELL08EB:00_06CB:CCA6_Touchpad" {
+    input $touchpad {
         dwt enabled
         tap enabled
         natural_scroll enabled
@@ -84,7 +101,7 @@ output * background $wallpaper fill $col_secondary
 
 ##: Keyboard Configuration:
 
-    input "1:1:AT_Translated_Set_2_keyboard" {
+    input $keyboard {
         xkb_numlock enabled
     }
 
@@ -123,6 +140,16 @@ exec mako --font 'Mint Spirit No2 14' --background-color '#044c47' \
 # Dismiss all notifications.
 bindsym $mod+M exec makoctl dismiss --all
 # }}}
+
+##: PipeWire (Multimedia Daemon) {{{:
+exec pipewire
+exec pipewire-pulse
+# }}}
+
+##: Check for system updates (Custom script) {{{:
+exec ~/bin/checkupdate
+# }}}
+
 # }}}
 
 ###: Key bindings {{{
@@ -135,8 +162,8 @@ bindsym $mod+M exec makoctl dismiss --all
     bindsym $mod+d exec $menu
 
     # take a screenshot
-    bindsym print exec grim ~/Pictures/Screenshots/"Screenshot_$(date +%F\ %H-%M-%S).png"
-    bindsym Shift+print exec slurp | grim -g - ~/Pictures/Screenshots/"Screenshot_$(date +%F\ %H-%M-%S).png"
+    bindsym print exec grim ~/Pictures/Screenshots/"Screenshot_$(date +%F\ %H-%M-%S).png" && notify-send "Screenshot captured!"
+    bindsym Shift+print exec slurp | grim -g - ~/Pictures/Screenshots/"Screenshot_$(date +%F\ %H-%M-%S).png" && notify-send "Screenshot captured!"
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
@@ -314,7 +341,7 @@ bindsym $mod+r mode "Resize"
     default_border none
     smart_borders on
 
-    gaps inner 10
+    gaps inner 8
 
     focus_follows_mouse no
 # }}}
@@ -325,15 +352,15 @@ bindsym $mod+r mode "Resize"
     client.focused $col_secondary $col_secondary $col_highlight \
         $col_highlight $col_highlight
 
-    client.unfocused $col_secondary $col_unfocused_titlebar_bg \
+    client.unfocused $col_unfocused_titlebar_bg $col_unfocused_titlebar_bg \
         $col_unfocused_titlebar_text $col_secondary $col_secondary
 # }}}
 
 # Special window behaviour: {{{
 
     for_window [class="Mathematica"] floating enable
-    for_window [app_id="zathura"] inhibit_idle fullscreen
-    for_window [class="qutebrowser"] inhibit_idle fullscreen
+    for_window [app_id="^.*"] inhibit_idle fullscreen
+    for_window [class="^.*"] inhibit_idle fullscreen
 
     exec python3 ~/.config/sway/swayscripts/behaviour/sway_smooth_fading.py &
 # }}}
@@ -349,5 +376,4 @@ bar {
 # }}}
 
 include /etc/sway/config.d/*
-
 # vim:fileencoding=utf-8:ft=conf:foldmethod=marker

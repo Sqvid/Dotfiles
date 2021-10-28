@@ -8,14 +8,14 @@
 }
 
 window#waybar {
-    background: rgba(00, 11, 28, 0.52);
+    background: rgba(01, 25, 35, 0.8);
     border-bottom: 3px solid rgba(100, 114, 125, 0.5);
     border-radius: 10px;
-    color: #00eddd;
+    color: #FFC5CD;
 }
 
 #window {
-    color: #00eddd;
+    color: #FFC5CD;
 }
 
 #workspaces button {
@@ -31,13 +31,13 @@ window#waybar {
 }
 
 #workspaces button.focused {
-    /*background: #64727D;*/
-    border-bottom: 3px solid #00eddd;
+    background: #c53c4e;
+    border-radius: 4px;
+    color: white;
 }
 
 #mode {
     background: #db2b00;
-    color: white;
     border-bottom: 3px solid white;
 }
 
@@ -47,13 +47,11 @@ window#waybar {
 }
 
 #clock {
-    color: white;
-    border-bottom: 3px solid white;
+    border-bottom: 3px solid #FFC5CD;
 }
 
 #battery {
     background-color: transparent;
-    color: white;
 }
 
 #battery.charging {
@@ -80,7 +78,6 @@ window#waybar {
 
 #network {
     background: transparent;
-    color: white
 }
 
 #network.disconnected {
@@ -89,19 +86,17 @@ window#waybar {
 
 #pulseaudio {
     background: transparent;
-    color: white;
 }
 
 #pulseaudio.muted {
-    background: #90b1b1;
-    color: #2a5c45;
+    background-color: #c53c4e;
+    color: #2d3436;
     border-bottom: 3px solid transparent;
     padding: 0px 25px;
 }
 
 #backlight {
     background: transparent;
-    color: white;
 }
 
 #idle_inhibitor {
@@ -110,7 +105,7 @@ window#waybar {
 }
 
 #idle_inhibitor.activated {
-    background-color: #00eddd;
+    background-color: #c53c4e;
     color: #2d3436;
 }
 
