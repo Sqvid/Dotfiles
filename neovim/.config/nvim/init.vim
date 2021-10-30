@@ -66,7 +66,7 @@ set inccommand=nosplit 	" Live feedback during substitution.
 set nowrapscan		" Don't wrap when jumping through search results.
 set autowrite		" Automatically write when calling :make
 
-"colorscheme nightfly
+colorscheme base16-bushido
 
 filetype plugin on
 

@@ -81,6 +81,7 @@ window#waybar {
 }
 
 #network.disconnected {
+    color: white;
     background: #f53c3c;
 }
 
