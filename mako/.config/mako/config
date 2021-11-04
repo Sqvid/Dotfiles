@@ -1,0 +1,13 @@
+font='Mint Spirit No2 14'
+width=500
+height=300
+padding= 15,15,15,50
+border-size=0
+max-visible=2
+layer=top
+
+## Base16 Bushido
+# Author: Siddhartha Menon
+text-color=#ffdfe4
+background-color=#c53c4e
+border-color=#0a4392
