@@ -74,7 +74,7 @@ set $audio_toggle cmus-remote -u
 set $audio_next cmus-remote -n
 
 # Write dbus session address to a file (useful for cron).
-exec sh -c 'echo DBUS_SESSION_BUS_ADDRESS=$DBUS_SESSION_BUS_ADDRESS > ~/.dbus/swaysession'
+exec sh -c 'echo "DBUS_SESSION_BUS_ADDRESS=$DBUS_SESSION_BUS_ADDRESS" > ~/.dbus/sway_session'
 
 # }}}
 
@@ -96,6 +96,7 @@ output * background $wallpaper fill $col_secondary
         tap enabled
         natural_scroll enabled
         middle_emulation enabled
+	pointer_accel 0.3
     }
 
 
@@ -141,6 +142,8 @@ bindsym $mod+M exec makoctl dismiss --all
 ##: PipeWire (Multimedia Daemon) {{{:
 exec pipewire
 exec pipewire-pulse
+exec easyeffects --gapplication-service > /dev/null 2>&1
+# EasyEffects for noise cancellation and other filters.
 # }}}
 
 ##: Check for system updates (Custom script) {{{:
