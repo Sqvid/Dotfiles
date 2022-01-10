@@ -1,11 +1,11 @@
 configuration {
-    theme: "custom.rasi"; 
   timeout {
       action: "kb-cancel";
-      delay:  0;
+      delay: 0;
   }
   filebrowser {
       directories-first: true;
-      sorting-method:    "name";
+      sorting-method: "name";
   }
 }
+@theme "custom.rasi"
