@@ -37,16 +37,16 @@ set $col_unfocused_titlebar_text #AAAAAA
 set $wallpaper ~/Pictures/Wallpapers/Japanese/SamuraiI.jpg
 
 # Workspaces:
-set $workspace1 I
-set $workspace2 II
-set $workspace3 III
-set $workspace4 IV
-set $workspace5 V
-set $workspace6 VI
-set $workspace7 VII
-set $workspace8 VIII
-set $workspace9 IX
-set $workspace10 X
+set $workspace1  1:I
+set $workspace2  2:II
+set $workspace3  3:III
+set $workspace4  4:IV
+set $workspace5  5:V
+set $workspace6  6:VI
+set $workspace7  7:VII
+set $workspace8  8:VIII
+set $workspace9  9:IX
+set $workspace10 10:X
 
 ##: Other:
 
@@ -142,14 +142,18 @@ bindsym $mod+M exec makoctl dismiss --all
 ##: PipeWire (Multimedia Daemon) {{{:
 exec pipewire
 exec pipewire-pulse
-exec easyeffects --gapplication-service > /dev/null 2>&1
+
 # EasyEffects for noise cancellation and other filters.
+exec easyeffects --gapplication-service > /dev/null 2>&1
+# }}}
+
+##: Udiskie (Removable disk manager) {{{:
+exec udiskie &
 # }}}
 
 ##: Check for system updates (Custom script) {{{:
-exec ~/bin/checkupdate
+exec ~/bin/x-checkupdate
 # }}}
-
 # }}}
 
 ###: Key bindings {{{
