@@ -12,9 +12,6 @@
 
 call plug#begin('~/.local/share/nvim/plugged')
 
-" Nightfly colourscheme.
-Plug 'bluz71/vim-nightfly-guicolors'
-
 " Status bar plugin.
 Plug 'vim-airline/vim-airline'
 
