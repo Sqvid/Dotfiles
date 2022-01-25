@@ -68,40 +68,28 @@ bindkey "^?" backward-delete-char
 bindkey "M-l" forward-char
 bindkey "M-w" forward-word
 bindkey '^R' history-incremental-search-backward
-bindkey -s '^o' 'lfcd\n'
 
 
 # *****************************************************************************
 # Aliases:
+
 alias ccc='gcc -Wall -Wextra -Wpedantic -std=c99'
 alias please='sudo $(fc -ln -1)'
 alias gdb='gdb --tui'
-alias info='info --vi-keys'
 alias shutdown='sudo poweroff'
 alias restart='sudo reboot'
 alias git='hub'
 alias ranger='source ranger'
 alias rngr='source ranger'
-alias lff='lfcd'
 alias vpm='vpm --color=yes'
 alias vkl='vkpurge list'
 alias xbu='sudo xbps-install -Svu'
+alias btrsync='sudo btrbk -v resume'
+alias umr='udiskie-umount -delaF'
 
 
 # *****************************************************************************
 # Functions:
-
-# Notify when command is done.
-msg() {
-	echo "$@"
-	if [ "$1" == "sudo" || "$1" ]; then
-		programName=$2
-	else
-		programName=$1
-	fi
-
-	"$@" && notify-send "${programName} has finished!"
-}
 
 # Edit a file with $EDITOR.
 v() {
@@ -121,7 +109,7 @@ z() {
 			--preview='pdftotext -f 1 -l 3 {} -')"
 
 	if [[ -n ${pdfSelection} ]]; then
-		setsid -f zathura "${pdfSelection}"
+		setsid -f zathura "${pdfSelection}" &
 	fi
 
 	exit
@@ -151,25 +139,16 @@ dot() {
 	fi
 }
 
-# Use lf to switch directories and bind it to ctrl-o
-lfcd() {
-	tmp="$(mktemp)"
-	lf -last-dir-path="${tmp}" "$@"
-	if [ -f "${tmp}" ]; then
-	dir="$(cat "${tmp}")"
-	rm -f "${tmp}"
-	[ -d "${dir}" ] && [ "${dir}" != "$(pwd)" ] && cd "${dir}" || return
-	fi
-}
-
 # Make timestamped btrfs readonly snapshots.
 btrsnap() {
+	local tsFormat="+%Y%m%d_%H%M%S%z"
+
 	if [ $# -ne 1 ]; then
 		echo "Must provide 'home' or 'root' as options."
 	elif [[ "$1" == "root" ]]; then
-		sudo btrfs subvolume snapshot -r / /snapshots/root/snapshot-root_$(date +%Y-%m-%d-%T)
+		sudo btrfs subvolume snapshot -r / /snapshots/root/snapshot-root_$(date ${tsFormat})
 	elif [[ "$1" == "home" ]]; then
-		sudo btrfs subvolume snapshot -r /home /snapshots/home/snapshot-home_$(date +%Y-%m-%d-%T)
+		sudo btrfs subvolume snapshot -r /home /snapshots/home/snapshot-home_$(date ${tsFormat})
 	else
 		echo "Must provide 'home' or 'root' as options."
 	fi
@@ -207,7 +186,11 @@ btrclean() {
 
 # Kill a program through fuzzy finder.
 fk() {
-	kill $(ps -ef | tail +2 | fzf | awk '{print $2}')
+	killSelection=$(ps -u "$(whoami)" -o pid,tty,comm | tail +2 | fzf | awk '{print $1}')
+
+	if [ -n "${killSelection}" ]; then
+		kill ${killSelection}
+	fi
 }
 
 # Purge old Void Linux kernels.
@@ -217,7 +200,8 @@ vkp() {
 
 # Install Void Linux packages.
 xbi() {
-	local pkgSelection=$(xbps-query -Rs "*" | fzf -m | awk '{ print $2 }')
+	local pkgSelection=$(xbps-query -Rs "*" | fzf -m --tiebreak=begin \
+		--query="$1" | awk '{ print $2 }')
 
 	if [ -n "${pkgSelection}" ]; then
 		sudo xbps-install -Svu $(echo ${pkgSelection} | tr '\n' ' ')
