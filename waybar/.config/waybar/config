@@ -15,7 +15,14 @@
     "sway/workspaces": {
         "tooltip": false,
         "disable-scroll": true,
-        "max-length": "10"
+        "max-length": "10",
+	"format": "{name}"
+    },
+    "wlr/workspaces": {
+        "tooltip": false,
+        "disable-scroll": true,
+        "max-length": "10",
+	"sort-by-name": true
     },
     "sway/mode": {
         "tooltip": false,
@@ -74,11 +81,14 @@
         "on-click": "pactl set-sink-mute 0 toggle"
     },
     "custom/cmus": {
-        "tooltip": false,
-        "format": "  <span style=\"italic\">{}</span>",
-        "on-click": "cmus-remote -u",
-        "on-click-right": "cmus-remote -n",
-        "exec": "~/.config/waybar/custom_modules/musicMonitor.sh"
+	    "tooltip": false,
+	    "format": "  <span style=\"italic\">{}</span>",
+	    "on-click": "cmus-remote -u",
+	    "on-click-right": "cmus-remote -n",
+            "exec": "~/.config/waybar/custom_modules/cmusinfo.sh",
+	    "exec-if": "pgrep cmus",
+	    "interval": 3,
+	    "escape": true
     },
     "backlight": {
         "format": "{percent}% {icon}",
