@@ -14,6 +14,7 @@ padding= 15,15,15,50
 border-size=0
 max-visible=2
 layer=top
+default-timeout=9500
 
 ## Base16 Bushido
 # Author: Siddhartha Menon
