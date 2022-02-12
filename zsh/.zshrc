@@ -51,9 +51,10 @@ texpath=/opt/texlive/2021/bin/x86_64-linux
 export GOPATH=${HOME}/Documents/Code/Go/packages
 export PATH=${PATH}:${userpath}:${GOPATH}/bin:${texpath}
 
+export GPG_TTY=${TTY}
 export EDITOR='nvim'
 export VISUAL=${EDITOR}
-export BROWSER=/usr/bin/firefox-wayland
+export BROWSER=$(which firefox-wayland)
 export XDG_CONFIG_HOME="${HOME}/.config"
 export FZF_DEFAULT_PREVIEW="bat --color=always --style=header,grid -r :300"
 
@@ -79,6 +80,7 @@ alias gdb='gdb --tui'
 alias shutdown='sudo poweroff'
 alias restart='sudo reboot'
 alias git='hub'
+alias gitroot='cd $(git rev-parse --show-toplevel)'
 alias ranger='source ranger'
 alias rngr='source ranger'
 alias vpm='vpm --color=yes'
@@ -109,10 +111,8 @@ z() {
 			--preview='pdftotext -f 1 -l 3 {} -')"
 
 	if [[ -n ${pdfSelection} ]]; then
-		setsid -f zathura "${pdfSelection}" &
+		zathura --fork "${pdfSelection}" &
 	fi
-
-	exit
 }
 
 # cd to a searched directory.
@@ -139,49 +139,12 @@ dot() {
 	fi
 }
 
-# Make timestamped btrfs readonly snapshots.
+# Make a manual timestamped btrfs readonly snapshot.
 btrsnap() {
 	local tsFormat="+%Y%m%d_%H%M%S%z"
 
-	if [ $# -ne 1 ]; then
-		echo "Must provide 'home' or 'root' as options."
-	elif [[ "$1" == "root" ]]; then
-		sudo btrfs subvolume snapshot -r / /snapshots/root/snapshot-root_$(date ${tsFormat})
-	elif [[ "$1" == "home" ]]; then
-		sudo btrfs subvolume snapshot -r /home /snapshots/home/snapshot-home_$(date ${tsFormat})
-	else
-		echo "Must provide 'home' or 'root' as options."
-	fi
-}
-
-# Clean up all but the last $keepRecent btrfs snapshots.
-btrclean() {
-	local keepRecent=3
-
-	if [ $# -ne 1 ]; then
-		echo "Must provide 'home' or 'root' as options."
-	elif [[ "$1" == "root" ]]; then
-		local cleanable="$(ls /snapshots/root | tr " " "\n" | head -n -${keepRecent})"
-
-		if [ -z ${cleanable} ]; then
-			echo "Nothing to clean."
-			return 0
-		fi
-
-		echo ${cleanable} | xargs -I{} sudo btrfs subvolume delete /snapshots/root/{}
-	elif [[ "$1" == "home" ]]; then
-		local cleanable="$(ls /snapshots/home | tr " " "\n" | head -n -${keepRecent})"
-
-		if [ -z ${cleanable} ]; then
-			echo "Nothing to clean."
-			return 0
-		fi
-
-		echo ${cleanable} | xargs -I{} sudo btrfs subvolume delete /snapshots/home/{}
-	else
-		echo "Must provide 'home' or 'root' as options."
-		return 1
-	fi
+	sudo btrfs subvolume snapshot -r / /snapshots/root/snapshot-root_$(date ${tsFormat})
+	sudo btrfs subvolume snapshot -r /home /snapshots/home/snapshot-home_$(date ${tsFormat})
 }
 
 # Kill a program through fuzzy finder.
