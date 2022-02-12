@@ -71,6 +71,13 @@ filetype plugin on
 autocmd BufReadPost * if line("'\"") >= 1 && line("'\"") <= line("$")
 	\ && &ft !~# 'commit' |   exe "normal! g`\"" | endif
 
+" Load templates based on file extension
+augroup templates
+	autocmd!
+	autocmd BufNewFile *.* silent! execute '0r ~/.config/nvim/templates/skeleton.'.expand("<afile>:e")
+	autocmd BufNewFile Makefile silent! 0r ~/.config/nvim/templates/skeleton.makefile
+augroup END
+
 "******************************************************************************
 " Mappings:
 " Set the leader key to be the spacebar.
