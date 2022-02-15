@@ -36,7 +36,7 @@ plugins=(
 	autojump
 )
 
-source ${ZSH}/oh-my-zsh.sh
+source "${ZSH}/oh-my-zsh.sh"
 
 
 # *****************************************************************************
@@ -46,10 +46,10 @@ source ${ZSH}/oh-my-zsh.sh
 #eval "$(starship init zsh)"
 
 # Exported variables:
-userpath=${HOME}/bin
+userpath="${HOME}/bin"
 texpath=/opt/texlive/2021/bin/x86_64-linux
-export GOPATH=${HOME}/Documents/Code/Go/packages
-export PATH=${PATH}:${userpath}:${GOPATH}/bin:${texpath}
+export GOPATH="${HOME}/Documents/Code/Go/packages"
+export PATH="${PATH}:${userpath}:${GOPATH}/bin:${texpath}"
 
 export GPG_TTY=${TTY}
 export EDITOR='nvim'
@@ -74,20 +74,9 @@ bindkey '^R' history-incremental-search-backward
 # *****************************************************************************
 # Aliases:
 
-alias ccc='gcc -Wall -Wextra -Wpedantic -std=c99'
-alias please='sudo $(fc -ln -1)'
-alias gdb='gdb --tui'
-alias shutdown='sudo poweroff'
-alias restart='sudo reboot'
-alias git='hub'
-alias gitroot='cd $(git rev-parse --show-toplevel)'
-alias ranger='source ranger'
-alias rngr='source ranger'
-alias vpm='vpm --color=yes'
-alias vkl='vkpurge list'
-alias xbu='sudo xbps-install -Svu'
-alias btrsync='sudo btrbk -v resume'
-alias umr='udiskie-umount -delaF'
+if [ -f "${HOME}/.sh_aliases" ]; then
+	source "${HOME}/.sh_aliases"
+fi
 
 
 # *****************************************************************************
@@ -110,7 +99,7 @@ z() {
 	pdfSelection="$(find ./ -type f -iname "*.pdf" | fzf \
 			--preview='pdftotext -f 1 -l 3 {} -')"
 
-	if [[ -n ${pdfSelection} ]]; then
+	if [[ -n "${pdfSelection}" ]]; then
 		zathura --fork "${pdfSelection}" &
 	fi
 }
@@ -121,7 +110,7 @@ leap() {
 	dirSelection="$(find ./ -type d ! -iwholename "*.git/*" | fzf \
 			--query="$1")"
 
-	if [[ -n ${dirSelection} ]]; then
+	if [[ -n "${dirSelection}" ]]; then
 		cd "${dirSelection}" || return
 	fi
 }
@@ -129,13 +118,13 @@ leap() {
 # Edit a dotfile.
 dot() {
 	local dotSelection;
-	dotSelection="$(find ${HOME}/.Dotfiles -type f ! -iwholename "*.git/*" \
+	dotSelection="$(find "${HOME}/.Dotfiles" -type f ! -iwholename "*.git/*" \
 			! -iwholename "*/plugged/*" -printf "%P\n" \
-			| fzf --preview="${FZF_DEFAULT_PREVIEW} ~/.Dotfiles/{}"\
+			| fzf --preview="${FZF_DEFAULT_PREVIEW} ${HOME}/.Dotfiles/{}"\
 			--query="$1")"
 
 	if [[ -n ${dotSelection} ]]; then
-		${EDITOR} ~/.Dotfiles/"${dotSelection}"
+		${EDITOR} "${HOME}/.Dotfiles/${dotSelection}"
 	fi
 }
 
@@ -143,8 +132,8 @@ dot() {
 btrsnap() {
 	local tsFormat="+%Y%m%d_%H%M%S%z"
 
-	sudo btrfs subvolume snapshot -r / /snapshots/root/snapshot-root_$(date ${tsFormat})
-	sudo btrfs subvolume snapshot -r /home /snapshots/home/snapshot-home_$(date ${tsFormat})
+	sudo btrfs subvolume snapshot -r / /snapshots/root/snapshot-root_"$(date ${tsFormat})"
+	sudo btrfs subvolume snapshot -r /home /snapshots/home/snapshot-home_"$(date ${tsFormat})"
 }
 
 # Kill a program through fuzzy finder.
@@ -152,13 +141,13 @@ fk() {
 	killSelection=$(ps -u "$(whoami)" -o pid,tty,comm | tail +2 | fzf | awk '{print $1}')
 
 	if [ -n "${killSelection}" ]; then
-		kill ${killSelection}
+		kill "${killSelection}"
 	fi
 }
 
 # Purge old Void Linux kernels.
 vkp() {
-	sudo vkpurge rm $(vkpurge list | fzf)
+	sudo vkpurge rm "$(vkpurge list | fzf)"
 }
 
 # Install Void Linux packages.
@@ -167,7 +156,7 @@ xbi() {
 		--query="$1" | awk '{ print $2 }')
 
 	if [ -n "${pkgSelection}" ]; then
-		sudo xbps-install -Svu $(echo ${pkgSelection} | tr '\n' ' ')
+		sudo xbps-install -Svu "$(echo "${pkgSelection}" | tr '\n' ' ')"
 	fi
 }
 
@@ -177,7 +166,7 @@ xbr() {
 		--preview="xbps-query {}")
 
 	if [ -n "${pkgSelection}" ]; then
-		sudo xbps-remove -R $(echo ${pkgSelection} | tr '\n' ' ')
+		sudo xbps-remove -R "$(echo "${pkgSelection}" | tr '\n' ' ')"
 	fi
 }
 

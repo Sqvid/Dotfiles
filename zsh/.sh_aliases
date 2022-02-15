@@ -1,0 +1,31 @@
+# Custom aliases
+alias ll='ls -lh'
+alias ccc='gcc -Wall -Wextra -Wpedantic -std=c99'
+alias please='sudo $(fc -ln -1)'
+alias rngr='source ranger'
+alias restart='sudo reboot'
+alias shutdown='sudo poweroff'
+alias btrsync='sudo btrbk -v resume'
+alias umr='udiskie-umount -delaF'
+alias vkl='vkpurge list'
+alias xbu='sudo xbps-install -Svu'
+
+# Program defaults
+alias gdb='gdb --tui'
+alias grep='grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,.idea,.tox}'
+alias ranger='source ranger'
+alias firefox='firefox-wayland'
+
+# Git aliases
+alias git='hub'
+alias ga='git add'
+alias gaa='git add --all'
+alias gc='git commit -v'
+alias gca='git commit -v -a'
+alias gcam='git commit -a -m'
+alias gd='git diff'
+alias gp='git push'
+alias gpsup='git push --set-upstream origin $(git_current_branch)'
+alias grs='git restore'
+alias grst='git restore --staged'
+alias gitroot='cd $(git rev-parse --show-toplevel)'
