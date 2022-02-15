@@ -1,13 +1,23 @@
-$(CC) = gcc
-$(CFLAGS) = -Wall -Wextra -std=c99 -pedantic
-$(OFLAGS) = -O3
-$(LDFLAGS) =
-$(DBGFLAGS) = -g
+CC = gcc
+CFLAGS = -Wall -Wextra -std=c99 -pedantic
+DBGFLAGS = -g -fsanitize=address -fsanitize=bounds -lubsan
+OPTFLAG = -O3
 
-$(BIN) = a.out
+BIN =
+
+%.o: %.c
+	$(CC) $(CFLAGS) -c $^
 
 $(BIN): *.o
-	$(CC) $(CFLAGS) -o $(BIN) $(LDFLAGS)
+	$(CC) $(CFLAGS) -o $@ $^
 
-%.o : %.c
-	$(CC) $(CFLAGS) -c $@ $<
+debug: CFLAGS += $(DBGFLAGS)
+debug : $(BIN)
+
+release: CFLAGS += $(OPTFLAG)
+release: $(BIN)
+
+.PHONY: clean
+clean:
+	rm *.o
+	rm $(BIN)
