@@ -156,7 +156,7 @@ xbi() {
 		--query="$1" | awk '{ print $2 }')
 
 	if [ -n "${pkgSelection}" ]; then
-		sudo xbps-install -Svu "$(echo "${pkgSelection}" | tr '\n' ' ')"
+		sudo xbps-install -Svu "$(echo "${pkgSelection}")"
 	fi
 }
 
@@ -166,7 +166,7 @@ xbr() {
 		--preview="xbps-query {}")
 
 	if [ -n "${pkgSelection}" ]; then
-		sudo xbps-remove -R "$(echo "${pkgSelection}" | tr '\n' ' ')"
+		sudo xbps-remove -R "$(echo "${pkgSelection}")"
 	fi
 }
 
