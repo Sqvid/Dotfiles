@@ -170,6 +170,11 @@ xbr() {
 	fi
 }
 
+# Copy files to wayland clipboard.
+wlc() {
+	cat "$@" | wl-copy -n
+}
+
 
 # *****************************************************************************
 # Launch Programs:
