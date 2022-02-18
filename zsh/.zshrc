@@ -54,7 +54,6 @@ export PATH="${PATH}:${userpath}:${GOPATH}/bin:${texpath}"
 export GPG_TTY=${TTY}
 export EDITOR='nvim'
 export VISUAL=${EDITOR}
-export BROWSER=$(which firefox-wayland)
 export XDG_CONFIG_HOME="${HOME}/.config"
 export FZF_DEFAULT_PREVIEW="bat --color=always --style=header,grid -r :300"
 
@@ -156,7 +155,7 @@ xbi() {
 		--query="$1" | awk '{ print $2 }')
 
 	if [ -n "${pkgSelection}" ]; then
-		sudo xbps-install -Svu "$(echo "${pkgSelection}")"
+		sudo xbps-install -Svu $(echo "${pkgSelection}")
 	fi
 }
 
@@ -166,7 +165,7 @@ xbr() {
 		--preview="xbps-query {}")
 
 	if [ -n "${pkgSelection}" ]; then
-		sudo xbps-remove -R "$(echo "${pkgSelection}")"
+		sudo xbps-remove -R $(echo "${pkgSelection}")
 	fi
 }
 
@@ -182,6 +181,11 @@ wlc() {
 # Window Manager:
 if [[ "${TTY}" == "/dev/tty1" ]]; then
 	echo "Launching Sway..."
+	# Give the user time to cancel.
 	sleep 2
+
+	# Set environment variables.
+	export BROWSER=$(which firefox-wayland)
+
 	exec dbus-run-session sway --unsupported-gpu
 fi
