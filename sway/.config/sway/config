@@ -151,8 +151,12 @@ exec easyeffects --gapplication-service > /dev/null 2>&1
 exec udiskie &
 # }}}
 
+##: Polkit Agent {{{:
+exec /usr/libexec/polkit-gnome-authentication-agent-1 &
+# }}}
+
 ##: Check for system updates (Custom script) {{{:
-exec ~/bin/x-checkupdate
+exec ~/.bin/x-checkupdate
 # }}}
 # }}}
 
