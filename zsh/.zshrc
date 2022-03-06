@@ -30,10 +30,9 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 # Oh My Zsh plugins.
 plugins=(
-	git
-	zsh-syntax-highlighting
-	zsh-autosuggestions
 	autojump
+	zsh-autosuggestions
+	zsh-syntax-highlighting
 )
 
 source "${ZSH}/oh-my-zsh.sh"
@@ -46,10 +45,10 @@ source "${ZSH}/oh-my-zsh.sh"
 #eval "$(starship init zsh)"
 
 # Exported variables:
-userpath="${HOME}/bin"
+binpath="${HOME}/.bin:${HOME}/.local/bin"
 texpath=/opt/texlive/2021/bin/x86_64-linux
 export GOPATH="${HOME}/Documents/Code/Go/packages"
-export PATH="${PATH}:${userpath}:${GOPATH}/bin:${texpath}"
+export PATH="${PATH}:${binpath}:${GOPATH}/bin:${texpath}"
 
 export GPG_TTY=${TTY}
 export EDITOR='nvim'
@@ -95,7 +94,13 @@ v() {
 # Open a PDF with Zathura.
 z() {
 	local pdfSelection;
-	pdfSelection="$(find ./ -type f -iname "*.pdf" | fzf \
+	local searchRoot="${HOME}"
+
+	if [ -n "$1" ]; then
+		searchRoot="$1"
+	fi
+
+	pdfSelection="$(find "${searchRoot}" -type f -iname "*.pdf" | fzf \
 			--preview='pdftotext -f 1 -l 3 {} -')"
 
 	if [[ -n "${pdfSelection}" ]]; then

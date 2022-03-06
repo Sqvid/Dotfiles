@@ -1,17 +1,20 @@
 # Custom aliases
-alias ls='ls --color=always'
 alias ll='ls -lh'
 alias ccc='gcc -Wall -Wextra -Wpedantic -std=c99'
 alias please='sudo $(fc -ln -1)'
 alias rngr='source ranger'
 alias restart='sudo reboot'
 alias shutdown='sudo poweroff'
+alias sdn='sudo poweroff now'
 alias btrsync='sudo btrbk -v resume'
 alias umr='udiskie-umount -delaF'
 alias vkl='vkpurge list'
 alias xbu='sudo xbps-install -Svu'
+alias xbuy='sudo xbps-install -Svuy'
 
 # Program defaults
+alias ls='ls --color=always'
+alias du='du -h'
 alias gdb='gdb --tui'
 alias grep='grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,.idea,.tox}'
 alias ranger='source ranger'
