@@ -47,7 +47,7 @@ source "${ZSH}/oh-my-zsh.sh"
 # Exported variables:
 binpath="${HOME}/.bin:${HOME}/.local/bin"
 texpath=/opt/texlive/2021/bin/x86_64-linux
-export GOPATH="${HOME}/Documents/Code/Go/packages"
+export GOPATH="${HOME}/Documents/Code/.go"
 export PATH="${PATH}:${binpath}:${GOPATH}/bin:${texpath}"
 
 export GPG_TTY=${TTY}
@@ -140,6 +140,14 @@ btrsnap() {
 	sudo btrfs subvolume snapshot -r /home /snapshots/home/snapshot-home_"$(date ${tsFormat})"
 }
 
+btrc() {
+	local rootNum=$(ls -1d /snapshots/root/@root* | wc -l)
+	local homeNum=$(ls -1d /snapshots/home/@home* | wc -l)
+
+	echo "Root snapshots: ${rootNum}"
+	echo "Home snapshots: ${homeNum}"
+}
+
 # Kill a program through fuzzy finder.
 fk() {
 	killSelection=$(ps -u "$(whoami)" -o pid,tty,comm | tail +2 | fzf | awk '{print $1}')
@@ -151,7 +159,11 @@ fk() {
 
 # Purge old Void Linux kernels.
 vkp() {
-	sudo vkpurge rm "$(vkpurge list | fzf)"
+	local keepKernels=3
+
+	for oldKernel in $(vkpurge list | head -n -${keepKernels}); do
+		sudo vkpurge rm "${oldKernel}"
+	done
 }
 
 # Install Void Linux packages.
@@ -160,7 +172,8 @@ xbi() {
 		--query="$1" | awk '{ print $2 }')
 
 	if [ -n "${pkgSelection}" ]; then
-		sudo xbps-install -Svu $(echo "${pkgSelection}")
+		# $(echo ${singlestring}) splits the string.
+		sudo xbps-install -Svu $(echo ${pkgSelection})
 	fi
 }
 
@@ -170,7 +183,8 @@ xbr() {
 		--preview="xbps-query {}")
 
 	if [ -n "${pkgSelection}" ]; then
-		sudo xbps-remove -R $(echo "${pkgSelection}")
+		# $(echo ${singlestring}) splits the string.
+		sudo xbps-remove -R $(echo ${pkgSelection})
 	fi
 }
 

@@ -1,5 +1,6 @@
 # Custom aliases
 alias ll='ls -lh'
+alias nv='nvim'
 alias ccc='gcc -Wall -Wextra -Wpedantic -std=c99'
 alias please='sudo $(fc -ln -1)'
 alias rngr='source ranger'
