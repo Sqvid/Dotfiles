@@ -21,9 +21,10 @@ set $up k
 set $right l
 
 # Preferred programs
-set $term kitty
+set $terminal kitty
 set $browser firefox-wayland
-set $menu rofi -show drun -config ~/.config/rofi/config
+set $pdfreader zathura
+set $launcher rofi -show drun -config ~/.config/rofi/config
 
 ##: Appearance:
 
@@ -166,9 +167,6 @@ exec ~/.bin/x-checkupdate
     # kill focused window
     bindsym $mod+Shift+q kill
 
-    # start your launcher
-    bindsym $mod+d exec $menu
-
     # take a screenshot
     bindsym print exec grim ~/Pictures/Screenshots/"Screenshot_$(date +%F_%T).png" && notify-send "Screenshot captured!"
     bindsym Shift+print exec slurp | grim -g - ~/Pictures/Screenshots/"Screenshot_$(date +%F_%T).png" && notify-send "Screenshot captured!"
@@ -197,8 +195,10 @@ exec ~/.bin/x-checkupdate
 
 # Programs: {{{
 
-    bindsym $mod+Return exec $term
+    bindsym $mod+Return exec $terminal
     bindsym $mod+Shift+Return exec $browser
+    bindsym $mod+p exec $pdfreader
+    bindsym $mod+d exec $launcher
 # }}}
 
 # Moving around: {{{
@@ -335,7 +335,7 @@ bindsym $mod+r mode "Resize"
     bindsym XF86AudioPrev exec $audio_prev
     bindsym XF86AudioPlay exec $audio_toggle
     bindsym XF86AudioNext exec $audio_next
-    bindsym XF86Search exec $menu
+    bindsym XF86Search exec $launcher
 
 # }}}
 # }}}
