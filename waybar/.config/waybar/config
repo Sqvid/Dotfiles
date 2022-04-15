@@ -16,13 +16,13 @@
         "tooltip": false,
         "disable-scroll": true,
         "max-length": "10",
-	"format": "{name}"
+        "format": "{name}"
     },
     "wlr/workspaces": {
         "tooltip": false,
         "disable-scroll": true,
         "max-length": "10",
-	"sort-by-name": true
+        "sort-by-name": true
     },
     "sway/mode": {
         "tooltip": false,
@@ -30,7 +30,7 @@
     },
     "sway/window": {
         "tooltip": false,
-	"max-length": 75
+        "max-length": 75
     },
     "tray": {
         "tooltip": false,
@@ -55,7 +55,7 @@
     "network": {
         "tooltip": false,
         "format-wifi": "{essid} ({signalStrength}%) ",
-        "format-ethernet": "{ifname}: {ipaddr}/{cidr} ",
+        "format-ethernet": "{ifname} ",
         "format-disconnected": "Disconnected ⚠"
     },
     "idle_inhibitor": {
@@ -81,14 +81,14 @@
         "on-click": "pactl set-sink-mute 0 toggle"
     },
     "custom/cmus": {
-	    "tooltip": false,
-	    "format": "  <span style=\"italic\">{}</span>",
-	    "on-click": "cmus-remote -u",
-	    "on-click-right": "cmus-remote -n",
+            "tooltip": false,
+            "format": "  <span style=\"italic\">{}</span>",
+            "on-click": "cmus-remote -u",
+            "on-click-right": "cmus-remote -n",
             "exec": "~/.config/waybar/custom_modules/cmusinfo.sh",
-	    "exec-if": "pgrep cmus",
-	    "interval": 3,
-	    "escape": true
+            "exec-if": "pgrep cmus",
+            "interval": 3,
+            "escape": true
     },
     "backlight": {
         "format": "{percent}% {icon}",
