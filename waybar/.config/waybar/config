@@ -2,9 +2,8 @@
     // Draw waybar on the bottom layer.
     "layer": "bottom",
     // Dimensions
-    "margin": "4, 4, 0",
+    "margin": "4px, 4px, 0px",
     "height": 30,
-    "width": 100,
 
     // Choose the order of the modules
     "modules-left": ["sway/workspaces", "sway/mode", "custom/cmus"],
@@ -15,13 +14,13 @@
     "sway/workspaces": {
         "tooltip": false,
         "disable-scroll": true,
-        "max-length": "10",
+        "max-length": "10px",
         "format": "{name}"
     },
     "wlr/workspaces": {
         "tooltip": false,
         "disable-scroll": true,
-        "max-length": "10",
+        "max-length": "10px",
         "sort-by-name": true
     },
     "sway/mode": {
@@ -30,23 +29,23 @@
     },
     "sway/window": {
         "tooltip": false,
-        "max-length": 75
+        "max-length": "75px"
     },
     "tray": {
         "tooltip": false,
-        "icon-size": 18,
-        "spacing": 10
+        "icon-size": "18px",
+        "spacing": "10px"
     },
     "clock": {
         "tooltip": false,
-        "format-alt": "{:%A, %-d %B}"
+        "format-alt": "{:%A, %d %B}"
     },
     "battery": {
         "tooltip": false,
         "states": {
-            "good": 70,
-            "warning": 20,
-            "critical": 10
+            "good": "70px",
+            "warning": "20px",
+            "critical": "10px"
         },
         "format": "{capacity}% {icon}",
         "format-full": "{capacity}% ",
