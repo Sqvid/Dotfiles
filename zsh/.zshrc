@@ -46,9 +46,8 @@ source "${ZSH}/oh-my-zsh.sh"
 
 # Exported variables:
 binpath="${HOME}/.bin:${HOME}/.local/bin"
-texpath=/opt/texlive/2021/bin/x86_64-linux
 export GOPATH="${HOME}/Documents/Code/.go"
-export PATH="${PATH}:${binpath}:${GOPATH}/bin:${texpath}"
+export PATH="${PATH}:${binpath}:${GOPATH}/bin"
 
 export GPG_TTY=${TTY}
 export EDITOR='nvim'
@@ -132,14 +131,6 @@ dot() {
 	fi
 }
 
-# Make a manual timestamped btrfs readonly snapshot.
-btrsnap() {
-	local tsFormat="+%Y%m%d_%H%M%S%z"
-
-	sudo btrfs subvolume snapshot -r / /snapshots/root/snapshot-root_"$(date ${tsFormat})"
-	sudo btrfs subvolume snapshot -r /home /snapshots/home/snapshot-home_"$(date ${tsFormat})"
-}
-
 btrc() {
 	local rootNum=$(ls -1d /snapshots/root/@root* | wc -l)
 	local homeNum=$(ls -1d /snapshots/home/@home* | wc -l)
@@ -164,6 +155,8 @@ vkp() {
 	for oldKernel in $(vkpurge list | head -n -${keepKernels}); do
 		sudo vkpurge rm "${oldKernel}"
 	done
+
+	echo "Done."
 }
 
 # Install Void Linux packages.
