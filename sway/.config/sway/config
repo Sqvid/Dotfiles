@@ -35,7 +35,7 @@ set $col_unfocused_titlebar_bg #040f14
 set $col_unfocused_titlebar_text #AAAAAA
 
 # Wallpaper
-set $wallpaper ~/Pictures/Wallpapers/Japanese/SamuraiI.jpg
+set $wallpaper ~/Pictures/Wallpapers/Nature/OceanCliff.jpg
 
 # Workspaces:
 set $workspace1  1:I
@@ -55,7 +55,7 @@ set $workspace10 10:X
 set $screen0 eDP-1
 
 # Inputs
-set $touchpad "1739:52390:DELL08EB:00_06CB:CCA6_Touchpad"
+set $touchpad "2:7:SynPS/2_Synaptics_TouchPad"
 set $keyboard "1:1:AT_Translated_Set_2_keyboard" 
 
 # Path to swaylock script.
@@ -383,5 +383,4 @@ bar {
 }
 # }}}
 
-include /etc/sway/config.d/*
 # vim:fileencoding=utf-8:ft=conf:foldmethod=marker
