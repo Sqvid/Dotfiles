@@ -1,5 +1,4 @@
 {
-  "suggest.enablePreview": true,
   "html.autoClosingTags": true,
 
   "languageserver": {

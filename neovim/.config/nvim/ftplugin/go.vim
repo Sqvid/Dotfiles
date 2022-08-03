@@ -3,4 +3,5 @@ inoremap " ""<++><Esc>4hi
 inoremap ' ''<++><Esc>4hi
 inoremap ( ()<++><Esc>4hi
 inoremap [ []<++><Esc>4hi
-inoremap { {<Esc>o<BS>}<++><Esc>O
+inoremap { {}<++><Esc>4hi
+inoremap {<CR> {<CR>}<++><Esc>O
