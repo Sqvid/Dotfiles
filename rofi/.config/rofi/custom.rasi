@@ -10,15 +10,17 @@
 	lightbg:			#534c48;
 	red: 				#f15d22;
 	orange:				#faa41a; 
-	highlight:				#00eddd; 
+	highlight:			#00eddd; 
+	foreground: 			#FFFFFF;
+	background: 			#0000FF;
 
-	selected-normal-foreground:  @selected-text-color;
-	normal-foreground:		   @foreground;
-	alternate-normal-background: @background;
-	selected-urgent-foreground:  @foreground;
-	urgent-foreground:		   @foreground;
-	alternate-urgent-background: @background;
-	active-foreground:		   @foreground;
+	selected-normal-foreground: 	@selected-text-color;
+	normal-foreground:		@foreground;
+	alternate-normal-background:	@background;
+	selected-urgent-foreground: 	@foreground;
+	urgent-foreground:		@foreground;
+	alternate-urgent-background:	@background;
+	active-foreground:		@foreground;
 	selected-active-foreground:  @foreground;
 	alternate-normal-foreground: @foreground;
 	alternate-active-background: @highlight;
@@ -42,7 +44,6 @@
 	padding: 				325;
 	text-color: 				@bordercolor;
 	//background-color: 			@background;
-	background-color: 			rgba (0, 0, 0, 0);
 	background-color:			rgba(0, 14, 29, 0.80);
 }
 #mainbox {

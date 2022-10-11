@@ -35,7 +35,7 @@ set $col_unfocused_titlebar_bg #040f14
 set $col_unfocused_titlebar_text #AAAAAA
 
 # Wallpaper
-set $wallpaper ~/Pictures/Wallpapers/Nature/OceanCliff.jpg
+set $wallpaper ~/Pictures/Wallpapers/Artists/JustinMaller/Jewels.jpg
 
 # Workspaces:
 set $workspace1  1:I

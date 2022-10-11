@@ -24,12 +24,16 @@ Plug 'fatih/vim-go', {'do': ':GoInstallBinaries'}
 " Live LaTeX preview.
 Plug 'xuhdev/vim-latex-live-preview', { 'for': 'tex' }
 
+" Tokyo Night colourscheme.
+Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
+
 call plug#end()
 
 " Plugin configurations:
 " Airline
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
+let g:airline_theme = "tokyonight"
 
 " CoC Intellisense
 " Use <Tab> to cycle completions.
@@ -60,7 +64,7 @@ set nowrapscan		" Don't wrap when jumping through search results.
 set autowrite		" Automatically write when calling :make
 set timeoutlen=500	" Timeout between mapped key sequence presses.
 
-colorscheme base16-bushido
+colorscheme tokyonight-night
 
 filetype plugin on
 
