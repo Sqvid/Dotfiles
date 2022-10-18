@@ -76,7 +76,7 @@ autocmd BufReadPost * if line("'\"") >= 1 && line("'\"") <= line("$")
 augroup templates
 	autocmd!
 	autocmd BufNewFile *.* silent! execute '0r ~/.config/nvim/templates/skeleton.'.expand("<afile>:e")
-	autocmd BufNewFile Makefile silent! 0r ~/.config/nvim/templates/skeleton.makefile
+	autocmd BufNewFile [Mm]akefile silent! 0r ~/.config/nvim/templates/skeleton.makefile
 augroup END
 
 "******************************************************************************

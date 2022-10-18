@@ -103,7 +103,7 @@ z() {
 			--preview='pdftotext -f 1 -l 3 {} -')"
 
 	if [[ -n "${pdfSelection}" ]]; then
-		zathura --fork "${pdfSelection}" &
+		zathura --fork "${pdfSelection}"
 	fi
 }
 
