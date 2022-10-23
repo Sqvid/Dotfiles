@@ -93,7 +93,7 @@ v() {
 # Open a PDF with Zathura.
 z() {
 	local pdfSelection;
-	local searchRoot="${HOME}"
+	local searchRoot="./"
 
 	if [ -n "$1" ]; then
 		searchRoot="$1"
@@ -103,7 +103,7 @@ z() {
 			--preview='pdftotext -f 1 -l 3 {} -')"
 
 	if [[ -n "${pdfSelection}" ]]; then
-		zathura --fork "${pdfSelection}"
+		zathura --fork --log-level=error "${pdfSelection}"
 	fi
 }
 
