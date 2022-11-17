@@ -15,6 +15,9 @@ call plug#begin('~/.local/share/nvim/plugged')
 " Status bar plugin.
 Plug 'vim-airline/vim-airline'
 
+" Insert or delete brackets, parens, quotes in pair.
+Plug 'jiangmiao/auto-pairs'
+
 " CoC Intellisense Engine.
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
@@ -53,8 +56,8 @@ set viminfo='20,\"50	" Read/write a .viminfo file, don't store more
 set history=200		" Keep 50 lines of command line history.
 set number		" Show line numbers.
 set updatetime=950	" Time to update .swp file.
-set colorcolumn=81	" Sets coloured bar at 80 characters as a guide.
-set tw=80		" Text wrapping at 79 characters.
+set colorcolumn=81	" Sets coloured bar as a text-width guide.
+set tw=80		" Text-wrapping width.
 set termguicolors 	" Set terminal colours.
 set scrolloff=1 	" Keep the lines above and below the cursor.
 set ignorecase		" Ignore case when searching.
@@ -91,10 +94,34 @@ nnoremap <silent> <Esc><Esc> :noh<CR>:let @/="ldsfl2393rj0mash02enp3irdsfc"<CR>
 nnoremap <silent> daa ggdG
 nnoremap <silent> zt zt2<C-Y>
 nnoremap <silent> zb zb2<C-E>
-nnoremap <silent> <C-j> /<++><CR>:noh<CR>ca<
 nnoremap <silent> <Leader>ff zfaB
 nnoremap <silent> <Leader>p gqap
 nnoremap <silent> K :Man<CR>
 
-" Insert mode mappings:
-inoremap <silent> <C-j> <Esc>/<++><CR>:noh<CR>ca<
+" CoC Mappings Stolen from neoclide/coc.nvim/README.md
+
+" Use `[g` and `]g` to navigate diagnostics
+nnoremap <silent> [g <Plug>(coc-diagnostic-prev)
+nnoremap <silent> ]g <Plug>(coc-diagnostic-next)
+
+" Go-to code navigation. Use <C-o> to go back through the stack.
+nnoremap <silent> gd <Plug>(coc-definition)
+nnoremap <silent> gy <Plug>(coc-type-definition)
+nnoremap <silent> gi <Plug>(coc-implementation)
+nnoremap <silent> gr <Plug>(coc-references)
+
+" Rename a symbol.
+nnoremap <silent> <leader>rn <Plug>(coc-rename)
+
+" Apply AutoFix to problem on the current line.
+nnoremap <silent> <leader>qf  <Plug>(coc-fix-current)
+
+" Use KK to show documentation in preview window.
+nnoremap <silent> KK :call ShowDocumentation()<CR>
+function! ShowDocumentation()
+	if CocAction('hasProvider', 'hover')
+		call CocActionAsync('doHover')
+	else
+		call feedkeys('KK', 'in')
+	endif
+endfunction
