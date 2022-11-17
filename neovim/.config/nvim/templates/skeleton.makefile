@@ -1,6 +1,6 @@
 CC = gcc
 CFLAGS = -std=c99 -Wpedantic -Wall -Wextra
-#CPPFLAGS= -std=c++14 -Wpedantic -Wall -Wextra -Wshadow -Wnon-virtual-dtor \
+#CPPFLAGS= -std=c++17 -Wpedantic -Wall -Wextra -Wshadow -Wnon-virtual-dtor \
 	  -Wold-style-cast -Wcast-align -Wuseless-cast -Wsign-conversion \
 	  -Wdouble-promotion -Wnull-dereference -Wmisleading-indentation \
 	  -Wduplicated-cond -Wformat=2
