@@ -185,19 +185,3 @@ xbr() {
 wlc() {
 	cat "$@" | wl-copy -n
 }
-
-
-# *****************************************************************************
-# Launch Programs:
-
-# Window Manager:
-if [[ "${TTY}" == "/dev/tty1" ]]; then
-	echo "Launching Sway..."
-	# Give the user time to cancel.
-	sleep 2
-
-	# Set environment variables.
-	export BROWSER=$(which firefox-wayland)
-
-	exec dbus-run-session sway --unsupported-gpu
-fi
