@@ -15,14 +15,11 @@ call plug#begin('~/.local/share/nvim/plugged')
 " Status bar plugin.
 Plug 'vim-airline/vim-airline'
 
-" Insert or delete brackets, parens, quotes in pair.
+" Insert or delete brackets, parenthesis, quotes in pairs.
 Plug 'jiangmiao/auto-pairs'
 
-" CoC Intellisense Engine.
+" Extension host for Neovim. Load extensions and host language servers.
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
-" Go language support.
-Plug 'fatih/vim-go', {'do': ':GoInstallBinaries'}
 
 " Live LaTeX preview.
 Plug 'xuhdev/vim-latex-live-preview', { 'for': 'tex' }
@@ -51,10 +48,8 @@ let g:livepreview_previewer = 'zathura'
 
 "******************************************************************************
 " Settings:
-set viminfo='20,\"50	" Read/write a .viminfo file, don't store more
-			" than 50 lines of registers.
-set history=200		" Keep 50 lines of command line history.
 set number		" Show line numbers.
+set relativenumber	" Set relative line number.
 set updatetime=950	" Time to update .swp file.
 set colorcolumn=81	" Sets coloured bar as a text-width guide.
 set tw=80		" Text-wrapping width.
@@ -62,7 +57,6 @@ set termguicolors 	" Set terminal colours.
 set scrolloff=1 	" Keep the lines above and below the cursor.
 set ignorecase		" Ignore case when searching.
 set smartcase		" Don't ignore case if search contains capitals.
-set inccommand=nosplit 	" Live feedback during substitution.
 set nowrapscan		" Don't wrap when jumping through search results.
 set autowrite		" Automatically write when calling :make
 set timeoutlen=500	" Timeout between mapped key sequence presses.
@@ -78,8 +72,8 @@ autocmd BufReadPost * if line("'\"") >= 1 && line("'\"") <= line("$")
 " Load templates based on file extensions.
 augroup templates
 	autocmd!
-	autocmd BufNewFile *.* silent! execute '0r ~/.config/nvim/templates/skeleton.'.expand("<afile>:e")
-	autocmd BufNewFile [Mm]akefile silent! 0r ~/.config/nvim/templates/skeleton.makefile
+	autocmd BufNewFile *.* silent! execute '0r ~/.config/nvim/templates/template.'.expand("<afile>:e")
+	autocmd BufNewFile [Mm]akefile silent! 0r ~/.config/nvim/templates/template.makefile
 augroup END
 
 "******************************************************************************
@@ -88,7 +82,6 @@ augroup END
 let mapleader = " "
 
 " Normal mode mappings:
-nnoremap <silent> <C-l> :LLPStartPreview <CR>
 nnoremap <silent> <F9> :setlocal spell! spelllang=en_gb <CR>
 nnoremap <silent> <Esc><Esc> :noh<CR>:let @/="ldsfl2393rj0mash02enp3irdsfc"<CR>
 nnoremap <silent> daa ggdG
@@ -98,7 +91,12 @@ nnoremap <silent> <Leader>ff zfaB
 nnoremap <silent> <Leader>p gqap
 nnoremap <silent> K :Man<CR>
 
+" Filetype specific mappings
+autocmd BufEnter *.tex nnoremap <silent> <C-l> :LLPStartPreview <CR>
+
+"******************************************************************************
 " CoC Mappings Stolen from neoclide/coc.nvim/README.md
+"
 
 " Use `[g` and `]g` to navigate diagnostics
 nnoremap <silent> [g <Plug>(coc-diagnostic-prev)
@@ -125,3 +123,8 @@ function! ShowDocumentation()
 		call feedkeys('KK', 'in')
 	endif
 endfunction
+
+augroup cocGolang
+	autocmd!
+	autocmd BufWritePre *.go :silent call CocAction('runCommand', 'editor.action.organizeImport')
+augroup END
