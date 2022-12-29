@@ -6,3 +6,5 @@ neovim/.config/nvim/spell/
 
 qutebrowser/*
 !qutebrowser/.config/qutebrowser/config.py
+
+sway/.config/sway/wallpaper.conf
