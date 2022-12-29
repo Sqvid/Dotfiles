@@ -150,7 +150,7 @@ fk() {
 
 # Purge old Void Linux kernels.
 vkp() {
-	local keepKernels=3
+	local keepKernels=2
 
 	for oldKernel in $(vkpurge list | head -n -${keepKernels}); do
 		sudo vkpurge rm "${oldKernel}"
@@ -181,7 +181,30 @@ xbr() {
 	fi
 }
 
+# Get info about installed Void Linux packages.
+xbq() {
+	local pkgSelection=$(xbps-query -Rs "*" | fzf -m --tiebreak=begin \
+		--query="$1" | awk '{ print $2 }')
+
+	if [ -n "${pkgSelection}" ]; then
+		# $(echo ${singlestring}) splits the string.
+		xbps-query $(echo ${pkgSelection}) | less
+	fi
+}
+
 # Copy files to wayland clipboard.
 wlc() {
 	cat "$@" | wl-copy -n
+}
+
+# Toggle WireGuard runit service.
+wgt() {
+	case "$(sudo sv status wireguard | cut -d ':' -f 1)" in
+		"down")
+			sudo sv start wireguard
+			;;
+		"run")
+			sudo sv stop wireguard
+			;;
+	esac
 }
