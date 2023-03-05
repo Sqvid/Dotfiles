@@ -57,10 +57,10 @@ set $screen0 eDP-1
 
 # Inputs
 set $touchpad "2:7:SynPS/2_Synaptics_TouchPad"
-set $keyboard "1:1:AT_Translated_Set_2_keyboard" 
+set $keyboard "1:1:AT_Translated_Set_2_keyboard"
 
 # Path to swaylock script.
-set $swaylock ~/.config/swaylock/blurlocker.sh
+set $swaylock ~/.config/swaylock/lockeffect.sh
 
 # Path to power options script.
 set $poweroptions ~/.config/sway/swayscripts/misc/poweroptions.sh
@@ -98,7 +98,7 @@ output * background $wallpaper fill $col_secondary
         tap enabled
         natural_scroll enabled
         middle_emulation enabled
-	pointer_accel 0.3
+        pointer_accel 0.3
     }
 
 
@@ -373,6 +373,10 @@ bindsym $mod+r mode "Resize"
 
     for_window [class="Mathematica"] floating enable
 
+    # Assign a default output/workspace for specific programs.
+    assign [class="Spotify"] workspace $workspace10
+    assign [class="discord"] workspace $workspace9
+
     # Inhibit idle when fullscreen.
     for_window [app_id="^.*"] inhibit_idle fullscreen
     for_window [class="^.*"] inhibit_idle fullscreen
@@ -391,4 +395,4 @@ bar {
 }
 # }}}
 
-# vim:fileencoding=utf-8:ft=conf:foldmethod=marker
+# vim:fileencoding=utf-8:ft=conf:foldmethod=marker:tabstop=4:shiftwidth=4:expandtab
