@@ -172,8 +172,8 @@ xbi() {
 
 # Remove manually installed Void Linux packages.
 xbr() {
-	local pkgSelection=$(xbps-query -m | fzf -m --preview-window follow \
-		--preview="xbps-query {}")
+	local pkgSelection=$(xbps-query -m | fzf -m --tiebreak=begin \
+		--preview-window follow --preview="xbps-query {}")
 
 	if [ -n "${pkgSelection}" ]; then
 		# $(echo ${singlestring}) splits the string.
@@ -188,7 +188,7 @@ xbq() {
 
 	if [ -n "${pkgSelection}" ]; then
 		# $(echo ${singlestring}) splits the string.
-		xbps-query $(echo ${pkgSelection}) | less
+		xbps-query -R $(echo ${pkgSelection}) | less
 	fi
 }
 
