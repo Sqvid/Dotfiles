@@ -77,6 +77,8 @@ set $audio_next cmus-remote -n
 
 # Write dbus session address to a file (useful for cron).
 exec sh -c 'echo "DBUS_SESSION_BUS_ADDRESS=$DBUS_SESSION_BUS_ADDRESS" > ~/.dbus/sway_session'
+# Set dbus environment variables.
+exec dbus-update-activation-environment DISPLAY I3SOCK SWAYSOCK WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
 
 # }}}
 
