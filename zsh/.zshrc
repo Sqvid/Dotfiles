@@ -55,6 +55,10 @@ export VISUAL=${EDITOR}
 export XDG_CONFIG_HOME="${HOME}/.config"
 export FZF_DEFAULT_PREVIEW="bat --color=always --style=header,grid -r :300"
 
+# OCaml opam configuration
+[[ ! -r /home/siddhartha/.opam/opam-init/init.zsh ]] \
+	|| source /home/siddhartha/.opam/opam-init/init.zsh  > /dev/null 2>&1
+
 # Zsh options:
 export KEYTIMEOUT=1
 setopt EXTENDED_GLOB
@@ -66,6 +70,11 @@ bindkey "^?" backward-delete-char
 bindkey "M-l" forward-char
 bindkey "M-w" forward-word
 bindkey '^R' history-incremental-search-backward
+# Use vim keys in tab complete menu:
+bindkey -M menuselect 'h' vi-backward-char
+bindkey -M menuselect 'k' vi-up-line-or-history
+bindkey -M menuselect 'l' vi-forward-char
+bindkey -M menuselect 'j' vi-down-line-or-history
 
 
 # *****************************************************************************
@@ -99,7 +108,7 @@ z() {
 		searchRoot="$1"
 	fi
 
-	pdfSelection="$(find "${searchRoot}" -type f -iname "*.pdf" | fzf \
+	pdfSelection="$(find "${searchRoot}" -type f -iname "*.pdf" | fzf --multi \
 			--preview='pdftotext -f 1 -l 3 {} -')"
 
 	if [[ -n "${pdfSelection}" ]]; then
@@ -110,8 +119,13 @@ z() {
 # cd to a searched directory.
 leap() {
 	local dirSelection;
-	dirSelection="$(find ./ -type d ! -iwholename "*.git/*" | fzf \
-			--query="$1")"
+	local searchRoot="./"
+
+	if [ -n "$1" ]; then
+		searchRoot="$1"
+	fi
+
+	dirSelection="$(find "${searchRoot}" -type d ! -iwholename "*.git/*" | fzf)"
 
 	if [[ -n "${dirSelection}" ]]; then
 		cd "${dirSelection}" || return
@@ -141,10 +155,15 @@ btrc() {
 
 # Kill a program through fuzzy finder.
 fk() {
-	killSelection=$(ps -u "$(whoami)" -o pid,tty,comm | tail +2 | fzf | awk '{print $1}')
+	local killSelection=$(ps -u "$(whoami)" -o pid,tty,comm | tail +2 | fzf | awk '{print $1}')
+	local signal=INT
+
+	if [ -n "$1" ]; then
+		signal = $1
+	fi
 
 	if [ -n "${killSelection}" ]; then
-		kill "${killSelection}"
+		kill -"${signal}" "${killSelection}"
 	fi
 }
 
@@ -161,7 +180,7 @@ vkp() {
 
 # Install Void Linux packages.
 xbi() {
-	local pkgSelection=$(xbps-query -Rs "*" | fzf -m --tiebreak=begin \
+	local pkgSelection=$(xbps-query -Rs "*" | fzf --multi --tiebreak=begin \
 		--query="$1" | awk '{ print $2 }')
 
 	if [ -n "${pkgSelection}" ]; then
@@ -172,7 +191,7 @@ xbi() {
 
 # Remove manually installed Void Linux packages.
 xbr() {
-	local pkgSelection=$(xbps-query -m | fzf -m --tiebreak=begin \
+	local pkgSelection=$(xbps-query -m | fzf --multi --tiebreak=begin \
 		--preview-window follow --preview="xbps-query {}")
 
 	if [ -n "${pkgSelection}" ]; then
@@ -183,7 +202,7 @@ xbr() {
 
 # Get info about installed Void Linux packages.
 xbq() {
-	local pkgSelection=$(xbps-query -Rs "*" | fzf -m --tiebreak=begin \
+	local pkgSelection=$(xbps-query -Rs "*" | fzf --multi --tiebreak=begin \
 		--query="$1" | awk '{ print $2 }')
 
 	if [ -n "${pkgSelection}" ]; then
