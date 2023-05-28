@@ -146,6 +146,7 @@ bindsym $mod+M exec makoctl dismiss --all
 ##: PipeWire (Multimedia Daemon) {{{:
 exec pipewire
 exec pipewire-pulse
+exec wireplumber
 
 # EasyEffects for noise cancellation and other filters.
 exec easyeffects --gapplication-service > /dev/null 2>&1
