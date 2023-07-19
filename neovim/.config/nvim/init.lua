@@ -11,11 +11,12 @@
 local opt = vim.opt
 local map = vim.keymap.set
 local func = vim.fn
+local cmd = vim.cmd
 local api = vim.api
 local augroup = vim.api.nvim_create_augroup
 local autocmd = vim.api.nvim_create_autocmd
 
-
+--------------------------------------------------------------------------------
 -- Vim-Plug:
 local Plug = func["plug#"]
 
@@ -56,7 +57,7 @@ local cocMapOpts = {
 	replace_keycodes = false
 }
 -- Use <Tab> to cycle completions.
-map("i", "<Tab>", 'coc#pum#visible() ? coc#pum#next(1) : v:lua.check_back_space() ? "<TAB>" : coc#refresh()', cocMapOpts)
+map("i", "<Tab>", [[coc#pum#visible() ? coc#pum#next(1) : v:lua.check_back_space() ? "<Tab>" : coc#refresh()]], cocMapOpts)
 map("i", "<S-Tab>", [[coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"]], cocMapOpts)
 -- Use <CR> to confirm completion.
 map("i", "<CR>", [[coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"]], cocMapOpts)
@@ -65,7 +66,7 @@ map("i", "<CR>", [[coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>\<c-r>=c
 vim.g.vimtex_view_method = "sioyek"
 
 
---******************************************************************************
+--------------------------------------------------------------------------------
 -- Settings:
 -- Highlight the row the cursor is currently on.
 opt.cursorline = true
@@ -103,9 +104,9 @@ opt.laststatus = 3
 -- Add OCaml indent tool to runtimepath
 opt.runtimepath:prepend("~/.opam/cs3110-2023sp/share/ocp-indent/vim")
 
-vim.cmd("colorscheme tokyonight-night")
+cmd("colorscheme tokyonight-night")
 
-vim.cmd("filetype plugin on")
+cmd("filetype plugin on")
 
 -- Jump to the last visited position in the file.
 augroup("jumpLastPosition", {clear = true})
@@ -133,7 +134,7 @@ autocmd({"BufReadPost"}, {
 augroup("templates", {clear = true})
 autocmd("BufNewFile", {
 	group = "templates",
-	command = "silent! execute '0r ~/.config/nvim/templates/template.'.expand('<afile>:e')"
+	command = [[silent! execute '0r ~/.config/nvim/templates/template.'.expand("<afile>:e")]]
 })
 autocmd("BufNewFile", {
 	group = "templates",
@@ -145,18 +146,23 @@ autocmd("BufNewFile", {
 augroup("deleteTrailingSpace", {clear = true})
 autocmd("BufWritePre", {
 	group = "deleteTrailingSpace",
-	command = "silent! %s/\\s\\+$//g",
+	callback =
+	function()
+		local view = func.winsaveview()
+		cmd([[silent! %s/\s\+$//g]])
+		func.winrestview(view)
+	end,
 	desc = "Delete trailing whitespace before saving"
 })
 
---******************************************************************************
+--------------------------------------------------------------------------------
 -- Mappings:
 vim.g.mapleader = " "
 vim.g.maplocalleader = "-"
 
 -- Normal-mode mappings:
 local mapOpts = {silent = true}
-map("n", "<F9>", ":setlocal spell! spelllang=en_gb<CR>", mapOpts)
+map("n", "<F9>", ":setlocal spell!<CR>", mapOpts)
 map("n", "<Esc><Esc>", ':noh<CR>:let @/="ldsfl2393rj0mash02enp3irdsfc"<CR>', mapOpts)
 map("n", "daa", "ggdG", mapOpts)
 map("n", "zt", "zt2<C-Y>", mapOpts)
@@ -171,11 +177,8 @@ map("n", "<C-t>", ":Texplore<CR>", mapOpts)
 -- Insert-mode mappings
 map("i", ",,", "<Esc>", mapOpts)
 
-
---******************************************************************************
 -- Plugin specific bindings:
 -- CoC Mappings Stolen from neoclide/coc.nvim/README.md
-
 -- Use `[g` and `]g` to navigate diagnostics
 map("n", "[g", "<Plug>(coc-diagnostic-prev)", mapOpts)
 map("n", "]g", "<Plug>(coc-diagnostic-next)", mapOpts)
@@ -203,7 +206,7 @@ function _G.show_docs()
 		api.nvim_command("!" .. vim.o.keywordprg .. " " .. cw)
 	end
 end
-map("n", "KK", "<CMD>lua _G.show_docs()<CR>", mapOpts)
+map("n", "KK", ":lua _G.show_docs()<CR>", mapOpts)
 
 augroup("cocGolang", {clear = true})
 autocmd("BufWritePre", {
