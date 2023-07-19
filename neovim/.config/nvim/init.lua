@@ -100,6 +100,8 @@ opt.shiftwidth = 4
 opt.showmode = false
 -- Where to draw the statusline.
 opt.laststatus = 3
+-- Spellcheck language.
+opt.spelllang = "en_gb"
 
 -- Add OCaml indent tool to runtimepath
 opt.runtimepath:prepend("~/.opam/cs3110-2023sp/share/ocp-indent/vim")
@@ -162,7 +164,7 @@ vim.g.maplocalleader = "-"
 
 -- Normal-mode mappings:
 local mapOpts = {silent = true}
-map("n", "<F9>", ":setlocal spell!<CR>", mapOpts)
+map("n", "<Leader>s", ":setlocal spell!<CR>", mapOpts)
 map("n", "<Esc><Esc>", ':noh<CR>:let @/="ldsfl2393rj0mash02enp3irdsfc"<CR>', mapOpts)
 map("n", "daa", "ggdG", mapOpts)
 map("n", "zt", "zt2<C-Y>", mapOpts)
