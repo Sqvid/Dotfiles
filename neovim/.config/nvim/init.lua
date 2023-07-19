@@ -7,6 +7,8 @@
 -- ╚═╝░░╚══╝╚══════╝░╚════╝░░░░╚═╝░░░╚═╝╚═╝░░░░░╚═╝
 --
 
+
+--------------------------------------------------------------------------------
 -- Lua-interface helpers
 local opt = vim.opt
 local map = vim.keymap.set
@@ -17,27 +19,37 @@ local augroup = vim.api.nvim_create_augroup
 local autocmd = vim.api.nvim_create_autocmd
 
 --------------------------------------------------------------------------------
--- Vim-Plug:
-local Plug = func["plug#"]
+-- Plugin Management:
+-- Bootstrap lazy.nvim
+local lazypath = func.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  func.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable",
+    lazypath,
+  })
+end
+opt.runtimepath:prepend(lazypath)
 
-func["plug#begin"]("~/.local/share/nvim/plugged")
+-- Leader keys need to be set before lazy.nvim is loaded.
+vim.g.mapleader = " "
+vim.g.maplocalleader = "-"
 
--- A light and configurable statusline plugin
-Plug("itchyny/lightline.vim")
-
--- Insert or delete brackets, parenthesis, quotes in pairs.
-Plug("jiangmiao/auto-pairs")
-
--- Extension and language-server host for Neovim.
-Plug("neoclide/coc.nvim", {branch = "release"})
-
--- A modern filetype plugin for LaTeX.
-Plug("lervag/vimtex")
-
--- Tokyo Night colourscheme.
-Plug("folke/tokyonight.nvim", {branch = "main"})
-
-func["plug#end"]()
+require("lazy").setup({
+	-- Tokyo Night colourscheme.
+	"folke/tokyonight.nvim",
+	-- A light and configurable statusline plugin.
+	"itchyny/lightline.vim",
+	-- Extension and language-server host for Neovim.
+	{'neoclide/coc.nvim', branch = 'release'},
+	-- Insert or delete brackets, parenthesis, quotes in pairs.
+	"jiangmiao/auto-pairs",
+	-- A modern filetype plugin for LaTeX.
+	"lervag/vimtex",
+})
 
 -- Plugin configurations:
 -- Airline
@@ -159,9 +171,6 @@ autocmd("BufWritePre", {
 
 --------------------------------------------------------------------------------
 -- Mappings:
-vim.g.mapleader = " "
-vim.g.maplocalleader = "-"
-
 -- Normal-mode mappings:
 local mapOpts = {silent = true}
 map("n", "<Leader>s", ":setlocal spell!<CR>", mapOpts)
