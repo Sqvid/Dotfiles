@@ -42,7 +42,7 @@ require("lazy").setup {
 	{"folke/tokyonight.nvim", priority = 1000},
 	-- Statusline plugin written in pure lua.
 	"nvim-lualine/lualine.nvim",
-	-- Adds icons to Neovim plugins
+	-- Adds icons to Neovim plugins.
 	{"nvim-tree/nvim-web-devicons", lazy = true},
 	-- Extension and language-server host for Neovim.
 	{"neoclide/coc.nvim", branch = "release"},
@@ -59,7 +59,7 @@ require("tokyonight").setup {
 -- Lualine
 local function spellStatus()
 	if vim.wo.spell == true then -- Note that 'spell' is a window option, so: wo
-		return '[' .. vim.bo.spelllang .. ']'
+		return "󰓆 " .. vim.bo.spelllang
 	end
 	return ''
 end
