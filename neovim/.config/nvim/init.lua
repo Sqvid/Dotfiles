@@ -7,7 +7,6 @@
 -- ╚═╝░░╚══╝╚══════╝░╚════╝░░░░╚═╝░░░╚═╝╚═╝░░░░░╚═╝
 --
 
-
 --------------------------------------------------------------------------------
 -- Lua-interface helpers
 local opt = vim.opt
@@ -48,7 +47,7 @@ require("lazy").setup({
 	-- Insert or delete brackets, parenthesis, quotes in pairs.
 	"jiangmiao/auto-pairs",
 	-- A modern filetype plugin for LaTeX.
-	"lervag/vimtex",
+	{"lervag/vimtex", ft = "tex"},
 })
 
 -- Plugin configurations:
@@ -69,6 +68,10 @@ local cocMapOpts = {
 	replace_keycodes = false
 }
 -- Use <Tab> to cycle completions.
+function _G.check_back_space()
+    local col = func.col('.') - 1
+    return col == 0 or func.getline('.'):sub(col, col):match('%s') ~= nil
+end
 map("i", "<Tab>", [[coc#pum#visible() ? coc#pum#next(1) : v:lua.check_back_space() ? "<Tab>" : coc#refresh()]], cocMapOpts)
 map("i", "<S-Tab>", [[coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"]], cocMapOpts)
 -- Use <CR> to confirm completion.
@@ -76,7 +79,6 @@ map("i", "<CR>", [[coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>\<c-r>=c
 
 -- VimTeX
 vim.g.vimtex_view_method = "sioyek"
-
 
 --------------------------------------------------------------------------------
 -- Settings:
