@@ -1,38 +1,23 @@
 * {
-    border: none;
-    padding: 0px 5px;
-    border-radius: 0px;
-    font-family: Roboto, Helvetica, Arial, sans-serif;
-    font-size: 13px;
+    font-family: Montserrat;
+    font-size: 14px;
+    padding: 0 10px;
 }
 
-window#waybar {
-    background: rgba(01, 25, 35, 0.8);
+window#waybar{
     border-bottom: 3px solid rgba(100, 114, 125, 0.5);
     border-radius: 10px;
-    color: #FFC5CD;
-}
-
-#window {
-    color: #FFC5CD;
-}
-
-#workspaces button {
-    padding: 0 5px;
-    background: transparent;
-    color: white;
-    border-bottom: 3px solid transparent;
-}
-
-#workspaces button:hover {
-    box-shadow: inherit;
-    text-shadow: inherit;
+    background-color: transparent;
 }
 
 #workspaces button.focused {
-    background: #c53c4e;
-    border-radius: 4px;
+    border-bottom: 3px solid white;
+}
+
+#workspaces button:hover {
+    all: inherit;
     color: white;
+    background: none;
 }
 
 #mode {
@@ -40,63 +25,26 @@ window#waybar {
     border-bottom: 3px solid white;
 }
 
-#clock, #battery, #network, #pulseaudio, #custom-cmus, #tray, #mode {
-    padding: 0 10px;
-    margin: 0px 2px;
-}
-
-#clock {
-    border-bottom: 3px solid #FFC5CD;
-}
-
-#battery {
-    background-color: transparent;
-}
-
 #battery.charging {
     color: #06db0a;
-    background-color: transparent;
 }
 
 #battery.warning:not(.charging) {
-    background: #f53c3c;
+    background-color: #f53c3c;
     color: white;
-}
-
-#network {
-    background: transparent;
 }
 
 #network.disconnected {
-    color: white;
-    background: #f53c3c;
-}
-
-#pulseaudio {
-    background: transparent;
+    background-color: #f53c3c;
 }
 
 #pulseaudio.muted {
     background-color: #c53c4e;
     color: #2d3436;
-    border-bottom: 3px solid transparent;
-    padding: 0px 25px;
-}
-
-#backlight {
-    background: transparent;
-}
-
-#idle_inhibitor {
-    background-color: #2d3436;
-    padding: 0px 12px;
+    padding: 0px 28px;
 }
 
 #idle_inhibitor.activated {
     background-color: #c53c4e;
     color: #2d3436;
-}
-
-#tray {
-    background-color: #2980b9;
 }
