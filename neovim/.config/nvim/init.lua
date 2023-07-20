@@ -22,14 +22,14 @@ local autocmd = vim.api.nvim_create_autocmd
 -- Bootstrap lazy.nvim
 local lazypath = func.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
-  func.system({
-    "git",
-    "clone",
-    "--filter=blob:none",
-    "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable",
-    lazypath,
-  })
+	func.system {
+		"git",
+		"clone",
+		"--filter=blob:none",
+		"https://github.com/folke/lazy.nvim.git",
+		"--branch=stable",
+		lazypath
+	}
 end
 opt.runtimepath:prepend(lazypath)
 
@@ -37,28 +37,50 @@ opt.runtimepath:prepend(lazypath)
 vim.g.mapleader = " "
 vim.g.maplocalleader = "-"
 
-require("lazy").setup({
+require("lazy").setup {
 	-- Tokyo Night colourscheme.
-	"folke/tokyonight.nvim",
-	-- A light and configurable statusline plugin.
-	"itchyny/lightline.vim",
+	{"folke/tokyonight.nvim", priority = 1000},
+	-- Statusline plugin written in pure lua.
+	"nvim-lualine/lualine.nvim",
+	-- Adds icons to Neovim plugins
+	{"nvim-tree/nvim-web-devicons", lazy = true},
 	-- Extension and language-server host for Neovim.
-	{'neoclide/coc.nvim', branch = 'release'},
+	{"neoclide/coc.nvim", branch = "release"},
 	-- Insert or delete brackets, parenthesis, quotes in pairs.
 	"jiangmiao/auto-pairs",
 	-- A modern filetype plugin for LaTeX.
-	{"lervag/vimtex", ft = "tex"},
-})
+	{"lervag/vimtex", ft = "tex"}
+}
 
--- Plugin configurations:
--- Airline
---let g:airline#extensions#tabline#enabled = 1
---let g:airline#extensions#whitespace#mixed_indent_algo = 1
---let g:airline_powerline_fonts = 1
---let g:airline_theme = "tokyonight"
+require("tokyonight").setup {
+	style = "night"
+}
 
--- Lightline
-vim.g.lightline = {colorscheme = "tokyonight"}
+-- Lualine
+local function spellStatus()
+	if vim.wo.spell == true then -- Note that 'spell' is a window option, so: wo
+		return '[' .. vim.bo.spelllang .. ']'
+	end
+	return ''
+end
+
+require('lualine').setup {
+	options = {
+		theme = "tokyonight"
+	},
+	sections = {
+		lualine_a = {'mode'},
+		lualine_b = {'diagnostics'},
+		lualine_c = {'filename', spellStatus},
+		lualine_x = {{'filetype', icon_only = true}},
+		lualine_y = {'progress'},
+		lualine_z = {'location'}
+	},
+	tabline = {
+		lualine_a = {'buffers'},
+		lualine_z = {'tabs'}
+	}
+}
 
 -- CoC Intellisense
 local cocMapOpts = {
@@ -120,7 +142,7 @@ opt.spelllang = "en_gb"
 -- Add OCaml indent tool to runtimepath
 opt.runtimepath:prepend("~/.opam/cs3110-2023sp/share/ocp-indent/vim")
 
-cmd("colorscheme tokyonight-night")
+cmd("colorscheme tokyonight")
 
 cmd("filetype plugin on")
 
