@@ -1,5 +1,5 @@
 # Custom aliases
-alias ll='ls -lh'
+alias ll='ls -lhv'
 alias nv='nvim'
 alias ccc='gcc -g -std=c99 -Wpedantic -Wall -Wextra'
 alias cpl='g++ -g -std=c++17 -Wpedantic -Wall -Wextra'
