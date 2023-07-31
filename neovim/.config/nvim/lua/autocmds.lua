@@ -62,12 +62,13 @@ autocmd("TextYankPost", {
 augroup("autoSession", {clear = true})
 autocmd("VimEnter", {
 	group = "autoSession",
+	nested = true,
 	callback =
 	function ()
 		local cwd = func.getcwd()
 		local session = cwd .. "/Session.vim"
 
-		if func.filereadable(session) ~=0 then
+		if func.filereadable(session) ~= 0 then
 			vim.ui.input(
 				{
 					prompt = "Detected session file. Restore it? (y/n): "
@@ -90,7 +91,7 @@ autocmd("VimLeave", {
 		local cwd = func.getcwd()
 		local session = cwd .. "/Session.vim"
 
-		if vim.g.LoadedFromSession and func.filewritable(session) ~=0 then
+		if vim.g.LoadedFromSession and func.filewritable(session) == 0 then
 			cmd("mksession!")
 		end
 	end
