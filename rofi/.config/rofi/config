@@ -8,4 +8,4 @@ configuration {
         sorting-method: "name";
     }
 }
-@theme "custom.rasi"
+@theme "solarized.rasi"
