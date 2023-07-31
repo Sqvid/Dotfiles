@@ -19,11 +19,10 @@ opt.showmode = false
 opt.laststatus = 3
 opt.spelllang = "en_gb"
 opt.hidden = true
-
+opt.mouse = "nv"
 -- Add OCaml indent tool to runtimepath
 opt.runtimepath:prepend("~/.opam/cs3110-2023sp/share/ocp-indent/vim")
 
 cmd("colorscheme tokyonight")
 
 cmd("filetype plugin on")
-

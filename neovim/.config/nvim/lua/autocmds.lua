@@ -58,6 +58,44 @@ autocmd("TextYankPost", {
 	command = [[silent! lua vim.highlight.on_yank({higroup = "IncSearch", timeout = 100})]]
 })
 
+-- Load session file if one exists in the current directory.
+augroup("autoSession", {clear = true})
+autocmd("VimEnter", {
+	group = "autoSession",
+	callback =
+	function ()
+		local cwd = func.getcwd()
+		local session = cwd .. "/Session.vim"
+
+		if func.filereadable(session) ~=0 then
+			vim.ui.input(
+				{
+					prompt = "Detected session file. Restore it? (y/n): "
+				},
+
+				function(input)
+					if input == "y" then
+						cmd("so ".. session)
+						vim.g.LoadedFromSession = true
+					end
+				end
+			)
+		end
+	end
+})
+autocmd("VimLeave", {
+	group = "autoSession",
+	callback =
+	function ()
+		local cwd = func.getcwd()
+		local session = cwd .. "/Session.vim"
+
+		if vim.g.LoadedFromSession and func.filewritable(session) ~=0 then
+			cmd("mksession!")
+		end
+	end
+})
+
 -- Track daily thesis progress.
 augroup("thesisProgress", {clear = true})
 local progressScript = "~/Documents/CourseWork/Cambridge/MPhilThesis/paper/progress.sh"
