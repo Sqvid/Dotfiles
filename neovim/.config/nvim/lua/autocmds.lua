@@ -65,10 +65,16 @@ autocmd("VimEnter", {
 	nested = true,
 	callback =
 	function ()
-		local cwd = func.getcwd()
-		local session = cwd .. "/Session.vim"
+		-- Can eventually extend the list of exception filetypes using a table
+		-- or regex.
+		if vim.bo.filetype == "gitcommit" then
+			return
+		end
 
-		if func.filereadable(session) ~= 0 then
+		local cwd = func.getcwd()
+		local sessionfile = cwd .. "/.Session.vim"
+
+		if func.filereadable(sessionfile) == 1 then
 			vim.ui.input(
 				{
 					prompt = "Detected session file. Restore it? (y/n): "
@@ -76,7 +82,7 @@ autocmd("VimEnter", {
 
 				function(input)
 					if input == "y" then
-						cmd("so ".. session)
+						cmd("source ".. sessionfile)
 						vim.g.LoadedFromSession = true
 					end
 				end
@@ -89,10 +95,10 @@ autocmd("VimLeave", {
 	callback =
 	function ()
 		local cwd = func.getcwd()
-		local session = cwd .. "/Session.vim"
+		local sessionfile = cwd .. "/.Session.vim"
 
-		if vim.g.LoadedFromSession and func.filewritable(session) == 0 then
-			cmd("mksession!")
+		if vim.g.LoadedFromSession and func.filewritable(sessionfile) == 1 then
+			cmd("mksession! " .. sessionfile)
 		end
 	end
 })

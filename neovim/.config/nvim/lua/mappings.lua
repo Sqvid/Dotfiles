@@ -14,8 +14,6 @@ map("n", "gb", "gT", mapOpts)
 map("n", "<C-t>", ":Texplore<CR>", mapOpts)
 map("n", "[b", ":bprevious<CR>", mapOpts)
 map("n", "]b", ":bnext<CR>", mapOpts)
--- Commonly mistyped quit.
-map("n", "q:", ":q<CR>")
 
 -- Insert-mode mappings
 map("i", ",,", "<Esc>", mapOpts)
