@@ -13,7 +13,6 @@ return {
 				"lua",
 				"ocaml"
 			},
-			highlight = { enable = true },
 			indent = { enable = true }
 		}
 	end

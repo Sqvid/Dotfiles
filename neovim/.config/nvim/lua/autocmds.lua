@@ -77,7 +77,7 @@ autocmd("VimEnter", {
 		if func.filereadable(sessionfile) == 1 then
 			vim.ui.input(
 				{
-					prompt = "Detected session file. Restore it? (y/n): "
+					prompt = "Detected a session file. Restore it? (y/n): "
 				},
 
 				function(input)
