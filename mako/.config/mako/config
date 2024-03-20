@@ -7,7 +7,7 @@
 #╚═╝     ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝ ╚════╝
 #
 
-font='Mint Spirit No2 14'
+font=Cabin 18
 width=500
 height=300
 padding= 15,15,15,50
