@@ -1,5 +1,6 @@
 local augroup = vim.api.nvim_create_augroup
 local autocmd = vim.api.nvim_create_autocmd
+local map = vim.keymap.set
 
 augroup("cocGolang", {clear = true})
 autocmd("BufWritePre", {

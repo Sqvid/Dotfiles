@@ -34,7 +34,7 @@ autocmd("BufNewFile", {
 })
 autocmd("BufNewFile", {
 	group = "templates",
-	pattern = "makefile",
+	pattern = "[Mm]akefile",
 	command = "silent! 0r ~/.config/nvim/templates/template.makefile"
 })
 

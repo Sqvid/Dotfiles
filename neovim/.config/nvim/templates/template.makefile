@@ -1,5 +1,5 @@
 BIN = main
-OBJECTS =
+OBJECTS = main.o
 
 CC = gcc
 CXX = g++
@@ -17,7 +17,7 @@ CXXFLAGS = -std=c++17 -Wpedantic -Wall -Wextra -Wshadow -Wnon-virtual-dtor\
 DBGFLAGS = -g3 -O0
 
 # Sanitizer flags.
-SANFLAGS = -fsanitize=address,undefined
+SANFLAGS = -fsanitize=address,leak,undefined
 
 # Optimisation flag.
 OPTFLAG = -O2
