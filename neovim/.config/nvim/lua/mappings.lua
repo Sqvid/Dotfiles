@@ -17,5 +17,3 @@ map("n", "]b", ":bnext<CR>", mapOpts)
 
 -- Insert-mode mappings
 map("i", ",,", "<Esc>", mapOpts)
-
-require('plugins.nvim-lspconfig.mappings')

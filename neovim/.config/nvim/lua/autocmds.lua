@@ -30,7 +30,7 @@ autocmd({"BufReadPost"}, {
 augroup("templates", {clear = true})
 autocmd("BufNewFile", {
 	group = "templates",
-	command = [[silent! execute '0r ~/.config/nvim/templates/template.'.expand("<afile>:e")]]
+	command = [[silent! execute "0r ~/.config/nvim/templates/template.".expand("<afile>:e")]]
 })
 autocmd("BufNewFile", {
 	group = "templates",

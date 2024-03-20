@@ -12,5 +12,12 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.runtimepath:prepend(lazypath)
 
--- Set up all plugins in the lua/plugins directory
-require("lazy").setup("plugins")
+require("lazy").setup({
+	lazy = true,
+	-- Set up all plugins in the lua/plugins directory
+	{import = "plugins"},
+	{import = "plugins.lsp"},
+	{import = "plugins.ui"}
+})
+
+require("lsp-setup")
