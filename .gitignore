@@ -3,7 +3,6 @@ vim/.vim/autoload/
 vim/.vim/.netrwhist
 
 neovim/.config/nvim/spell/
-neovim/.config/nvim/lazy-lock.json
 
 qutebrowser/*
 !qutebrowser/.config/qutebrowser/config.py
