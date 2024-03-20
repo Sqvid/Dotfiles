@@ -24,7 +24,7 @@ set $right l
 set $terminal kitty
 set $browser firefox-wayland
 set $pdfreader zathura
-set $launcher rofi -show drun -config ~/.config/rofi/config
+set $launcher tofi-drun --drun-launch=true
 
 ##: Appearance:
 
@@ -35,7 +35,6 @@ set $col_unfocused_titlebar_bg #040f14
 set $col_unfocused_titlebar_text #AAAAAA
 
 # Wallpaper
-#set $wallpaper ~/Pictures/Wallpapers/Artists/SimonStalenhag/TracesOfTheGreatWar_cropped.jpg
 include ~/.config/sway/wallpaper.conf
 
 # Workspaces:
@@ -53,10 +52,10 @@ set $workspace10 10:X
 ##: Other:
 
 # Outputs
-set $screen0 eDP-1
+set $screen0 "eDP-1"
 
 # Inputs
-set $touchpad "2:7:SynPS/2_Synaptics_TouchPad"
+set $touchpad "1267:12926:ELAN0001:00_04F3:327E_Touchpad"
 set $keyboard "1:1:AT_Translated_Set_2_keyboard"
 
 # Path to swaylock script.
@@ -86,8 +85,15 @@ exec dbus-update-activation-environment DISPLAY I3SOCK SWAYSOCK WAYLAND_DISPLAY 
 
 ##: Set Wallpaper:
 
-output $screen0 mode 1920x1080@144.171997Hz
 output * background $wallpaper fill $col_secondary
+    output $screen0 {
+        mode 2560x1600@60.007Hz
+        position 1920 0
+    }
+
+    output "DP-2" {
+        position 0 0
+    }
 # You can get the names of your outputs by running: swaymsg -t get_outputs
 # }}}
 
@@ -162,6 +168,9 @@ exec /usr/libexec/polkit-gnome-authentication-agent-1 &
 
 ##: Check for system updates (Custom script) {{{:
 exec ~/.bin/x-checkupdate
+
+##: Tune system for power efficiency
+exec powertop --auto-tune
 # }}}
 # }}}
 
@@ -383,6 +392,7 @@ bindsym $mod+r mode "Resize"
     # Inhibit idle when fullscreen.
     for_window [app_id="^.*"] inhibit_idle fullscreen
     for_window [class="^.*"] inhibit_idle fullscreen
+    for_window [class="Set"] floating enable
 
     # Smooth fading when changing window focus.
     exec python3 ~/.config/sway/swayscripts/behaviour/sway_smooth_fading.py &

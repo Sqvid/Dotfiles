@@ -2,8 +2,7 @@
 
 LOCKSCRIPT="${HOME}/.config/sway/swayscripts/swaylock/blurlocker.sh"
 
-response=$(echo -e "Cancel\n1. Shutdown\n2. Restart\n3. Sleep" | \
-	rofi -config ~/.config/rofi/config -dmenu -p "Power Options")
+response=$(echo -e "Cancel\n1. Shutdown\n2. Restart\n3. Sleep" | tofi)
 
 if [ "$response" == "1. Shutdown" ]; then
 	sudo poweroff now
