@@ -10,5 +10,5 @@ if [[ "${TTY}" == "/dev/tty1" ]]; then
 	export BROWSER=$(which firefox-wayland)
 	export WM=sway
 
-	exec dbus-run-session sway --unsupported-gpu
+	exec dbus-run-session sway
 fi

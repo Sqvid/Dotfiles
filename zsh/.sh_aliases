@@ -22,7 +22,6 @@ alias du='du -h'
 alias gdb='gdb --tui'
 alias grep='grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,.idea,.tox}'
 alias ranger='source ranger'
-alias firefox='firefox-wayland'
 alias zathura='zathura --fork'
 
 # Git aliases

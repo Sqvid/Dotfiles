@@ -112,7 +112,7 @@ z() {
 			--preview='pdftotext -f 1 -l 3 {} -')"
 
 	if [[ -n "${pdfSelection}" ]]; then
-		zathura --fork --log-level=error "${pdfSelection}"
+		sioyek "${pdfSelection}" & disown
 	fi
 }
 
