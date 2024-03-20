@@ -1,19 +1,19 @@
 local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities()
 
+local lspconfig = require("lspconfig")
+
 local default_lsp_setup = function(server)
-	require("lspconfig")[server].setup({
+	lspconfig[server].setup({
 		capabilities = lsp_capabilities
 	})
 end
 
-local lspconfig = require("lspconfig")
-
 -- Setup language servers.
-lspconfig.clangd.setup {}
-lspconfig.gopls.setup {}
+lspconfig.clangd.setup({})
+lspconfig.gopls.setup({})
 
 require("mason").setup()
-require('mason-lspconfig').setup({
+require("mason-lspconfig").setup({
 	handlers = { default_lsp_setup }
 })
 
@@ -46,6 +46,7 @@ local has_words_before = function()
 	return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
 end
 
+-- Setup autocompletion.
 local cmp = require("cmp")
 
 cmp.setup({
@@ -70,6 +71,7 @@ cmp.setup({
 			end
 			end, {"i","s","c",}),
 
+		-- Use <Tab>/<S-Tab> to cycle selections.
 		["<Tab>"] = cmp.mapping(function(fallback)
 			if cmp.visible() then
 				cmp.select_next_item()
@@ -79,6 +81,14 @@ cmp.setup({
 				fallback()
 			end
 			end, { "i", "s" }),
+
+		["<S-Tab>"] = cmp.mapping(function(fallback)
+			if cmp.visible() then
+				cmp.select_prev_item()
+			else
+				fallback()
+			end
+		end, { "i", "s" }),
 
 		-- Ctrl + space triggers completion menu.
 		["<C-Space>"] = cmp.mapping.complete(),
