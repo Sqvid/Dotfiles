@@ -19,30 +19,28 @@ require("lazy-setup")
 
 --------------------------------------------------------------------------------
 -- Options:
-local opt = vim.opt
+local o = vim.o
 local cmd = vim.cmd
 
-opt.cursorline = true
-opt.ignorecase = true
-opt.smartcase = true
-opt.wrapscan = false
-opt.number = true
-opt.relativenumber = true
-opt.scrolloff = 1
-opt.signcolumn = "yes"
-opt.termguicolors = true
-opt.timeoutlen = 300
-opt.colorcolumn = "81"
-opt.textwidth = 80
-opt.tabstop = 4
-opt.shiftwidth = 4
-opt.showmode = false
-opt.laststatus = 3
-opt.spelllang = "en_gb"
-opt.hidden = true
-opt.mouse = "v"
--- Add OCaml indent tool to runtimepath
-opt.runtimepath:prepend("~/.opam/cs3110-2023sp/share/ocp-indent/vim")
+o.colorcolumn = "81"
+o.cursorline = true
+o.hidden = true
+o.ignorecase = true
+o.laststatus = 3
+o.mouse = "v"
+o.number = true
+o.relativenumber = true
+o.scrolloff = 1
+o.shiftwidth = 4
+o.showmode = false
+o.signcolumn = "yes"
+o.smartcase = true
+o.spelllang = "en_gb"
+o.tabstop = 4
+o.termguicolors = true
+o.textwidth = 80
+o.timeoutlen = 300
+o.wrapscan = false
 
 cmd("colorscheme tokyonight")
 
