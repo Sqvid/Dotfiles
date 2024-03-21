@@ -1,9 +1,9 @@
 -- Draw indentation guides.
 return {
-	"lukas-reineke/indent-blankline.nvim",
-	main = "ibl",
+  "lukas-reineke/indent-blankline.nvim",
+  main = "ibl",
 
-	opts = {
-		scope = {show_start = false},
-	}
+  opts = {
+    scope = {show_start = false},
+  }
 }

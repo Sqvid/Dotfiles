@@ -7,5 +7,5 @@ vim.keymap.set("n", "<Leader>b", ":Buffers<CR>", mapOpts)
 vim.keymap.set("n", "<Leader>o", ":Files<CR>", mapOpts)
 
 return {
-	"junegunn/fzf.vim"
+  "junegunn/fzf.vim"
 }

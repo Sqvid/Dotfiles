@@ -2,6 +2,6 @@
 vim.g.vimtex_view_method = "sioyek"
 
 return {
-	"lervag/vimtex",
-	ft = "tex"
+  "lervag/vimtex",
+  ft = "tex"
 }
