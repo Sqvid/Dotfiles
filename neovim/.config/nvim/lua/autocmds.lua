@@ -65,8 +65,7 @@ autocmd("VimEnter", {
 	nested = true,
 	callback =
 	function ()
-		-- Can eventually extend the list of exception filetypes using a table
-		-- or regex.
+		-- Can eventually extend the list of exception filetypes.
 		if vim.bo.filetype == "gitcommit" then
 			return
 		end
@@ -100,19 +99,5 @@ autocmd("VimLeave", {
 		if vim.g.LoadedFromSession and func.filewritable(sessionfile) == 1 then
 			cmd("mksession! " .. sessionfile)
 		end
-	end
-})
-
--- Track daily thesis progress.
-augroup("thesisProgress", {clear = true})
-local progressScript = "~/Documents/CourseWork/Cambridge/MPhilThesis/paper/progress.sh"
-autocmd("BufWritePost", {
-	group = "thesisProgress",
-	pattern = "*/MPhilThesis/paper/**.tex",
-	callback =
-	function ()
-		local progress = func.system(progressScript)
-		cmd("redraw")
-		print(progress)
 	end
 })
