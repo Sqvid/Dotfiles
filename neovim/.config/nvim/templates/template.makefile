@@ -4,14 +4,15 @@ OBJECTS = main.o
 CC = gcc
 CXX = g++
 
-CFLAGS = -std=c99 -Wpedantic -Wall -Wextra -Wshadow -Wcast-align\
--Wconversion -Wno-sign-conversion -Wdouble-promotion -Wnull-dereference\
+CFLAGS = -std=c99 -Wpedantic -Wall -Wextra -Wshadow -Wcast-align \
+-Wconversion -Wno-sign-conversion -Wdouble-promotion -Wnull-dereference \
 -Wmisleading-indentation -Wduplicated-cond -Wformat=2
 
-CXXFLAGS = -std=c++17 -Wpedantic -Wall -Wextra -Wshadow -Wnon-virtual-dtor\
- -Wold-style-cast -Wcast-align -Wuseless-cast -Wconversion\
- -Wno-sign-conversion -Wdouble-promotion -Wnull-dereference\
- -Wmisleading-indentation -Wduplicated-cond -Wformat=2
+CXXFLAGS = -std=c++17 -Wpedantic -Wall -Wextra -Wshadow -Wnon-virtual-dtor \
+-Wold-style-cast -Wcast-align -Wuseless-cast -Wconversion \
+-Wno-sign-conversion -Wdouble-promotion -Wnull-dereference \
+-Wsuggest-override -Woverloaded-virtual -Wmisleading-indentation \
+-Wduplicated-cond -Wformat=2
 
 # Debug flags.
 DBGFLAGS = -g3 -O0
