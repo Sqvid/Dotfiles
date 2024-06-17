@@ -9,8 +9,7 @@ if [ "$response" == "1. Shutdown" ]; then
 elif [ "$response" == "2. Restart" ]; then
 	sudo reboot now
 elif [ "$response" == "3. Sleep" ]; then
-	echo "Unimplemented"
-	#loginctl suspend
+	loginctl suspend
 else
 	exit 0
 fi
