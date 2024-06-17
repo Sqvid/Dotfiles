@@ -15,6 +15,7 @@ alias xbu='sudo xbps-install -Svu'
 alias xbuy='sudo xbps-install -Svuy'
 alias tarc='tar -czvf'
 alias tarx='tar -xzvf'
+alias nb='newsboat'
 
 # Program defaults
 alias ls='ls --color=always'
