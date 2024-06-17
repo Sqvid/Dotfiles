@@ -8,61 +8,26 @@
 #
 
 # *****************************************************************************
-# Oh My Zsh Configuration:
+# Zsh Options:
+HISTFILE=~/.zsh_history
+HISTSIZE=1000
+SAVEHIST=5000
+KEYTIMEOUT=1
+setopt extendedglob
+unsetopt beep
 
-# Path to the Oh My Zsh installation.
-export ZSH="${HOME}/.oh-my-zsh"
-
-# Set Oh My Zsh theme.
-ZSH_THEME="agnoster-short"
-
-# Uncomment the following line to change how often to auto-update (in days).
-export UPDATE_ZSH_DAYS=30
-
-# Enable command auto-correction.
-ENABLE_CORRECTION="true"
-
-# Display red dots whilst waiting for completion.
-COMPLETION_WAITING_DOTS="true"
-
-# Disable marking untracked files under VCS as dirty.
-DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-# Oh My Zsh plugins.
-plugins=(
-	autojump
-	zsh-autosuggestions
-	zsh-syntax-highlighting
-)
-
-source "${ZSH}/oh-my-zsh.sh"
-
-
-# *****************************************************************************
-# Variables and Options:
-
-# Starship prompt
-#eval "$(starship init zsh)"
-
-# Exported variables:
-binpath="${HOME}/.bin:${HOME}/.local/bin"
-export GOPATH="${HOME}/Documents/Code/.go"
-export PATH="${PATH}:${binpath}:${GOPATH}/bin"
-
-export GPG_TTY=${TTY}
-export EDITOR='nvim'
-export VISUAL=${EDITOR}
-export XDG_CONFIG_HOME="${HOME}/.config"
-export FZF_DEFAULT_PREVIEW="bat --color=always --style=header,grid -r :300"
-
-# OCaml opam configuration
-[[ ! -r /home/siddhartha/.opam/opam-init/init.zsh ]] \
-	|| source /home/siddhartha/.opam/opam-init/init.zsh  > /dev/null 2>&1
-
-# Zsh options:
-export KEYTIMEOUT=1
-setopt EXTENDED_GLOB
-setopt NO_AUTO_CD
+# Completions:
+zstyle ':completion:*' completer _complete _ignored _correct _approximate
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+zstyle ':completion:*' matcher-list '' 'm:{[:lower:]}={[:upper:]} l:|=* r:|=*' 'r:|[._-]=** r:|=**'
+zstyle ':completion:*' max-errors 1
+zstyle ':completion:*' menu select=long
+zstyle ':completion:*' prompt 'Completions:'
+zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
+zstyle :compinstall filename '/home/siddhartha/.zshrc'
+autoload -Uz compinit
+compinit
+zmodload -i zsh/complist
 
 # Bindkeys:
 bindkey -v
@@ -75,6 +40,35 @@ bindkey -M menuselect 'h' vi-backward-char
 bindkey -M menuselect 'k' vi-up-line-or-history
 bindkey -M menuselect 'l' vi-forward-char
 bindkey -M menuselect 'j' vi-down-line-or-history
+
+# Plugins:
+source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /usr/share/autojump/autojump.zsh
+
+fpath=(/usr/share/zsh/site-functions/ $fpath)
+
+# *****************************************************************************
+# Variables and Options:
+
+# Exported variables:
+binpath="${HOME}/.bin:${HOME}/.local/bin"
+export GOPATH="${HOME}/Documents/Code/.go"
+export PATH="${PATH}:${binpath}:${GOPATH}/bin"
+
+export GPG_TTY=${TTY}
+export EDITOR='nvim'
+export VISUAL=${EDITOR}
+export XDG_CONFIG_HOME="${HOME}/.config"
+export FZF_DEFAULT_PREVIEW="bat --color=always --style=header,grid -r :300"
+
+# Starship prompt
+export STARSHIP_CONFIG="${XDG_CONFIG_HOME}/starship/starship.toml"
+eval "$(starship init zsh)"
+
+# OCaml opam configuration
+[[ ! -r /home/siddhartha/.opam/opam-init/init.zsh ]] \
+	|| source /home/siddhartha/.opam/opam-init/init.zsh  > /dev/null 2>&1
 
 
 # *****************************************************************************
