@@ -21,10 +21,6 @@ stow -v neovim
 ./stowall -s
 ```
 
-Depending on your use-case you may also want to download external packages such as
-[Oh My Zsh](https://github.com/ohmyzsh/ohmyzsh) and [vim-plug](https://github.com/junegunn/vim-plug)
-that some of these configs call.
-
 ## Uninstall
 
 Change into the dotfile directory.
