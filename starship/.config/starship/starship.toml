@@ -7,7 +7,7 @@ error_symbol = "[✖](bold red) "
 
 [directory]
 truncation_length = 2
-format = "[$path|](dimmed blue)"
+format = "[$path ](dimmed blue)"
 
 [git_branch]
 symbol = " "
@@ -19,7 +19,7 @@ commit_hash_length = 6
 style = "bold white"
 
 [git_status]
-format = '[\[$all_status\]](dimmed purple) '
+format = '([\[$all_status\]](dimmed purple)) '
 conflicted = "[☇ ](bold red)"
 stashed = "[⚿ ](bold 214)"
 modified = "[🗎 ](bold yellow)"
