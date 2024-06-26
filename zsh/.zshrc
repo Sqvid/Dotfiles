@@ -12,22 +12,27 @@
 HISTFILE=~/.zsh_history
 HISTSIZE=1000
 SAVEHIST=5000
-KEYTIMEOUT=1
+KEYTIMEOUT=10
+
 setopt extendedglob
-unsetopt beep
+setopt correct
+setopt nobeep
+setopt menu_complete
 
 # Completions:
-zstyle ':completion:*' completer _complete _ignored _correct _approximate
-zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+zstyle ':completion:*' completer _complete _approximate
 zstyle ':completion:*' matcher-list '' 'm:{[:lower:]}={[:upper:]} l:|=* r:|=*' 'r:|[._-]=** r:|=**'
-zstyle ':completion:*' max-errors 1
-zstyle ':completion:*' menu select=long
-zstyle ':completion:*' prompt 'Completions:'
-zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
-zstyle :compinstall filename '/home/siddhartha/.zshrc'
-autoload -Uz compinit
-compinit
-zmodload -i zsh/complist
+zstyle ':completion:*' max-errors 2
+zstyle ':completion:*:*:*:*:descriptions' format '%F{green}-- %d --%f'
+zstyle ':completion:*' menu select
+zstyle ':completion:*' group-name ''
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+zstyle ':completion:*' squeeze-slashes true
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path "$XDG_CACHE_HOME/zsh/.zcompcache"
+
+autoload -Uz compinit; compinit
+zmodload zsh/complist
 
 # Bindkeys:
 bindkey -v
@@ -35,17 +40,21 @@ bindkey "^?" backward-delete-char
 bindkey "M-l" forward-char
 bindkey "M-w" forward-word
 bindkey '^R' history-incremental-search-backward
-# Use vim keys in tab complete menu:
+# Use vi keys in completion menu:
 bindkey -M menuselect 'h' vi-backward-char
 bindkey -M menuselect 'k' vi-up-line-or-history
 bindkey -M menuselect 'l' vi-forward-char
 bindkey -M menuselect 'j' vi-down-line-or-history
+bindkey -M menuselect '0' vi-beginning-of-line
+bindkey -M menuselect '$' vi-end-of-line
+bindkey -M menuselect 'g' beginning-of-history
+bindkey -M menuselect 'G' end-of-history
 
 # Plugins:
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /usr/share/autojump/autojump.zsh
-
+# Add completions provided by zsh-completions plugin
 fpath=(/usr/share/zsh/site-functions/ $fpath)
 
 # *****************************************************************************
