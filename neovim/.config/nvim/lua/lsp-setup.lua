@@ -1,5 +1,6 @@
 local map = vim.keymap.set
 
+--------------------------------------------------------------------------------
 -- Language servers:
 local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities()
 
@@ -11,27 +12,29 @@ local default_lsp_setup = function(server)
   })
 end
 
--- Choose LSPs.
-lspconfig.clangd.setup({})
-lspconfig.gopls.setup({})
-
 -- Mason package manager for LSPs, formatters, and linters
 require("mason").setup()
-require("mason-lspconfig").setup({
-  handlers = { default_lsp_setup }
-})
+require("mason-lspconfig").setup()
+
+-- Choose LSPs.
+lspconfig.clangd.setup{}
+lspconfig.gopls.setup{}
+lspconfig.tailwindcss.setup{}
+lspconfig.emmet_ls.setup{}
+
+require("lint").linters_by_ft = {
+  cpp = {"clang-tidy", "cpplint"}
+}
 
 -- LSP keybindings.
-map("n", "<Leader>e", vim.diagnostic.open_float)
-map("n", "[d", vim.diagnostic.goto_prev)
-map("n", "]d", vim.diagnostic.goto_next)
-
--- Use LspAttach autocommand to only map the following keys after the language
--- server attaches to the current buffer.
+-- Use the LspAttach autocommand to only map the following keys after the
+-- language server attaches to the current buffer.
 vim.api.nvim_create_autocmd("LspAttach", { group =
   vim.api.nvim_create_augroup("UserLspConfig", {}), callback = function(ev)
     local opts = { buffer = ev.buf }
-
+    map("n", "<Leader>e", vim.diagnostic.open_float)
+    map("n", "[d", vim.diagnostic.goto_prev)
+    map("n", "]d", vim.diagnostic.goto_next)
     map("n", "gD", vim.lsp.buf.declaration, opts)
     map("n", "gd", vim.lsp.buf.definition, opts)
     map("n", "K", vim.lsp.buf.hover, opts)
@@ -40,9 +43,7 @@ vim.api.nvim_create_autocmd("LspAttach", { group =
     map("n", "<Leader>D", vim.lsp.buf.type_definition, opts)
     map("n", "<Leader>rn", vim.lsp.buf.rename, opts)
     map("n", "gr", vim.lsp.buf.references, opts)
-    map("n", "<Leader>f", function()
-      vim.lsp.buf.format { async = true }
-    end, opts)
+    map("n", "<Leader>qf", vim.lsp.buf.code_action, opts)
   end
 })
 
@@ -61,7 +62,14 @@ cmp.setup({
   sources = {
     {name = "nvim_lsp"},
     {name = "buffer"},
-    {name = "path"}
+    {name = "path"},
+    {name = 'luasnip'},
+  },
+  snippet = {
+    -- REQUIRED - you must specify a snippet engine
+    expand = function(args)
+      require('luasnip').lsp_expand(args.body)
+    end,
   },
   mapping = cmp.mapping.preset.insert({
     -- Enter key confirms completion item.
