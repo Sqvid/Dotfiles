@@ -73,19 +73,31 @@ autocmd("VimEnter", {
       local cwd = func.getcwd()
       local sessionfile = cwd .. "/.Session.vim"
 
+      -- Helper function that laods the session and sets a flag.
+      local function loadSession()
+        cmd("source ".. sessionfile)
+        vim.g.LoadedFromSession = true
+      end
+
+      -- Only trigger if the sessionfile is found.
       if func.filereadable(sessionfile) == 1 then
-        vim.ui.input(
+        -- If called with no args, restore the session.
+        if func.argc() == 0 then
+          loadSession()
+          -- Else only restore if asked.
+        else
+          vim.ui.input(
           {
             prompt = "Detected a session file. Restore it? (y/n): "
           },
 
           function(input)
             if input == "y" then
-              cmd("source ".. sessionfile)
-              vim.g.LoadedFromSession = true
+              loadSession()
             end
           end
-        )
+          )
+        end
       end
     end
 })
