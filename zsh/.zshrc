@@ -17,7 +17,6 @@ KEYTIMEOUT=10
 setopt extendedglob
 setopt correct
 setopt nobeep
-setopt menu_complete
 
 # Completions:
 zstyle ':completion:*' completer _complete _approximate
