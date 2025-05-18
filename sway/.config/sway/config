@@ -131,8 +131,8 @@ seat * hide_cursor 1900
 # Swayidle: {{{
 
 exec swayidle -w \
-    timeout 490 $swaylock \
-    timeout 500 'swaymsg "output * dpms off"' \
+    timeout 1100 $swaylock \
+    timeout 1200 'swaymsg "output * dpms off"' \
     resume 'swaymsg "output * dpms on"' \
     before-sleep $swaylock
 
