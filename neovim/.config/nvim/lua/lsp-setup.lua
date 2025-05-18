@@ -21,6 +21,8 @@ lspconfig.clangd.setup{}
 lspconfig.gopls.setup{}
 lspconfig.tailwindcss.setup{}
 lspconfig.emmet_ls.setup{}
+lspconfig.jedi_language_server.setup{}
+lspconfig.ocamllsp.setup{}
 
 require("lint").linters_by_ft = {
   cpp = {"clang-tidy", "cpplint"}

@@ -15,8 +15,11 @@ return {
   opts = {
     -- Define your formatters
     formatters_by_ft = {
+      c = { "clang-format" },
+      cpp = { "clang-format" },
       go = { "gofumpt" },
-      cpp = { "clang-format" }
+      ocaml = { "ocamlformat" },
+      python = { "black", "isort" },
     },
     -- Set up format-on-save
     format_after_save = { lsp_fallback = false },
