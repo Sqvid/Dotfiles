@@ -1,9 +1,12 @@
-format = "$directory$git_branch$git_status$character"
+format = "$python$directory$git_branch$git_status$character"
 add_newline = false
 
 [character]
-format = "[⮞ ](bold green)"
-error_symbol = "[✖](bold red) "
+success_symbol = "[⮞ ](bold green)"
+error_symbol = "[⮞ ](bold red)"
+vicmd_symbol = "[⮞ ](bold purple)"
+vimcmd_replace_symbol = "$vicmd_symbol"
+vimcmd_visual_symbol = "$vicmd_symbol"
 
 [directory]
 truncation_length = 2
@@ -32,3 +35,13 @@ untracked = ""
 renamed = ""
 deleted = ""
 typechanged = ""
+
+[python]
+format = '[\($virtualenv | ${version}\)](yellow bold) '
+detect_files = []
+detect_extensions = []
+
+[status]
+disabled = false
+symbol = "· "
+format = "[$symbol](red)"
