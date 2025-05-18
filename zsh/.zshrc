@@ -14,9 +14,10 @@ HISTSIZE=1000
 SAVEHIST=5000
 KEYTIMEOUT=10
 
-setopt extendedglob
-setopt correct
-setopt nobeep
+setopt ExtendedGlob
+setopt Correct
+setopt NoBeep
+setopt NoAutoRemoveSlash
 
 # Completions:
 zstyle ':completion:*' completer _complete _approximate
@@ -62,17 +63,13 @@ fpath=(/usr/share/zsh/site-functions/ $fpath)
 # Exported variables:
 binpath="${HOME}/.bin:${HOME}/.local/bin"
 export GOPATH="${HOME}/Documents/Code/.go"
-export PATH="${PATH}:${binpath}:${GOPATH}/bin"
+export PATH="${PATH}:${binpath}:${GOPATH}/bin:/usr/local/cuda/bin"
 
 export GPG_TTY=${TTY}
 export EDITOR='nvim'
 export VISUAL=${EDITOR}
 export XDG_CONFIG_HOME="${HOME}/.config"
 export FZF_DEFAULT_PREVIEW="bat --color=always --style=header,grid -r :300"
-
-# Starship prompt
-export STARSHIP_CONFIG="${XDG_CONFIG_HOME}/starship/starship.toml"
-eval "$(starship init zsh)"
 
 # OCaml opam configuration
 [[ ! -r /home/siddhartha/.opam/opam-init/init.zsh ]] \
@@ -229,3 +226,7 @@ wgt() {
 			;;
 	esac
 }
+
+# Starship prompt
+export STARSHIP_CONFIG="${XDG_CONFIG_HOME}/starship/starship.toml"
+eval "$(starship init zsh)"
