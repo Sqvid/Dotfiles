@@ -1,6 +1,5 @@
 local map = vim.keymap.set
 
---------------------------------------------------------------------------------
 -- Enable LSPs.
 vim.lsp.enable("clangd")
 vim.lsp.enable("gopls")

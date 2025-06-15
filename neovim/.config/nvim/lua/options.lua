@@ -1,0 +1,21 @@
+local o = vim.o
+
+o.colorcolumn = "81"
+o.cursorline = true
+o.hidden = true
+o.ignorecase = true
+o.laststatus = 3
+o.mouse = ""
+o.number = true
+o.relativenumber = true
+o.scrolloff = 1
+o.shiftwidth = 4
+o.showmode = false
+o.signcolumn = "no"
+o.smartcase = true
+o.spelllang = "en_gb"
+o.tabstop = 4
+o.termguicolors = true
+o.textwidth = 80
+o.timeoutlen = 300
+o.wrapscan = false
