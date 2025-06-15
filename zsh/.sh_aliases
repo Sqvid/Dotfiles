@@ -20,7 +20,6 @@ alias du='du -h'
 alias gdb='gdb --tui'
 alias grep='grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,.idea,.tox}'
 alias ls='ls --color=always'
-alias ranger='source ranger'
 alias zathura='zathura --fork'
 
 # Git aliases
