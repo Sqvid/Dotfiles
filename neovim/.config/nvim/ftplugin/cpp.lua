@@ -1,5 +1,5 @@
 local map = vim.keymap.set
 
--- :ClangdSwitchSourceHeader is defined by the clangd profile of the
+-- :LspClangdSwitchSourceHeader is defined by the clangd profile of the
 -- nvim-lspconfig plugin.
-map("n", "gh", ":ClangdSwitchSourceHeader<CR>", {silent = true})
+map("n", "gh", ":LspClangdSwitchSourceHeader<CR>", {silent = true})

@@ -55,7 +55,7 @@ autocmd("BufWritePre", {
 augroup("highlightOnYank", {clear = true})
 autocmd("TextYankPost", {
   group = "highlightOnYank",
-  command = [[silent! lua vim.highlight.on_yank({higroup = "IncSearch", timeout = 100})]]
+  command = [[silent! lua vim.highlight.on_yank({higroup = "IncSearch", timeout = 120})]]
 })
 
 -- Load session file if one exists in the current directory.
