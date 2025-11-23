@@ -18,4 +18,5 @@ o.tabstop = 4
 o.termguicolors = true
 o.textwidth = 80
 o.timeoutlen = 300
+o.winborder = "rounded"
 o.wrapscan = false
