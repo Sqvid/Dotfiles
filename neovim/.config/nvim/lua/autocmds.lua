@@ -37,6 +37,11 @@ autocmd("BufNewFile", {
   pattern = "[Mm]akefile",
   command = "silent! 0r ~/.config/nvim/templates/template.makefile"
 })
+autocmd("BufNewFile", {
+  group = "templates",
+  pattern = "CMakeLists.txt",
+  command = "silent! 0r ~/.config/nvim/templates/template.CMakeLists.txt"
+})
 
 -- Delete trailing whitespace before saving.
 augroup("deleteTrailingSpace", {clear = true})

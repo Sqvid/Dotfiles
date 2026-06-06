@@ -1,19 +1,17 @@
 -- Interface to the tree-sitter incremental parsing library.
 return {
   "nvim-treesitter/nvim-treesitter",
+  lazy = false,
   build = ":TSUpdate",
-
-  config = function ()
-    require("nvim-treesitter.configs").setup {
-      ensure_installed = {
-        "c",
-        "cpp",
-        "go",
-        "python",
-        "lua",
-        "ocaml"
-      },
-      indent = { enable = false }
-    }
-  end
+  opts = {
+  indent = { enable = true },
+  ensure_installed = {
+    "c",
+    "cpp",
+    "go",
+    "python",
+    "lua",
+    "ocaml",
+  },
+  }
 }

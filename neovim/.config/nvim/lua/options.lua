@@ -2,6 +2,7 @@ local o = vim.o
 
 o.colorcolumn = "81"
 o.cursorline = true
+o.expandtab = true
 o.hidden = true
 o.ignorecase = true
 o.laststatus = 3

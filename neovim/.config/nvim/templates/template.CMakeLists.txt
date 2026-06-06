@@ -1,0 +1,20 @@
+cmake_minimum_required(VERSION 3.24)
+
+set(project_name "Project")
+project(${project_name} LANGUAGES CXX)
+
+add_library(cxx_opts INTERFACE)
+target_compile_features(cxx_opts INTERFACE cxx_std_17)
+target_compile_options(cxx_opts INTERFACE
+	-Wpedantic;-Wall; -Wextra;-Wshadow;
+	-Wnon-virtual-dtor;-Wold-style-cast;-Wcast-align;
+	-Wuseless-cast;-Wconversion;-Wno-sign-conversion;-Wdouble-promotion;
+	-Wnull-dereference;-Wsuggest-override;-Woverloaded-virtual;
+	-Wmisleading-indentation;-Wduplicated-cond;-Wformat=2)
+
+set(exec_name "main")
+file(GLOB source_list "*.cpp")
+
+add_executable(${exec_name} ${source_list})
+set_target_properties(${exec_name} PROPERTIES CXX_EXTENSIONS OFF)
+target_link_libraries(${exec_name} PRIVATE cxx_opts)
