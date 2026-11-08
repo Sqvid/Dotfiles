@@ -21,9 +21,9 @@ set $up k
 set $right l
 
 # Preferred programs
-set $terminal kitty
-set $browser firefox-wayland
-set $pdfreader zathura
+set $terminal foot
+set $browser firefox
+set $pdfreader sioyek
 set $launcher tofi-drun --drun-launch=true
 
 ##: Appearance:
