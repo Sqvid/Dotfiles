@@ -10,14 +10,19 @@
 # *****************************************************************************
 # Zsh Options:
 HISTFILE=~/.zsh_history
-HISTSIZE=1000
-SAVEHIST=5000
+HISTSIZE=200000
+SAVEHIST=100000
 KEYTIMEOUT=10
 
-setopt ExtendedGlob
 setopt Correct
-setopt NoBeep
+setopt ExtendedGlob
+setopt HistExpireDupsFirst
+setopt HistIgnoreSpace
+setopt HistSaveNoDups
+setopt IncAppendHistory
 setopt NoAutoRemoveSlash
+setopt NoBeep
+setopt ShareHistory
 
 # Completions:
 zstyle ':completion:*' completer _complete _approximate
@@ -29,7 +34,7 @@ zstyle ':completion:*' group-name ''
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*' squeeze-slashes true
 zstyle ':completion:*' use-cache on
-zstyle ':completion:*' cache-path "$XDG_CACHE_HOME/zsh/.zcompcache"
+zstyle ':completion:*' cache-path "~/.zcompcache"
 
 autoload -Uz compinit; compinit
 zmodload zsh/complist
@@ -70,6 +75,8 @@ export EDITOR='nvim'
 export VISUAL=${EDITOR}
 export XDG_CONFIG_HOME="${HOME}/.config"
 export FZF_DEFAULT_PREVIEW="bat --color=always --style=header,grid -r :300"
+export LIBVA_DRIVER_NAME='radeonsi'
+export VDPAU_DRIVER='va_gl'
 
 # OCaml opam configuration
 [[ ! -r /home/siddhartha/.opam/opam-init/init.zsh ]] \
@@ -90,7 +97,7 @@ fi
 # Edit a file with $EDITOR.
 v() {
 	local viSelection;
-	viSelection="$(find ./ -type f ! -iwholename "*.git/*" | fzf \
+	viSelection="$(find ./ -type f ! -iwholename '*.git/*' | fzf \
 			--preview="${FZF_DEFAULT_PREVIEW} {}")"
 
 	if [[ -n ${viSelection} ]]; then
@@ -98,7 +105,7 @@ v() {
 	fi
 }
 
-# Open a PDF with Zathura.
+# Open a PDF
 z() {
 	local pdfSelection;
 	local searchRoot="./"
@@ -107,7 +114,7 @@ z() {
 		searchRoot="$1"
 	fi
 
-	pdfSelection="$(find "${searchRoot}" -type f -iname "*.pdf" | fzf --multi \
+	pdfSelection="$(find "${searchRoot}" -type f -iname '*.pdf' | fzf --multi \
 			--preview='pdftotext -f 1 -l 3 {} -')"
 
 	if [[ -n "${pdfSelection}" ]]; then
@@ -124,7 +131,7 @@ leap() {
 		searchRoot="$1"
 	fi
 
-	dirSelection="$(find "${searchRoot}" -type d ! -iwholename "*.git/*" | fzf)"
+	dirSelection="$(find "${searchRoot}" -type d ! -iwholename '*.git/*' | fzf)"
 
 	if [[ -n "${dirSelection}" ]]; then
 		cd "${dirSelection}" || return
@@ -134,7 +141,7 @@ leap() {
 # Edit a dotfile.
 dot() {
 	local dotSelection;
-	dotSelection="$(find "${HOME}/.Dotfiles" -type f ! -iwholename "*.git/*" \
+	dotSelection="$(find "${HOME}/.Dotfiles" -type f ! -iwholename '*.git/*' \
 			! -iwholename "*/plugged/*" -printf "%P\n" \
 			| fzf --preview="${FZF_DEFAULT_PREVIEW} ${HOME}/.Dotfiles/{}"\
 			--query="$1")"
